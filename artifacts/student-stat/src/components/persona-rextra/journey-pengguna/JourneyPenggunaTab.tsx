@@ -15,7 +15,6 @@ import { Search, Users, Trophy, AlertTriangle, RefreshCw, Eye, Download, Inbox }
 export function JourneyPenggunaTab() {
   const [demoState, setDemoState] = useState<DemoState>("data");
   const [search, setSearch] = useState("");
-  const [filterPersonaAwal, setFilterPersonaAwal] = useState("semua");
   const [filterPersonaAktif, setFilterPersonaAktif] = useState("semua");
   const [filterStatus, setFilterStatus] = useState("semua");
   const [activeStatCard, setActiveStatCard] = useState<string | null>(null);
@@ -24,16 +23,14 @@ export function JourneyPenggunaTab() {
   const handleStatClick = (key: string) => {
     if (activeStatCard === key) {
       setActiveStatCard(null);
-      setFilterPersonaAwal("semua");
       setFilterPersonaAktif("semua");
       setFilterStatus("semua");
     } else {
       setActiveStatCard(key);
-      setFilterPersonaAwal("semua");
       setFilterPersonaAktif("semua");
       setFilterStatus("semua");
       if (key === "pathfinder" || key === "builder" || key === "achiever") {
-        setFilterPersonaAwal(key.charAt(0).toUpperCase() + key.slice(1));
+        setFilterPersonaAktif(key.charAt(0).toUpperCase() + key.slice(1));
       } else if (key === "selesai") {
         setFilterPersonaAktif("Journey Selesai");
       }
@@ -43,19 +40,17 @@ export function JourneyPenggunaTab() {
   const filteredUsers = MOCK_JOURNEY_USERS.filter(u => {
     if (search) {
       const q = search.toLowerCase();
-      if (!u.name.toLowerCase().includes(q) && !u.email.toLowerCase().includes(q) && !(u.nim || "").toLowerCase().includes(q)) return false;
+      if (!u.name.toLowerCase().includes(q)) return false;
     }
-    if (filterPersonaAwal !== "semua" && u.personaAwal !== filterPersonaAwal) return false;
     if (filterPersonaAktif !== "semua" && u.personaAktif !== filterPersonaAktif) return false;
     if (filterStatus !== "semua" && u.statusJourney !== filterStatus) return false;
     return true;
   });
 
-  const hasActiveFilter = search !== "" || filterPersonaAwal !== "semua" || filterPersonaAktif !== "semua" || filterStatus !== "semua";
+  const hasActiveFilter = search !== "" || filterPersonaAktif !== "semua" || filterStatus !== "semua";
 
   const resetFilters = () => {
     setSearch("");
-    setFilterPersonaAwal("semua");
     setFilterPersonaAktif("semua");
     setFilterStatus("semua");
     setActiveStatCard(null);
@@ -75,7 +70,7 @@ export function JourneyPenggunaTab() {
         <div className="grid grid-cols-5 gap-3">
           {[1, 2, 3, 4, 5].map(i => <Skeleton key={i} className="h-20 rounded-xl" />)}
         </div>
-        <div className="flex gap-3"><Skeleton className="h-9 flex-1" /><Skeleton className="h-9 w-36" /><Skeleton className="h-9 w-36" /><Skeleton className="h-9 w-36" /></div>
+        <div className="flex gap-3"><Skeleton className="h-9 flex-1" /><Skeleton className="h-9 w-36" /><Skeleton className="h-9 w-36" /></div>
         <Card className="shadow-none">
           <div className="p-4 space-y-3">
             {[1, 2, 3, 4, 5].map(i => <Skeleton key={i} className="h-12 w-full" />)}
@@ -139,9 +134,9 @@ export function JourneyPenggunaTab() {
           <StatCard label="Achiever" value={SUMMARY_STATS.achiever} active={false} onClick={() => {}} persona="Achiever" />
           <StatCard label="Journey Selesai" value={SUMMARY_STATS.selesai} icon={<Trophy className="h-4 w-4" />} active={false} onClick={() => {}} />
         </div>
-        <ToolbarSection search="rencana karier" onSearchChange={() => {}} filterPersonaAwal="Builder" onFilterPersonaAwalChange={() => {}} filterPersonaAktif="semua" onFilterPersonaAktifChange={() => {}} filterStatus="semua" onFilterStatusChange={() => {}} />
+        <ToolbarSection search="rencana karier" onSearchChange={() => {}} filterPersonaAktif="Builder" onFilterPersonaAktifChange={() => {}} filterStatus="semua" onFilterStatusChange={() => {}} />
         <div className="text-xs text-muted-foreground px-1">
-          Filter aktif: Persona Awal Builder, Pencarian "rencana karier".{" "}
+          Filter aktif: Persona Builder, Pencarian "rencana karier".{" "}
           <Button variant="link" size="sm" className="h-auto p-0 text-xs" onClick={() => setDemoState("data")}>Reset filter</Button>
         </div>
         <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -172,7 +167,6 @@ export function JourneyPenggunaTab() {
       {/* Toolbar */}
       <ToolbarSection
         search={search} onSearchChange={setSearch}
-        filterPersonaAwal={filterPersonaAwal} onFilterPersonaAwalChange={setFilterPersonaAwal}
         filterPersonaAktif={filterPersonaAktif} onFilterPersonaAktifChange={setFilterPersonaAktif}
         filterStatus={filterStatus} onFilterStatusChange={setFilterStatus}
       />
@@ -190,13 +184,10 @@ export function JourneyPenggunaTab() {
           <TableHeader>
             <TableRow>
               <TableHead>Nama Pengguna</TableHead>
-              <TableHead>Email / NIM</TableHead>
-              <TableHead>Persona Awal</TableHead>
               <TableHead>Persona Aktif</TableHead>
               <TableHead>Status Journey</TableHead>
               <TableHead>Progress Wajib</TableHead>
-              <TableHead>Total Selesai</TableHead>
-              <TableHead>Profiling</TableHead>
+              <TableHead>Misi Selesai</TableHead>
               <TableHead>Diperbarui</TableHead>
               <TableHead className="text-right">Aksi</TableHead>
             </TableRow>
@@ -212,13 +203,6 @@ export function JourneyPenggunaTab() {
                     <span className="font-medium">{u.name}</span>
                   </div>
                 </TableCell>
-                <TableCell>
-                  <div>
-                    <p className="text-xs">{u.email}</p>
-                    {u.nim && <p className="text-[11px] text-muted-foreground">{u.nim}</p>}
-                  </div>
-                </TableCell>
-                <TableCell><PersonaBadge label={u.personaAwal} /></TableCell>
                 <TableCell><PersonaBadge label={u.personaAktif === "Journey Selesai" ? "Achiever" : u.personaAktif} className={u.personaAktif === "Journey Selesai" ? "!bg-green-100 !text-green-800" : undefined} /></TableCell>
                 <TableCell><StatusBadge label={u.statusJourney} /></TableCell>
                 <TableCell>
@@ -227,8 +211,7 @@ export function JourneyPenggunaTab() {
                     <span className="text-xs text-muted-foreground font-mono whitespace-nowrap">{u.progressWajib.done}/{u.progressWajib.total}</span>
                   </div>
                 </TableCell>
-                <TableCell><span className="text-xs">{u.totalMisiSelesai} misi</span></TableCell>
-                <TableCell><span className="text-xs text-muted-foreground">{u.tanggalProfiling}</span></TableCell>
+                <TableCell><span className="text-xs font-medium">{u.totalMisiSelesai} misi</span></TableCell>
                 <TableCell><span className="text-xs text-muted-foreground">{u.terakhirDiperbarui}</span></TableCell>
                 <TableCell className="text-right">
                   <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={(e) => { e.stopPropagation(); openDetail(u); }}>
@@ -253,7 +236,7 @@ function HeaderSection() {
     <div className="flex items-start justify-between">
       <div>
         <h2 className="text-lg font-bold text-foreground">Journey Pengguna</h2>
-        <p className="text-xs text-muted-foreground mt-1">Pantau hasil profiling persona, distribusi user per fase, dan progress penyelesaian misi tiap pengguna.</p>
+        <p className="text-xs text-muted-foreground mt-1">Pantau distribusi user per fase dan progress penyelesaian misi tiap pengguna.</p>
       </div>
       <div className="flex gap-2 shrink-0">
         <Button variant="outline" size="sm"><Download className="h-3.5 w-3.5 mr-1.5" />Export</Button>
@@ -288,12 +271,10 @@ function StatCard({ label, value, icon, active, onClick, persona }: { label: str
 
 function ToolbarSection({
   search, onSearchChange,
-  filterPersonaAwal, onFilterPersonaAwalChange,
   filterPersonaAktif, onFilterPersonaAktifChange,
   filterStatus, onFilterStatusChange,
 }: {
   search: string; onSearchChange: (v: string) => void;
-  filterPersonaAwal: string; onFilterPersonaAwalChange: (v: string) => void;
   filterPersonaAktif: string; onFilterPersonaAktifChange: (v: string) => void;
   filterStatus: string; onFilterStatusChange: (v: string) => void;
 }) {
@@ -301,17 +282,8 @@ function ToolbarSection({
     <div className="flex items-center gap-3 flex-wrap">
       <div className="relative flex-1 min-w-[220px]">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input className="h-9 text-sm pl-9" placeholder="Cari nama, email, atau NIM pengguna..." value={search} onChange={e => onSearchChange(e.target.value)} />
+        <Input className="h-9 text-sm pl-9" placeholder="Cari nama pengguna..." value={search} onChange={e => onSearchChange(e.target.value)} />
       </div>
-      <Select value={filterPersonaAwal} onValueChange={onFilterPersonaAwalChange}>
-        <SelectTrigger className="w-[150px] h-9 text-sm"><SelectValue placeholder="Persona Awal" /></SelectTrigger>
-        <SelectContent>
-          <SelectItem value="semua">Persona Awal</SelectItem>
-          <SelectItem value="Pathfinder">Pathfinder</SelectItem>
-          <SelectItem value="Builder">Builder</SelectItem>
-          <SelectItem value="Achiever">Achiever</SelectItem>
-        </SelectContent>
-      </Select>
       <Select value={filterPersonaAktif} onValueChange={onFilterPersonaAktifChange}>
         <SelectTrigger className="w-[150px] h-9 text-sm"><SelectValue placeholder="Persona Aktif" /></SelectTrigger>
         <SelectContent>
