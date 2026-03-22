@@ -8,7 +8,7 @@ import { PersonaBadge, StatusBadge } from "@/components/persona-rextra/PersonaBa
 import { MOCK_JOURNEY_USERS, MOCK_TRANSITIONS, MOCK_USER_MISSIONS } from "@/components/persona-rextra/journey-pengguna/mockJourneyData";
 import {
   ArrowLeft, User, Award, CalendarDays, CheckCircle2, Circle, Clock,
-  ChevronRight, Zap, Tag, Activity
+  ChevronRight, Zap
 } from "lucide-react";
 
 const MISSION_STATUS_ICON: Record<string, React.ReactNode> = {
@@ -65,24 +65,24 @@ export default function JourneyUserDetailPage() {
         <Card className="shadow-none">
           {/* Top: Info Pengguna */}
           <div className="p-5 border-b">
-            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5 mb-4">
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5 mb-5">
               <User className="h-3.5 w-3.5" /> Informasi Pengguna
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3">
-              <InfoItem icon={<Tag className="h-3.5 w-3.5" />} label="Persona Awal">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5">
+              <InfoItem label="Persona Awal">
                 <PersonaBadge label={user.personaAwal} />
               </InfoItem>
-              <InfoItem icon={<Activity className="h-3.5 w-3.5" />} label="Persona Aktif">
+              <InfoItem label="Persona Aktif">
                 <PersonaBadge
                   label={user.personaAktif === "Journey Selesai" ? "Achiever" : user.personaAktif}
                   className={user.personaAktif === "Journey Selesai" ? "!bg-green-100 !text-green-800" : undefined}
                 />
               </InfoItem>
-              <InfoItem icon={<CalendarDays className="h-3.5 w-3.5" />} label="Tanggal Profiling">
-                <span className="text-xs font-medium text-foreground">{user.tanggalProfiling}</span>
+              <InfoItem label="Tanggal Profiling">
+                <span className="text-sm font-semibold text-foreground">{user.tanggalProfiling}</span>
               </InfoItem>
-              <InfoItem icon={<Clock className="h-3.5 w-3.5" />} label="Terakhir Diperbarui">
-                <span className="text-xs font-medium text-foreground">{user.terakhirDiperbarui}</span>
+              <InfoItem label="Terakhir Diperbarui">
+                <span className="text-sm font-semibold text-foreground">{user.terakhirDiperbarui}</span>
               </InfoItem>
             </div>
           </div>
@@ -110,20 +110,20 @@ export default function JourneyUserDetailPage() {
               <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5 mb-3">
                 <CalendarDays className="h-3.5 w-3.5" /> Riwayat Transisi
               </h4>
-              <div className="flex items-center flex-wrap gap-1">
+              <div className="flex items-center gap-2">
                 {MOCK_TRANSITIONS.map((t, i) => (
-                  <div key={i} className="flex items-center gap-1">
-                    <div className={`flex items-center gap-2 rounded-lg border px-3 py-2 ${t.status === "Selesai" ? "bg-green-50 border-green-200" : t.status === "Aktif" ? "bg-primary/5 border-primary/30" : "bg-muted/50 border-border"}`}>
-                      <div className={`h-2 w-2 rounded-full shrink-0 ${t.status === "Selesai" ? "bg-green-500" : t.status === "Aktif" ? "bg-primary" : "bg-muted-foreground/30"}`} />
-                      <div>
-                        <PersonaBadge label={t.persona} className="text-[10px] px-1.5 py-0" />
-                        <p className="text-[10px] text-muted-foreground mt-0.5">
+                  <div key={i} className="flex items-center gap-2 flex-1 min-w-0">
+                    <div className={`flex-1 flex items-center gap-3 rounded-lg border px-4 py-3 ${t.status === "Selesai" ? "bg-green-50 border-green-200" : t.status === "Aktif" ? "bg-primary/5 border-primary/30" : "bg-muted/50 border-border"}`}>
+                      <div className={`h-2.5 w-2.5 rounded-full shrink-0 ${t.status === "Selesai" ? "bg-green-500" : t.status === "Aktif" ? "bg-primary" : "bg-muted-foreground/30"}`} />
+                      <div className="min-w-0">
+                        <PersonaBadge label={t.persona} className="text-xs" />
+                        <p className="text-[11px] text-muted-foreground mt-1">
                           {t.status === "Selesai" ? `${t.startDate} — ${t.endDate}` : t.status === "Aktif" ? `Sejak ${t.startDate}` : "Belum dimulai"}
                         </p>
                       </div>
                     </div>
                     {i < MOCK_TRANSITIONS.length - 1 && (
-                      <ChevronRight className="h-4 w-4 text-muted-foreground/50 shrink-0" />
+                      <ChevronRight className="h-4 w-4 text-muted-foreground/40 shrink-0" />
                     )}
                   </div>
                 ))}
@@ -172,39 +172,15 @@ export default function JourneyUserDetailPage() {
           </Table>
         </Card>
 
-        {/* Profiling */}
-        <Card className="shadow-none p-5 space-y-3">
-          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Hasil Profiling</h3>
-          <div className="rounded-lg bg-muted/40 border p-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <User className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium">Hasil Persona:</p>
-                  <PersonaBadge label={user.personaAwal} />
-                </div>
-                <p className="text-[11px] text-muted-foreground mt-0.5">Profiling dilakukan pada {user.tanggalProfiling}</p>
-              </div>
-            </div>
-            <Button variant="outline" size="sm" className="text-xs shrink-0">
-              Lihat Detail <ChevronRight className="h-3 w-3 ml-1" />
-            </Button>
-          </div>
-        </Card>
       </div>
     </DashboardLayout>
   );
 }
 
-function InfoItem({ icon, label, children }: { icon: React.ReactNode; label: string; children: React.ReactNode }) {
+function InfoItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="space-y-1.5">
-      <div className="flex items-center gap-1.5 text-muted-foreground">
-        <span className="shrink-0">{icon}</span>
-        <span className="text-[11px] font-medium uppercase tracking-wide">{label}</span>
-      </div>
+    <div className="space-y-2">
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">{label}</p>
       {children}
     </div>
   );
