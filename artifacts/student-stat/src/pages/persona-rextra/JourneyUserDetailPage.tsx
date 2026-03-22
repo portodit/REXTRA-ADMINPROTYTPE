@@ -8,7 +8,7 @@ import { PersonaBadge, StatusBadge } from "@/components/persona-rextra/PersonaBa
 import { MOCK_JOURNEY_USERS, MOCK_TRANSITIONS, MOCK_USER_MISSIONS } from "@/components/persona-rextra/journey-pengguna/mockJourneyData";
 import {
   ArrowLeft, User, Award, CalendarDays, CheckCircle2, Circle, Clock,
-  ChevronRight, Zap, Mail, Hash, Tag, Activity
+  ChevronRight, Zap, Tag, Activity
 } from "lucide-react";
 
 const MISSION_STATUS_ICON: Record<string, React.ReactNode> = {
@@ -61,25 +61,34 @@ export default function JourneyUserDetailPage() {
           </div>
         </div>
 
-        {/* Top Row: User Info + Progress */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* User Info Card */}
-          <Card className="shadow-none p-5 lg:col-span-1">
+        {/* Combined: Info Pengguna + Progress Journey */}
+        <Card className="shadow-none">
+          {/* Top: Info Pengguna */}
+          <div className="p-5 border-b">
             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5 mb-4">
               <User className="h-3.5 w-3.5" /> Informasi Pengguna
             </h3>
-            <div className="space-y-3">
-              <InfoRow icon={<Mail className="h-3.5 w-3.5" />} label="Email" value={user.email} />
-              {user.nim && <InfoRow icon={<Hash className="h-3.5 w-3.5" />} label="NIM" value={user.nim} />}
-              <InfoRow icon={<Tag className="h-3.5 w-3.5" />} label="Persona Awal" badge={<PersonaBadge label={user.personaAwal} />} />
-              <InfoRow icon={<Activity className="h-3.5 w-3.5" />} label="Persona Aktif" badge={<PersonaBadge label={user.personaAktif === "Journey Selesai" ? "Achiever" : user.personaAktif} className={user.personaAktif === "Journey Selesai" ? "!bg-green-100 !text-green-800" : undefined} />} />
-              <InfoRow icon={<CalendarDays className="h-3.5 w-3.5" />} label="Profiling" value={user.tanggalProfiling} />
-              <InfoRow icon={<Clock className="h-3.5 w-3.5" />} label="Diperbarui" value={user.terakhirDiperbarui} />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3">
+              <InfoItem icon={<Tag className="h-3.5 w-3.5" />} label="Persona Awal">
+                <PersonaBadge label={user.personaAwal} />
+              </InfoItem>
+              <InfoItem icon={<Activity className="h-3.5 w-3.5" />} label="Persona Aktif">
+                <PersonaBadge
+                  label={user.personaAktif === "Journey Selesai" ? "Achiever" : user.personaAktif}
+                  className={user.personaAktif === "Journey Selesai" ? "!bg-green-100 !text-green-800" : undefined}
+                />
+              </InfoItem>
+              <InfoItem icon={<CalendarDays className="h-3.5 w-3.5" />} label="Tanggal Profiling">
+                <span className="text-xs font-medium text-foreground">{user.tanggalProfiling}</span>
+              </InfoItem>
+              <InfoItem icon={<Clock className="h-3.5 w-3.5" />} label="Terakhir Diperbarui">
+                <span className="text-xs font-medium text-foreground">{user.terakhirDiperbarui}</span>
+              </InfoItem>
             </div>
-          </Card>
+          </div>
 
-          {/* Progress + Stats */}
-          <Card className="shadow-none p-5 lg:col-span-2 space-y-5">
+          {/* Bottom: Progress Journey */}
+          <div className="p-5 space-y-5">
             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
               <Award className="h-3.5 w-3.5" /> Progress Journey
             </h3>
@@ -96,14 +105,14 @@ export default function JourneyUserDetailPage() {
               <Progress value={progressPct} className="h-2.5" />
             </div>
 
-            {/* Timeline inline */}
+            {/* Timeline */}
             <div>
               <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5 mb-3">
                 <CalendarDays className="h-3.5 w-3.5" /> Riwayat Transisi
               </h4>
-              <div className="flex items-center gap-0">
+              <div className="flex items-center flex-wrap gap-1">
                 {MOCK_TRANSITIONS.map((t, i) => (
-                  <div key={i} className="flex items-center gap-0">
+                  <div key={i} className="flex items-center gap-1">
                     <div className={`flex items-center gap-2 rounded-lg border px-3 py-2 ${t.status === "Selesai" ? "bg-green-50 border-green-200" : t.status === "Aktif" ? "bg-primary/5 border-primary/30" : "bg-muted/50 border-border"}`}>
                       <div className={`h-2 w-2 rounded-full shrink-0 ${t.status === "Selesai" ? "bg-green-500" : t.status === "Aktif" ? "bg-primary" : "bg-muted-foreground/30"}`} />
                       <div>
@@ -114,14 +123,14 @@ export default function JourneyUserDetailPage() {
                       </div>
                     </div>
                     {i < MOCK_TRANSITIONS.length - 1 && (
-                      <ChevronRight className="h-4 w-4 text-muted-foreground/50 mx-1 shrink-0" />
+                      <ChevronRight className="h-4 w-4 text-muted-foreground/50 shrink-0" />
                     )}
                   </div>
                 ))}
               </div>
             </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
 
         {/* Missions Table */}
         <Card className="shadow-none overflow-hidden">
@@ -189,12 +198,14 @@ export default function JourneyUserDetailPage() {
   );
 }
 
-function InfoRow({ icon, label, value, badge }: { icon: React.ReactNode; label: string; value?: string; badge?: React.ReactNode }) {
+function InfoItem({ icon, label, children }: { icon: React.ReactNode; label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-2.5 text-xs">
-      <span className="text-muted-foreground shrink-0">{icon}</span>
-      <span className="text-muted-foreground w-20 shrink-0">{label}</span>
-      {badge || <span className="font-medium text-foreground truncate">{value}</span>}
+    <div className="space-y-1.5">
+      <div className="flex items-center gap-1.5 text-muted-foreground">
+        <span className="shrink-0">{icon}</span>
+        <span className="text-[11px] font-medium uppercase tracking-wide">{label}</span>
+      </div>
+      {children}
     </div>
   );
 }
