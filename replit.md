@@ -50,6 +50,18 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 
 ## Packages
 
+### `artifacts/student-stat` (`@workspace/student-stat`)
+
+REXTRA ADMIN Dashboard — a React + Vite web application connected to Supabase.
+
+- **Preview path**: `/` (mounted at root)
+- **Port**: 21370 (reads from `PORT` env var via Vite)
+- **Stack**: React 18, Vite 7, Tailwind CSS v4 (`@tailwindcss/vite`), shadcn/ui, React Router v6, Tanstack Query, Supabase JS
+- **Features**: Membership management, Persona REXTRA, Kamus Karier (career dictionary), Sistem Token, Kenali Diri feedback
+- **Supabase**: URL and anon key stored as shared env vars (`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`)
+- **Notes**: Uses Tailwind v4 format (no `tailwind.config.ts`, no `postcss.config.js`). Google Fonts loaded via `<link>` in `index.html`. Source was migrated from a Lovable/Tailwind v3 project.
+- `pnpm --filter @workspace/student-stat run dev` — run the dev server
+
 ### `artifacts/api-server` (`@workspace/api-server`)
 
 Express 5 API server. Routes live in `src/routes/` and use `@workspace/api-zod` for request and response validation and `@workspace/db` for persistence.

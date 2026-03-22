@@ -24,3 +24,9 @@ expertMode = true
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+[userenv]
+
+[userenv.shared]
+VITE_SUPABASE_URL = "https://jltwnpmkpcspkkydphxm.supabase.co"
+VITE_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsdHducG1rcGNzcGtreWRwaHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODY5MDIsImV4cCI6MjA4Nzg2MjkwMn0.Rek_mXph1Kv4Us65Pzyh0M02JUDkebjZpkvwswXm_qY"
