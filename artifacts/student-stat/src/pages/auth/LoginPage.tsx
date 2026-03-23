@@ -109,14 +109,6 @@ export default function LoginPage() {
               )}
             </CustomButton>
 
-            <div className="mt-4 text-center">
-              <Typography variant="bt" className="text-[#494848] text-sm">
-                Belum punya akun?{' '}
-                <Link to="/register" className="text-[#003499] underline font-medium">
-                  Daftar Sekarang
-                </Link>
-              </Typography>
-            </div>
           </form>
         </FormProvider>
       </div>

@@ -82,7 +82,6 @@ function AppRoutes() {
 
       {/* ─── Auth ─── */}
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/change-password" element={<ChangePasswordPage />} />
       <Route path="/change-password/success" element={<ChangePasswordSuccessPage />} />

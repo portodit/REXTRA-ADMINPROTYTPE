@@ -6,6 +6,7 @@ const router = Router();
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "rextra-dev-secret-2025";
 const TOKEN_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+const RESET_TOKEN_EXPIRY_MS = 15 * 60 * 1000; // 15 minutes
 
 function hashPassword(password: string, salt: string): string {
   return crypto.createHmac("sha256", salt).update(password).digest("hex");
@@ -52,6 +53,10 @@ function seedUser(id: string, name: string, email: string, password: string, rol
 seedUser("usr-001", "Aditya Bli", "bliaditdev@gmail.com", "Ry12Ho34", "ADMIN");
 seedUser("usr-admin", "Admin REXTRA", "admin@rextra.id", "admin123", "ADMIN");
 
+// ─── Reset token store ───────────────────────────────────────────────────────
+const resetTokens = new Map<string, { email: string; expiresAt: number }>();
+
+// ─── Login ───────────────────────────────────────────────────────────────────
 router.post("/v1/auth/login", (req: Request, res: Response) => {
   const { email, password } = req.body as { email?: string; password?: string };
 
@@ -87,36 +92,7 @@ router.post("/v1/auth/login", (req: Request, res: Response) => {
   });
 });
 
-router.post("/v1/auth/register", (req: Request, res: Response) => {
-  const { name, email, password } = req.body as { name?: string; email?: string; password?: string };
-
-  if (!name || !email || !password) {
-    res.status(400).json({ success: false, message: "Semua field wajib diisi" });
-    return;
-  }
-
-  const existing = users.get(email.toLowerCase());
-  if (existing) {
-    res.status(409).json({ success: false, message: "Email sudah terdaftar" });
-    return;
-  }
-
-  const id = `usr-${Date.now()}`;
-  const salt = crypto.randomBytes(16).toString("hex");
-  const passwordHash = hashPassword(password, salt);
-
-  users.set(email.toLowerCase(), {
-    id, name, email, role: "ADMIN",
-    passwordHash, salt, isVerified: false,
-  });
-
-  res.status(201).json({
-    success: true,
-    message: "Registrasi berhasil. Silakan verifikasi email Anda.",
-    data: { id, email, name },
-  });
-});
-
+// ─── Me ──────────────────────────────────────────────────────────────────────
 router.get("/v1/auth/me", (req: Request, res: Response) => {
   const authHeader = req.headers.authorization;
   if (!authHeader?.startsWith("Bearer ")) {
@@ -144,6 +120,7 @@ router.get("/v1/auth/me", (req: Request, res: Response) => {
   });
 });
 
+// ─── Forgot Password ─────────────────────────────────────────────────────────
 router.post("/v1/auth/forgot-password", (req: Request, res: Response) => {
   const { email } = req.body as { email?: string };
 
@@ -152,12 +129,44 @@ router.post("/v1/auth/forgot-password", (req: Request, res: Response) => {
     return;
   }
 
+  const user = users.get(email.toLowerCase());
+
+  if (user) {
+    // Invalidate any existing reset tokens for this email
+    for (const [tok, data] of resetTokens.entries()) {
+      if (data.email === email.toLowerCase()) resetTokens.delete(tok);
+    }
+
+    // Generate secure reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    resetTokens.set(resetToken, {
+      email: email.toLowerCase(),
+      expiresAt: Date.now() + RESET_TOKEN_EXPIRY_MS,
+    });
+
+    const resetUrl = `/change-password?token=${resetToken}`;
+    console.log(`[DEV] Forgot password for: ${email}`);
+    console.log(`[DEV] Reset token: ${resetToken}`);
+    console.log(`[DEV] Reset URL: ${resetUrl}`);
+
+    // Return dev token so frontend can redirect for testing (non-production only)
+    res.json({
+      success: true,
+      message: "Jika email terdaftar, tautan reset akan dikirimkan.",
+      _dev_token: resetToken,
+      _dev_reset_url: resetUrl,
+    });
+    return;
+  }
+
+  // Email not found – return same response for security (don't reveal if email exists)
   res.json({
     success: true,
     message: "Jika email terdaftar, tautan reset akan dikirimkan.",
   });
 });
 
+// ─── Reset Password ───────────────────────────────────────────────────────────
 router.post("/v1/auth/reset-password", (req: Request, res: Response) => {
   const { token, new_password } = req.body as { token?: string; new_password?: string };
 
@@ -166,14 +175,24 @@ router.post("/v1/auth/reset-password", (req: Request, res: Response) => {
     return;
   }
 
-  const payload = verifyToken(token);
-  if (!payload) {
+  if (new_password.length < 8) {
+    res.status(400).json({ success: false, message: "Password minimal 8 karakter" });
+    return;
+  }
+
+  const tokenData = resetTokens.get(token);
+  if (!tokenData) {
     res.status(400).json({ success: false, message: "Token tidak valid atau kadaluarsa" });
     return;
   }
 
-  const email = payload.email as string;
-  const user = users.get(email?.toLowerCase());
+  if (tokenData.expiresAt < Date.now()) {
+    resetTokens.delete(token);
+    res.status(400).json({ success: false, message: "Token tidak valid atau kadaluarsa" });
+    return;
+  }
+
+  const user = users.get(tokenData.email);
   if (!user) {
     res.status(404).json({ success: false, message: "User tidak ditemukan" });
     return;
@@ -182,11 +201,17 @@ router.post("/v1/auth/reset-password", (req: Request, res: Response) => {
   const newSalt = crypto.randomBytes(16).toString("hex");
   user.salt = newSalt;
   user.passwordHash = hashPassword(new_password, newSalt);
-  users.set(email.toLowerCase(), user);
+  users.set(tokenData.email, user);
+
+  // Invalidate token after use
+  resetTokens.delete(token);
+
+  console.log(`[DEV] Password reset successful for: ${tokenData.email}`);
 
   res.json({ success: true, message: "Kata sandi berhasil diubah" });
 });
 
+// ─── Verify Email ─────────────────────────────────────────────────────────────
 router.post("/v1/auth/verify-email", (req: Request, res: Response) => {
   const { token } = req.body as { token?: string };
 
@@ -214,6 +239,7 @@ router.post("/v1/auth/verify-email", (req: Request, res: Response) => {
   res.json({ success: true, message: "Email berhasil diverifikasi" });
 });
 
+// ─── Resend Verification ──────────────────────────────────────────────────────
 router.post("/v1/auth/resend-verification", (req: Request, res: Response) => {
   const { email } = req.body as { email?: string };
   if (!email) {
