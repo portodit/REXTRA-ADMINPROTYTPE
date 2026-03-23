@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { cn } from '@/lib/utils'
-import logoRextra from '@/assets/logo-rextra.png'
 import {
   ChevronDown,
   ChevronLeft,
@@ -138,9 +137,9 @@ function SidebarContent({
       >
         <div className="flex items-center gap-3 overflow-hidden whitespace-nowrap min-w-0">
           {isOpen || isMobile ? (
-            <img src={logoRextra} alt="Rextra Full Logo" className="h-8 object-contain transition-opacity duration-300" />
+            <img src="/images/dashboard/logo-rextra.webp" alt="Rextra Full Logo" className="h-8 object-contain transition-opacity duration-300" />
           ) : (
-            <img src={logoRextra} alt="Rextra Icon" className="w-9 h-9 object-contain transition-opacity duration-300" />
+            <img src="/images/dashboard/logo-mini.svg" alt="Rextra Icon" className="w-9 h-9 object-contain transition-opacity duration-300" />
           )}
         </div>
         {(isOpen || isMobile) && (
