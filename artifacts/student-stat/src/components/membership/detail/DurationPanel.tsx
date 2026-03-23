@@ -20,7 +20,7 @@ interface DurationPanelProps {
   planId: string;
   durationMode: DurationMode;
   accessMappings: AccessMapping[];
-  onToggleDuration: (month: DurationMonth, active: boolean) => Promise<boolean>;
+  onToggleDuration: (month: DurationMonth, active: boolean) => Promise<boolean | undefined>;
   onDurationModeChange: (mode: DurationMode) => void;
   onStarterDurationChange?: (months: number) => void;
   onCopyConfig: (sourceId: string, targetId: string, copyAccess: boolean, copyPricing: boolean, copyPoints: boolean, overwrite: boolean) => Promise<boolean>;

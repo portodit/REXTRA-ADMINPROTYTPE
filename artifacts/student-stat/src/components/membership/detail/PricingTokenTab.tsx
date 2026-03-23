@@ -16,7 +16,7 @@ interface Props {
   plan: PlanDetail;
   durations: PlanDuration[];
   onUpdateDuration: (durId: string, updates: Partial<PlanDuration>) => Promise<boolean>;
-  onUpdatePlan: (updates: Partial<PlanDetail>) => Promise<boolean>;
+  onUpdatePlan: (updates: Partial<PlanDetail>) => Promise<boolean | undefined>;
 }
 
 export function PricingTokenTab({ plan, durations, onUpdateDuration, onUpdatePlan }: Props) {

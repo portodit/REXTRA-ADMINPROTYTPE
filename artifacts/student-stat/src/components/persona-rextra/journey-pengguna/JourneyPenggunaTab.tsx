@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -25,7 +25,7 @@ export function JourneyPenggunaTab() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -216,7 +216,7 @@ export function JourneyPenggunaTab() {
               </TableHeader>
               <TableBody>
                 {users.map(u => (
-                  <TableRow key={u.user_id} className="cursor-pointer" onClick={() => navigate(`/persona-rextra/journey/${u.user_id}`)}>
+                  <TableRow key={u.user_id} className="cursor-pointer" onClick={() => router.push(`/persona-rextra/journey/${u.user_id}`)}>
                     <TableCell>
                       <div className="flex items-center gap-2.5">
                         <div className="h-7 w-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-bold shrink-0">
@@ -248,7 +248,7 @@ export function JourneyPenggunaTab() {
                     </TableCell>
                     <TableCell className="text-right">
                       <Button variant="ghost" size="sm" className="h-7 text-xs"
-                        onClick={e => { e.stopPropagation(); navigate(`/persona-rextra/journey/${u.user_id}`); }}>
+                        onClick={e => { e.stopPropagation(); router.push(`/persona-rextra/journey/${u.user_id}`); }}>
                         <Eye className="h-3.5 w-3.5 mr-1" />Detail
                       </Button>
                     </TableCell>

@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -292,7 +292,7 @@ const sortOptions = [
 type TabType = "profesi" | "kategori" | "perusahaan" | "istilah" | "artikel";
 
 const KamusKarierMasterData = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   
   // Tab state
   const [activeTab, setActiveTab] = useState<TabType>("profesi");
@@ -426,7 +426,7 @@ const KamusKarierMasterData = () => {
   };
 
   const handleViewDetail = (profesi: Profesi) => {
-    navigate(`/kamus-karier/master-data/profesi/${profesi.id}`);
+    router.push(`/kamus-karier/master-data/profesi/${profesi.id}`);
   };
 
   const handleKategoriChange = (value: string) => {
@@ -766,7 +766,7 @@ const KamusKarierMasterData = () => {
                             <TableCell className="py-2">
                               <div className="flex items-center gap-3">
                                 <img
-                                  src={profesi.image || noImageProfesi}
+                                  src={profesi.image || noImageProfesi.src}
                                   alt={profesi.nama}
                                   className="h-10 w-10 rounded-md object-cover bg-muted shrink-0"
                                 />
@@ -855,7 +855,7 @@ const KamusKarierMasterData = () => {
                                       variant="ghost"
                                       size="icon"
                                       className="h-8 w-8 hover:bg-primary/10 hover:text-primary"
-                                      onClick={() => navigate(`/kamus-karier/master-data/profesi/${profesi.id}/edit`)}
+                                      onClick={() => router.push(`/kamus-karier/master-data/profesi/${profesi.id}/edit`)}
                                     >
                                       <Pencil className="h-4 w-4" />
                                     </Button>

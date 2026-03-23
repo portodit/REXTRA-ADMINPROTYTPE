@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Typography from '@/components/Typography'
 import { Button } from '@/components/ui/button'
 
@@ -45,7 +45,7 @@ export default function ChangePasswordSuccessPage() {
           className="mx-auto object-contain w-[249px] h-[241px] aspect-auto"
         />
 
-        <Link to="/login" className="block mt-5">
+        <Link href="/login" className="block mt-5">
           <Button className="w-full sm:w-3/4 mx-auto bg-[#0046CC] hover:bg-[#0046CC]/80 hover:cursor-pointer rounded-lg">
             <Typography
               variant="bt"

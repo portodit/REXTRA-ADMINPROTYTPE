@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import authApi from '@/lib/authApi'
 import { z } from 'zod'
 import { RegisterSchema } from '@/validation/register'
 
 export const useRegisterMutation = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const { mutate, isPending } = useMutation<
     unknown,
@@ -22,7 +22,7 @@ export const useRegisterMutation = () => {
     },
     onSuccess: () => {
       toast.success('Registrasi berhasil! Silakan verifikasi email Anda.')
-      navigate('/verifikasi-akun/terkirim')
+      router.push('/verifikasi-akun/terkirim')
     },
     onError: (error) => {
       const res = error.response?.data as { message?: string }

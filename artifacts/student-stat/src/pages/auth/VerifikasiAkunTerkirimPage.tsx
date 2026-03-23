@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Typography from '@/components/Typography'
 import { Button } from '@/components/ui/button'
 
@@ -49,7 +49,7 @@ export default function VerifikasiAkunTerkirimPage() {
           className="mx-auto object-contain w-[249px] h-[241px] aspect-auto"
         />
 
-        <Link to="/login" className="block">
+        <Link href="/login" className="block">
           <Button className="w-full sm:w-3/4 mx-auto mt-5 bg-[#0046CC] hover:bg-[#0046CC]/80 rounded-lg">
             <Typography
               variant="bt"
@@ -68,7 +68,7 @@ export default function VerifikasiAkunTerkirimPage() {
           className="text-center text-[#494848] text-[14px] mt-2"
         >
           Belum menerima e-mail?{' '}
-          <Link to="/verifikasi-akun" className="underline text-[#003499]">
+          <Link href="/verifikasi-akun" className="underline text-[#003499]">
             Kirim Ulang
           </Link>
         </Typography>

@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,7 +47,7 @@ function getDiscountDisplay(d: Discount) {
 }
 
 export default function PromoDiskonPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { discounts, loading, toggleStatus, saveDiscount } = useDiscounts();
   const [filters, setFilters] = useState<DiscountFilters>({
     search: "", status: "all", applies_to: "all", plan: "all", discount_type: "all",
@@ -185,7 +185,7 @@ export default function PromoDiskonPage() {
               paginatedDiscounts.map(d => {
                 const ds = getDisplayStatus(d);
                 return (
-                  <TableRow key={d.id} className="cursor-pointer hover:bg-muted/50" onClick={() => navigate(`/membership/promo-diskon/${d.id}`)}>
+                  <TableRow key={d.id} className="cursor-pointer hover:bg-muted/50" onClick={() => router.push(`/membership/promo-diskon/${d.id}`)}>
                     <TableCell className="font-mono font-semibold text-primary">{d.code}</TableCell>
                     <TableCell className="font-medium">{d.name}</TableCell>
                     <TableCell>
@@ -204,7 +204,7 @@ export default function PromoDiskonPage() {
                       <Badge className={`${statusColor[ds] || "bg-muted"} border text-xs`}>{ds}</Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="icon" onClick={e => { e.stopPropagation(); navigate(`/membership/promo-diskon/${d.id}`); }}>
+                      <Button variant="ghost" size="icon" onClick={e => { e.stopPropagation(); router.push(`/membership/promo-diskon/${d.id}`); }}>
                         <Eye className="h-4 w-4" />
                       </Button>
                     </TableCell>

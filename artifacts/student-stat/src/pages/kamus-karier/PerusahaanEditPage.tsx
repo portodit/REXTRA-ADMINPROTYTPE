@@ -1,5 +1,5 @@
+import { useRouter, useParams } from 'next/navigation'
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Save, X, Upload, Trash2, Plus, Loader2, AlertCircle,
   Building2, Landmark, Briefcase, Globe, GraduationCap, Heart,
@@ -152,8 +152,8 @@ interface FormData {
 }
 
 export default function PerusahaanEdit() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const id = (useParams() as Record<string, string>)?.id ?? "";
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [showExitDialog, setShowExitDialog] = useState(false);
@@ -203,13 +203,13 @@ export default function PerusahaanEdit() {
       setPendingNavigation(`/kamus-karier/master-data/perusahaan/${id}`);
       setShowExitDialog(true);
     } else {
-      navigate(`/kamus-karier/master-data/perusahaan/${id}`);
+      router.push(`/kamus-karier/master-data/perusahaan/${id}`);
     }
   };
 
   const handleConfirmExit = () => {
     setShowExitDialog(false);
-    if (pendingNavigation) navigate(pendingNavigation);
+    if (pendingNavigation) router.push(pendingNavigation);
   };
 
   const validateForm = (): boolean => {
@@ -231,7 +231,7 @@ export default function PerusahaanEdit() {
     setIsSaving(false);
     setHasChanges(false);
     toast({ title: "Berhasil", description: "Perubahan berhasil disimpan." });
-    navigate(`/kamus-karier/master-data/perusahaan/${id}`);
+    router.push(`/kamus-karier/master-data/perusahaan/${id}`);
   };
 
   const scrollToSection = (anchor: string) => {

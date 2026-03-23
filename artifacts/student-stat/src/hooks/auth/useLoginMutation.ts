@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import useAuthStore from '@/store/useAuthStore'
 import authApi from '@/lib/authApi'
 import { setAccessToken, setRefreshToken } from '@/lib/cookiesUtil'
@@ -21,7 +21,7 @@ interface UserResponse {
 
 export const useLoginMutation = () => {
   const { login } = useAuthStore()
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const { mutate, isPending } = useMutation<
     LoginResponse,
@@ -47,8 +47,8 @@ export const useLoginMutation = () => {
     onSuccess: () => {
       toast.success('Berhasil masuk!')
       setTimeout(() => {
-        navigate('/persona-rextra')
-      }, 1000)
+        window.location.href = '/persona-rextra'
+      }, 800)
     },
     onError: (error) => {
       const res = error.response?.data as { message?: string }

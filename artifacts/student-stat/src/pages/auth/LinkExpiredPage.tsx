@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Typography from '@/components/Typography'
 import { Button } from '@/components/ui/button'
 
@@ -45,7 +45,7 @@ export default function LinkExpiredPage() {
           className="mx-auto object-contain w-[249px] h-[241px] aspect-auto"
         />
 
-        <Link to="/forgot-password" className="block">
+        <Link href="/forgot-password" className="block">
           <Button className="w-full sm:w-3/4 mx-auto mt-5 bg-[#0046CC] hover:bg-[#0046CC]/80 rounded-lg">
             <Typography
               variant="bt"
@@ -64,7 +64,7 @@ export default function LinkExpiredPage() {
           className="text-center text-[#494848] text-[14px] mt-2"
         >
           Belum menerima e-mail?{' '}
-          <Link to="/verifikasi-akun" className="underline text-[#003499]">
+          <Link href="/verifikasi-akun" className="underline text-[#003499]">
             Kirim Ulang
           </Link>
         </Typography>

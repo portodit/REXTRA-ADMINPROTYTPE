@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -88,7 +88,7 @@ function PlanBadge({ plan }: { plan: string | null }) {
 const formatCurrency = (v: number) => `Rp ${v.toLocaleString("id-ID")}`;
 
 export function TransaksiTab() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [changeTypeFilter, setChangeTypeFilter] = useState("all");
@@ -323,7 +323,7 @@ export function TransaksiTab() {
                       <TableRow
                         key={trx.id}
                         className="cursor-pointer hover:bg-sky-50/50 transition-colors"
-                        onClick={() => navigate(`/membership/riwayat-transaksi/${trx.id}`)}
+                        onClick={() => router.push(`/membership/riwayat-transaksi/${trx.id}`)}
                       >
                         <TableCell>
                           <p className="text-sm font-medium">{format(d, "dd MMM yy", { locale: idLocale })}</p>
@@ -347,7 +347,7 @@ export function TransaksiTab() {
                         <TableCell><PrimaryStatusBadge status={trx.primary_status} /></TableCell>
                         <TableCell>
                           <Button variant="ghost" size="icon" className="h-8 w-8 text-primary hover:bg-primary/10"
-                            onClick={(e) => { e.stopPropagation(); navigate(`/membership/riwayat-transaksi/${trx.id}`); }}>
+                            onClick={(e) => { e.stopPropagation(); router.push(`/membership/riwayat-transaksi/${trx.id}`); }}>
                             <Eye className="h-4 w-4" />
                           </Button>
                         </TableCell>

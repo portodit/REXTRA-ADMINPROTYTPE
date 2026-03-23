@@ -1,5 +1,5 @@
+import { useRouter, useParams } from 'next/navigation'
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -123,8 +123,8 @@ const calcKelengkapan = (data: any) => {
 };
 
 const PerusahaanDetail = () => {
-  const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const router = useRouter();
+  const id = useParams<{ id: string }>()?.id ?? "";
   const [activeTab, setActiveTab] = useState("profil");
   const [isLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -137,8 +137,8 @@ const PerusahaanDetail = () => {
   const { persen, missing } = calcKelengkapan(data);
   const OrgIcon = tipeOrganisasiIcons[data.tipeOrganisasi] || Building2;
 
-  const handleBack = () => navigate("/kamus-karier/master-data");
-  const handleEdit = () => navigate(`/kamus-karier/master-data/perusahaan/${id}/edit`);
+  const handleBack = () => router.push("/kamus-karier/master-data");
+  const handleEdit = () => router.push(`/kamus-karier/master-data/perusahaan/${id}/edit`);
   const handleRetry = () => setHasError(false);
 
   const applyDemoState = (level: number) => {

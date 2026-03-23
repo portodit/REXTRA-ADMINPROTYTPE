@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
 
+import Typography from '@/components/Typography'
+
+import { cn } from '@/lib/utils'
 export default function HelperText({
   children,
   helperTextClassName,
@@ -9,8 +11,17 @@ export default function HelperText({
   helperTextClassName?: string
 }) {
   return (
-    <p className={cn('text-xs text-gray-500 mt-1', helperTextClassName)}>
-      {children}
-    </p>
+    <div className="flex space-x-1">
+      <Typography
+        as="p"
+        weight="regular"
+        className={cn(
+          'text-xs !leading-tight text-gray-900',
+          helperTextClassName,
+        )}
+      >
+        {children}
+      </Typography>
+    </div>
   )
 }

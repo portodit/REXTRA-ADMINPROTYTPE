@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Typography from '@/components/Typography'
 import { Button } from '@/components/ui/button'
 
@@ -45,7 +45,7 @@ export default function VerifikasiAkunGagalPage() {
           className="mx-auto object-contain w-[249px] h-[241px] aspect-auto"
         />
 
-        <Link to="/verifikasi-akun" className="block">
+        <Link href="/verifikasi-akun" className="block">
           <Button className="w-full sm:w-3/4 mx-auto mt-5 bg-[#0046CC] hover:bg-[#0046CC]/80 rounded-lg">
             <Typography
               variant="bt"
@@ -63,7 +63,7 @@ export default function VerifikasiAkunGagalPage() {
           weight="regular"
           className="text-center text-[#494848] text-[14px] mt-2"
         >
-          <Link to="/login" className="underline text-[#003499]">
+          <Link href="/login" className="underline text-[#003499]">
             Kembali ke Login
           </Link>
         </Typography>

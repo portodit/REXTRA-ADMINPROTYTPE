@@ -1,8 +1,8 @@
+import Link from 'next/link'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Link } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import Typography from '@/components/Typography'
 import CustomButton from '@/components/CustomButton'
@@ -131,7 +131,7 @@ export default function RegisterPage() {
             <div className="mt-4 text-center">
               <Typography variant="bt" className="text-[#494848] text-sm">
                 Sudah punya akun?{' '}
-                <Link to="/login" className="text-[#003499] underline font-medium">
+                <Link href="/login" className="text-[#003499] underline font-medium">
                   Masuk di sini
                 </Link>
               </Typography>

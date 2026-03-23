@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useRouter, useParams } from 'next/navigation'
 import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
@@ -33,8 +33,8 @@ function fmtDate(iso?: string | null) {
 }
 
 export default function JourneyUserDetailPage() {
-  const { userId } = useParams();
-  const navigate = useNavigate();
+  const userId = (useParams() as Record<string, string>)?.userId ?? "";
+  const router = useRouter();
   const [data, setData] = useState<UserJourneyDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -75,7 +75,7 @@ export default function JourneyUserDetailPage() {
     return (
       <DashboardLayout>
         <div className="space-y-4">
-          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => navigate("/persona-rextra")}>
+          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => router.push("/persona-rextra")}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div className="rounded-lg bg-red-50 border border-red-200 p-5">
@@ -103,7 +103,7 @@ export default function JourneyUserDetailPage() {
       <div className="space-y-6">
         {/* Back + Header */}
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => navigate("/persona-rextra")}>
+          <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => router.push("/persona-rextra")}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div className="flex items-center gap-3 flex-1 min-w-0">

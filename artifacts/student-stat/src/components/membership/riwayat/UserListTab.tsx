@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { Search, LayoutGrid, List, RefreshCw, AlertCircle, X, Users as UsersIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ interface UserListTabProps {
 }
 
 export function UserListTab({ demoState }: UserListTabProps) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [search, setSearch] = useState("");
   const [summaryFilter, setSummaryFilter] = useState<SummaryFilter>("all");
@@ -42,7 +42,7 @@ export function UserListTab({ demoState }: UserListTabProps) {
   const handleViewDetail = (user: MemberUser) => {
     const dbId = mockToDbId[user.id];
     if (dbId) {
-      navigate(`/membership/riwayat-langganan/${dbId}`);
+      router.push(`/membership/riwayat-langganan/${dbId}`);
     }
   };
 

@@ -1,5 +1,5 @@
+import { useRouter, useParams } from 'next/navigation'
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Save, X, Upload, Trash2, Plus, GripVertical, Briefcase, Code, Heart, Lightbulb, Users, TrendingUp, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -126,8 +126,8 @@ interface FormData {
 }
 
 export default function ProfesiEdit() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const id = (useParams() as Record<string, string>)?.id ?? "";
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("profil");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -205,14 +205,14 @@ export default function ProfesiEdit() {
       setPendingNavigation(`/kamus-karier/master-data/profesi/${id}`);
       setShowExitDialog(true);
     } else {
-      navigate(`/kamus-karier/master-data/profesi/${id}`);
+      router.push(`/kamus-karier/master-data/profesi/${id}`);
     }
   };
 
   const handleConfirmExit = () => {
     setShowExitDialog(false);
     if (pendingNavigation) {
-      navigate(pendingNavigation);
+      router.push(pendingNavigation);
     }
   };
 
@@ -260,7 +260,7 @@ export default function ProfesiEdit() {
       description: "Perubahan berhasil disimpan.",
     });
     
-    navigate(`/kamus-karier/master-data/profesi/${id}`);
+    router.push(`/kamus-karier/master-data/profesi/${id}`);
   };
 
   // Helper functions for array operations

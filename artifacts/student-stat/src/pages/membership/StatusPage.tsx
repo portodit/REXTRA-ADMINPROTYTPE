@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ import emblemPro from "@/assets/emblem-pro.png";
 import emblemMax from "@/assets/emblem-max.png";
 
 export default function MembershipStatusPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [packages, setPackages] = useState<MembershipPackage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -59,10 +59,10 @@ export default function MembershipStatusPage() {
         name: p.name,
         category: p.category as "paid" | "unpaid",
         status: p.status as PackageStatus,
-        emblem: p.emblem_key === "basic" ? emblemBasic
-          : p.emblem_key === "pro" ? emblemPro
-          : p.emblem_key === "max" ? emblemMax
-          : emblemStarter,
+        emblem: p.emblem_key === "basic" ? emblemBasic.src
+          : p.emblem_key === "pro" ? emblemPro.src
+          : p.emblem_key === "max" ? emblemMax.src
+          : emblemStarter.src,
         price: p.base_price_1m || 0,
         tokenPerMonth: p.base_token_1m || 0,
         pointsActive: false,
@@ -94,7 +94,7 @@ export default function MembershipStatusPage() {
   const premiumPackages = packages.filter(p => p.category === "paid");
 
   const handleSelect = (pkg: MembershipPackage) => {
-    navigate(`/membership/status/${pkg.id}`);
+    router.push(`/membership/status/${pkg.id}`);
   };
 
   const handleQuickActivate = (pkg: MembershipPackage) => {

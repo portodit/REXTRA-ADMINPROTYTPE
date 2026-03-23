@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import authApi from '@/lib/authApi'
 
 export const useChangePassword = (token: string | null) => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const { mutate, isPending } = useMutation<unknown, AxiosError, string>({
     mutationFn: async (new_password) => {
@@ -17,7 +17,7 @@ export const useChangePassword = (token: string | null) => {
     },
     onSuccess: () => {
       toast.success('Kata sandi berhasil diubah!')
-      navigate('/change-password/success')
+      router.push('/change-password/success')
     },
     onError: (error) => {
       const res = error.response?.data as { message?: string }

@@ -1,5 +1,8 @@
+'use client'
+
 import { useState, useEffect } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import {
   ChevronDown,
@@ -8,7 +11,6 @@ import {
   User,
   BarChart2,
   GraduationCap,
-  Users,
   Heart,
   Building2,
   FileText,
@@ -98,8 +100,7 @@ function SidebarContent({
   isMobile?: boolean
 }) {
   const [expandedMenus, setExpandedMenus] = useState<string[]>([])
-  const location = useLocation()
-  const pathname = location.pathname
+  const pathname = usePathname() ?? ''
 
   const toggleMenu = (label: string) => {
     setExpandedMenus(prev =>
@@ -201,17 +202,15 @@ function SidebarContent({
                         )}
                       </button>
                     ) : (
-                      <NavLink
-                        to={item.href}
-                        className={({ isActive }) =>
-                          cn(
-                            'flex items-center w-full p-3 rounded-2xl transition-all duration-200 group relative',
-                            isOpen || isMobile ? 'justify-start' : 'justify-center flex-col gap-1',
-                            isActive
-                              ? 'bg-blue-50 text-blue-900 font-semibold'
-                              : 'text-gray-600 hover:bg-gray-50',
-                          )
-                        }
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          'flex items-center w-full p-3 rounded-2xl transition-all duration-200 group relative',
+                          isOpen || isMobile ? 'justify-start' : 'justify-center flex-col gap-1',
+                          isSelfActive
+                            ? 'bg-blue-50 text-blue-900 font-semibold'
+                            : 'text-gray-600 hover:bg-gray-50',
+                        )}
                       >
                         <div className={cn('flex items-center gap-4', !isOpen && !isMobile && 'flex-col gap-0')}>
                           <Icon
@@ -228,7 +227,7 @@ function SidebarContent({
                             {item.label}
                           </span>
                         </div>
-                      </NavLink>
+                      </Link>
                     )}
 
                     {/* Sub Menu */}
@@ -246,9 +245,9 @@ function SidebarContent({
                               pathname === subItem.href ||
                               (subItem.href !== '/' && pathname.startsWith(subItem.href + '/'))
                             return (
-                              <NavLink
+                              <Link
                                 key={subIdx}
-                                to={subItem.href}
+                                href={subItem.href}
                                 className="relative flex items-center py-2 pl-16 text-sm hover:text-blue-600 group/sub w-full"
                               >
                                 <div
@@ -266,7 +265,7 @@ function SidebarContent({
                                 >
                                   {subItem.label}
                                 </span>
-                              </NavLink>
+                              </Link>
                             )
                           })}
                         </div>
@@ -293,7 +292,7 @@ function SidebarContent({
 export function AppSidebar() {
   const [isOpen, setIsOpen] = useState(true)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const location = useLocation()
+  const pathname = usePathname() ?? ''
 
   const toggleSidebar = () => setIsOpen(v => !v)
   const openMobile = () => setMobileOpen(true)
@@ -301,7 +300,7 @@ export function AppSidebar() {
 
   useEffect(() => {
     setMobileOpen(false)
-  }, [location.pathname])
+  }, [pathname])
 
   useEffect(() => {
     if (mobileOpen) {

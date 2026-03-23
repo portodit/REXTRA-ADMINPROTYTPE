@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
 
+import Typography from '@/components/Typography'
+
+import { cn } from '@/lib/utils'
 export default function LabelText({
   children,
   labelTextClasname,
@@ -12,9 +14,9 @@ export default function LabelText({
 }) {
   return (
     <label>
-      <p className={cn('text-gray-900', labelTextClasname)}>
+      <Typography className={cn('text-gray-900', labelTextClasname)}>
         {children} {required && <span className="text-red-500">*</span>}
-      </p>
+      </Typography>
     </label>
   )
 }

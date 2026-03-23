@@ -297,7 +297,7 @@ export function DokumenPenomoranModule({
                     {/* Header */}
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <img src={logoRextra} alt="Logo" className="h-4 object-contain mb-0.5" />
+                        <img src={logoRextra.src} alt="Logo" className="h-4 object-contain mb-0.5" />
                         <p className="text-[7px] font-bold leading-tight" style={{ color: '#111' }}>{companyName || "REXTRA TECHNOLOGY"}</p>
                         {companyAddress && (
                           <p className="text-[6px] leading-tight mt-px" style={{ color: '#888' }}>{companyAddress}</p>

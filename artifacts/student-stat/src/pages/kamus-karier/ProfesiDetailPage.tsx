@@ -1,5 +1,5 @@
+import { useRouter, useParams } from 'next/navigation'
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -131,8 +131,8 @@ const mockDetailData = {
 };
 
 const ProfesiDetail = () => {
-  const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const router = useRouter();
+  const id = useParams<{ id: string }>()?.id ?? "";
   const [activeTab, setActiveTab] = useState("profil");
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -143,11 +143,11 @@ const ProfesiDetail = () => {
   const profesi = id ? mockProfesiData[id] || mockProfesiData["2"] : null;
 
   const handleBack = () => {
-    navigate("/kamus-karier/master-data");
+    router.push("/kamus-karier/master-data");
   };
 
   const handleEdit = () => {
-    navigate(`/kamus-karier/master-data/profesi/${id}/edit`);
+    router.push(`/kamus-karier/master-data/profesi/${id}/edit`);
   };
 
   const handleRetry = () => {

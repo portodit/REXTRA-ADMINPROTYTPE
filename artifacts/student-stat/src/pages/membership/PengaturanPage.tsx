@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Bell, FileText } from "lucide-react";
@@ -24,7 +24,7 @@ const MODULES = [
 type ModuleId = typeof MODULES[number]["id"];
 
 export default function PengaturanMembershipPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [activeModule, setActiveModule] = useState<ModuleId>("notifikasi");
   const [pendingModule, setPendingModule] = useState<ModuleId | null>(null);
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
@@ -41,7 +41,7 @@ export default function PengaturanMembershipPage() {
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => navigate(-1)}>
+          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => router.back()}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <span>Membership</span>

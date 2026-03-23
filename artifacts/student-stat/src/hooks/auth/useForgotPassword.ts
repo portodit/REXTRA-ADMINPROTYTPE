@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import authApi from '@/lib/authApi'
 
 interface ForgotPasswordResponse {
@@ -12,7 +12,7 @@ interface ForgotPasswordResponse {
 }
 
 export const useForgotPassword = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const { mutate, isPending } = useMutation<ForgotPasswordResponse, AxiosError, { email: string }>({
     mutationFn: async (data) => {
@@ -20,13 +20,12 @@ export const useForgotPassword = () => {
       return res.data
     },
     onSuccess: (data) => {
-      // In dev mode the backend returns the reset token directly so we can test the full flow
       if (data._dev_token) {
         toast.success('Token reset ditemukan. Mengarahkan ke halaman ubah kata sandi...')
-        navigate(`/change-password?token=${data._dev_token}`)
+        router.push(`/change-password?token=${data._dev_token}`)
       } else {
         toast.success('Tautan reset kata sandi telah dikirim ke email Anda.')
-        navigate('/verifikasi-akun/terkirim')
+        router.push('/verifikasi-akun/terkirim')
       }
     },
     onError: (error) => {

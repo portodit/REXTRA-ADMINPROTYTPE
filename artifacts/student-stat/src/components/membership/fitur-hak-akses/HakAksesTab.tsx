@@ -1236,12 +1236,7 @@ export function HakAksesTab() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setHakModalOpen(false)}>Batal</Button>
             <Button onClick={saveHak}
-              disabled={
-                isDuplicateKey ||
-                (availableKategoriForModal.length === 0 && !!hakForm.fiturId) ||
-                (editingHak && editingHak.usedByPlans > 0 && hakForm.status === "inactive" && editingHak.status === "active" && !hakConfirmChecked) ||
-                (hakForm.level === "sub_fitur" && hakForm.fiturId && selectedFiturSubFiturs.length === 0)
-              }>
+              disabled={!!(isDuplicateKey || (availableKategoriForModal.length === 0 && !!hakForm.fiturId) || (editingHak && editingHak.usedByPlans > 0 && hakForm.status === "inactive" && editingHak.status === "active" && !hakConfirmChecked) || (hakForm.level === "sub_fitur" && hakForm.fiturId && selectedFiturSubFiturs.length === 0))}>
               Simpan
             </Button>
           </DialogFooter>

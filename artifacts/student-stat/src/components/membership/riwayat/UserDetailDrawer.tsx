@@ -23,11 +23,11 @@ interface UserDetailDrawerProps {
 }
 
 const tierEmblems: Record<string, string> = {
-  Max: emblemMax,
-  Pro: emblemPro,
-  Basic: emblemBasic,
-  Starter: emblemStarter,
-  Standard: emblemStarter,
+  Max: emblemMax.src,
+  Pro: emblemPro.src,
+  Basic: emblemBasic.src,
+  Starter: emblemStarter.src,
+  Standard: emblemStarter.src,
 };
 
 const tierColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -69,7 +69,7 @@ export function UserDetailDrawer({ user, open, onClose }: UserDetailDrawerProps)
   if (!user) return null;
 
   const tierColor = tierColors[user.tier] || tierColors.Standard;
-  const tierEmblem = tierEmblems[user.tier] || emblemStarter;
+  const tierEmblem = tierEmblems[user.tier] || emblemStarter.src;
 
   const formatCurrency = (value: number) => `Rp ${value.toLocaleString("id-ID")}`;
 

@@ -1,8 +1,8 @@
+import Link from 'next/link'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Link } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import Typography from '@/components/Typography'
 import CustomButton from '@/components/CustomButton'
@@ -88,8 +88,7 @@ export default function LoginPage() {
             </div>
 
             <div className="flex justify-end mb-6">
-              <Link
-                to="/forgot-password"
+              <Link href="/forgot-password"
                 className="text-sm text-[#003499] underline"
               >
                 Lupa kata sandi?

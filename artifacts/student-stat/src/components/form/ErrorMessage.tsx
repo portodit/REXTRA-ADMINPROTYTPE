@@ -1,14 +1,15 @@
-import { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
+import Typography from '@/components/Typography'
 
-export default function ErrorMessage({
-  children,
-  className,
-}: {
-  children: ReactNode
-  className?: string
-}) {
+export default function ErrorMessage({ children }: { children: string }) {
   return (
-    <p className={cn('text-xs text-red-500 mt-1', className)}>{children}</p>
+    <div className="flex space-x-1">
+      <Typography
+        as="p"
+        weight="regular"
+        className="text-xs !leading-tight text-red-500"
+      >
+        {children}
+      </Typography>
+    </div>
   )
 }

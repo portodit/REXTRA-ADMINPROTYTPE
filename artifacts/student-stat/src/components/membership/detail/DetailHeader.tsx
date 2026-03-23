@@ -15,10 +15,10 @@ import emblemPro from "@/assets/emblem-pro.png";
 import emblemMax from "@/assets/emblem-max.png";
 
 const emblemMap: Record<string, string> = {
-  starter: emblemStarter,
-  basic: emblemBasic,
-  pro: emblemPro,
-  max: emblemMax,
+  starter: emblemStarter.src,
+  basic: emblemBasic.src,
+  pro: emblemPro.src,
+  max: emblemMax.src,
 };
 
 const statusConfig = {
@@ -49,7 +49,7 @@ interface Props {
 export function DetailHeader({ plan, isComplete, hasChanges, onBack, onSaveDraft, onSaveChanges, onActivate, onDeactivate }: Props) {
   const [calloutOpen, setCalloutOpen] = useState(false);
   const sc = statusConfig[plan.status];
-  const emblem = emblemMap[plan.emblemKey] || emblemStarter;
+  const emblem = emblemMap[plan.emblemKey] || emblemStarter.src;
   const isPaid = plan.category === "paid";
   const isStarter = plan.id === "starter";
   const isStandard = plan.id === "standard";

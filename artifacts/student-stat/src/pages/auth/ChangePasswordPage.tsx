@@ -1,8 +1,8 @@
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { Suspense } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useSearchParams, useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import Typography from '@/components/Typography'
 import CustomButton from '@/components/CustomButton'
@@ -13,8 +13,8 @@ import { ChangePasswordSchema } from '@/validation/changePassword'
 type ChangePasswordForm = z.infer<typeof ChangePasswordSchema>
 
 function ChangePasswordForm() {
-  const [searchParams] = useSearchParams()
-  const token = searchParams.get('token')
+  const searchParams = useSearchParams()
+  const token = searchParams?.get('token') ?? null
 
   const methods = useForm<ChangePasswordForm>({
     mode: 'onBlur',

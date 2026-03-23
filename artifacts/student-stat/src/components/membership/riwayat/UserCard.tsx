@@ -15,15 +15,15 @@ interface UserCardProps {
 }
 
 const tierEmblems: Record<string, string> = {
-  Max: emblemMax,
-  Pro: emblemPro,
-  Basic: emblemBasic,
-  Starter: emblemStarter,
-  Standard: emblemStarter,
+  Max: emblemMax.src,
+  Pro: emblemPro.src,
+  Basic: emblemBasic.src,
+  Starter: emblemStarter.src,
+  Standard: emblemStarter.src,
 };
 
 export function UserCard({ user, onViewDetail }: UserCardProps) {
-  const emblem = tierEmblems[user.tier] || emblemStarter;
+  const emblem = tierEmblems[user.tier] || emblemStarter.src;
 
   const getCountdownText = () => {
     if (user.tier === "Standard" && !user.endDate) {

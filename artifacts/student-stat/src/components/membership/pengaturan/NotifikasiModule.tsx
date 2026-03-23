@@ -255,7 +255,7 @@ export function NotifikasiModule({ data, invoice, loading, saving, onSave, onSav
 
               {/* Header */}
               <div className="px-5 py-3 flex items-center justify-between border-b border-slate-100">
-                <img src={logoRextra} alt="Rextra" className="h-5 object-contain" />
+                <img src={logoRextra.src} alt="Rextra" className="h-5 object-contain" />
                 <span className="text-[9px] text-slate-400 font-medium tracking-wide uppercase">Membership</span>
               </div>
 

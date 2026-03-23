@@ -55,9 +55,10 @@ export default function Typography<T extends React.ElementType>({
       id={id}
       className={cn(
         'text-black',
+        // *=============== Font Type ==================
         {
-          Poppins: 'font-poppins',
-          Montserrat: 'font-montserrat',
+          Poppins: 'font-Poppins',
+          Montserrat: 'font-Montserrat',
         }[font],
         {
           thin: 'font-thin',
@@ -70,6 +71,7 @@ export default function Typography<T extends React.ElementType>({
           extrabold: 'font-extrabold',
           black: 'font-black',
         }[weight],
+        // *=============== Font Variants ==================
         {
           h1: 'md:text-[72px]',
           h2: 'md:text-[60px]',

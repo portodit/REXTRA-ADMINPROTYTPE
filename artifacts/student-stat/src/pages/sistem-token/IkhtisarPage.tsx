@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import {
   Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
@@ -47,7 +47,7 @@ const SOURCE_LABELS: Record<string, string> = {
 };
 
 export default function SistemTokenIkhtisar() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [selectedPeriod, setSelectedPeriod] = useState("30d");
   const [selectedTab, setSelectedTab] = useState<SourceFilter>("semua");
   const [searchQuery, setSearchQuery] = useState("");
@@ -341,7 +341,7 @@ export default function SistemTokenIkhtisar() {
                 Aktivitas token akan muncul setelah ada top up, alokasi membership, atau pemakaian fitur.
               </p>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => navigate("/sistem-token/pengadaan")}>Ke Pengadaan Token</Button>
+                <Button variant="outline" onClick={() => router.push("/sistem-token/pengadaan")}>Ke Pengadaan Token</Button>
               </div>
             </div>
           )}
@@ -420,7 +420,7 @@ export default function SistemTokenIkhtisar() {
                               <span className="text-sm text-foreground">{alert.message}</span>
                             </div>
                             <Button variant="ghost" size="sm" className="h-8 px-3 text-xs font-medium text-primary hover:text-primary hover:bg-primary/10 opacity-70 group-hover:opacity-100 transition-opacity"
-                              onClick={(e) => { e.stopPropagation(); navigate(alert.route); }}>
+                              onClick={(e) => { e.stopPropagation(); router.push(alert.route); }}>
                               Tinjau<ExternalLink className="h-3 w-3 ml-1.5" />
                             </Button>
                           </div>
@@ -485,7 +485,7 @@ export default function SistemTokenIkhtisar() {
                     <p className="text-sm text-muted-foreground mt-1">{filteredLedger.length} pergerakan token terakhir</p>
                   </div>
                   <Button variant="outline" size="sm" className="gap-2 hover:bg-primary/5 hover:text-primary hover:border-primary/30"
-                    onClick={() => navigate("/sistem-token/ledger")}>
+                    onClick={() => router.push("/sistem-token/ledger")}>
                     Lihat Semua<ExternalLink className="h-3.5 w-3.5" />
                   </Button>
                 </CardHeader>
@@ -509,7 +509,7 @@ export default function SistemTokenIkhtisar() {
                           const time = new Date(item.occurred_at);
                           return (
                             <TableRow key={item.id} className="hover:bg-muted/30 cursor-pointer group"
-                              onClick={() => navigate(`/sistem-token/ledger?ref=${item.reference_id}`)}>
+                              onClick={() => router.push(`/sistem-token/ledger?ref=${item.reference_id}`)}>
                               <TableCell className="py-3">
                                 <div className="text-sm font-medium">{time.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}</div>
                                 <div className="text-xs text-muted-foreground">{time.toLocaleDateString("id-ID", { day: "numeric", month: "short" })}</div>

@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useRouter, useParams } from 'next/navigation'
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -25,8 +25,8 @@ function formatCurrency(v: number) {
 }
 
 export default function PromoDiskonDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const id = useParams<{ id: string }>()?.id ?? "";
+  const router = useRouter();
   const { toast } = useToast();
   const { discount, redemptions, loading, refetch } = useDiscountDetail(id);
   const { toggleStatus, saveDiscount } = useDiscounts();
@@ -63,11 +63,11 @@ export default function PromoDiskonDetailPage() {
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => navigate("/membership/promo-diskon")}>
+          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => router.push("/membership/promo-diskon")}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <span>Membership</span><span>/</span>
-          <span className="cursor-pointer hover:text-foreground" onClick={() => navigate("/membership/promo-diskon")}>Promo & Diskon</span>
+          <span className="cursor-pointer hover:text-foreground" onClick={() => router.push("/membership/promo-diskon")}>Promo & Diskon</span>
           <span>/</span>
           <span className="text-foreground font-medium">{discount.code}</span>
         </div>

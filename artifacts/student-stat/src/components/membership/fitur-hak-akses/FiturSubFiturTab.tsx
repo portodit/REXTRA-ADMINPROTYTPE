@@ -1114,9 +1114,7 @@ export function FiturSubFiturTab() {
             <Button variant="outline" onClick={() => setFiturModalOpen(false)}>Batal</Button>
             <Button
               onClick={saveFitur}
-              disabled={
-                editingFitur && isFiturConnected(editingFitur) && fiturForm.status === "inactive" && editingFitur.status === "active" && !editConfirmChecked
-              }
+              disabled={!!(editingFitur && isFiturConnected(editingFitur) && fiturForm.status === "inactive" && editingFitur.status === "active" && !editConfirmChecked)}
             >
               {editingFitur ? "Simpan Perubahan" : "Simpan"}
             </Button>
@@ -1262,9 +1260,7 @@ export function FiturSubFiturTab() {
             <Button variant="outline" onClick={() => setSubFiturModalOpen(false)}>Batal</Button>
             <Button
               onClick={saveSubFitur}
-              disabled={
-                editingSubFitur.subFitur && isSubFiturConnected(editingSubFitur.subFitur) && subFiturForm.status === "inactive" && editingSubFitur.subFitur.status === "active" && !subEditConfirmChecked
-              }
+              disabled={!!(editingSubFitur.subFitur && isSubFiturConnected(editingSubFitur.subFitur) && subFiturForm.status === "inactive" && editingSubFitur.subFitur.status === "active" && !subEditConfirmChecked)}
             >
               {editingSubFitur.subFitur ? "Simpan Perubahan" : "Simpan"}
             </Button>

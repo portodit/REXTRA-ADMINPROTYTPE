@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -22,7 +22,7 @@ const formatCurrency = (v: number) => `Rp ${Math.abs(v).toLocaleString("id-ID")}
 const formatDate = (d: string | null) => d ? new Date(d).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "-";
 
 export function UserMembershipTab1({ membership, cycles, isLoading, isError, refetch }: Tab1Props) {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // Fetch transaction UUIDs for all cycles that have a transaction_id
   const trxIds = cycles.filter(c => c.transaction_id).map(c => c.transaction_id!);
@@ -227,13 +227,13 @@ export function UserMembershipTab1({ membership, cycles, isLoading, isError, ref
                     {cycle.transaction_id && trxMap?.[cycle.transaction_id] && (
                       <div className="flex items-center gap-2 pt-2 border-t border-border/40 flex-wrap">
                         <Button variant="outline" size="sm" className="text-xs h-7"
-                          onClick={() => navigate(`/membership/riwayat-transaksi/${trxMap[cycle.transaction_id!].uuid}`)}>
+                          onClick={() => router.push(`/membership/riwayat-transaksi/${trxMap[cycle.transaction_id!].uuid}`)}>
                           <Clock className="h-3 w-3 mr-1.5" />
                           Detail Transaksi
                         </Button>
                         {trxMap[cycle.transaction_id!].status === "BERHASIL" && (
                           <Button variant="outline" size="sm" className="text-xs h-7"
-                            onClick={() => navigate(`/faktur/view/${trxMap[cycle.transaction_id!].uuid}`)}>
+                            onClick={() => router.push(`/faktur/view/${trxMap[cycle.transaction_id!].uuid}`)}>
                             <FileText className="h-3 w-3 mr-1.5" />
                             Faktur
                           </Button>

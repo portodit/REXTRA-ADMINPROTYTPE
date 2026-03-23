@@ -1,5 +1,5 @@
+import { useRouter, useParams } from 'next/navigation'
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
@@ -27,8 +27,8 @@ const PAID_TABS: { key: TabKey; label: string }[] = [
 ];
 
 export default function MembershipDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const id = useParams<{ id: string }>()?.id ?? "";
+  const router = useRouter();
 
   const {
     plan, durations, accessMappings, loading, error,
@@ -67,7 +67,7 @@ export default function MembershipDetailPage() {
     });
   })();
 
-  const handleBack = () => navigate("/membership/status");
+  const handleBack = () => router.push("/membership/status");
 
   const handleSaveDraft = async () => {
     if (!plan) return;
@@ -112,8 +112,10 @@ export default function MembershipDetailPage() {
     toast({ title: "Plan berhasil dinonaktifkan" });
   };
 
-  const handleDurationModeChange = async (mode: "tanpa_durasi" | "dengan_durasi") => {
-    await updatePlan({ durationMode: mode });
+  const handleDurationModeChange = async (mode: "tanpa_durasi" | "dengan_durasi" | "starter_durasi") => {
+    if (mode === "tanpa_durasi" || mode === "dengan_durasi") {
+      await updatePlan({ durationMode: mode });
+    }
   };
 
   const handleStarterDurationChange = async (months: number) => {

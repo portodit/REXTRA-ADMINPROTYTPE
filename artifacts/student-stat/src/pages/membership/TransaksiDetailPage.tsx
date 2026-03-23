@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useRouter, useParams } from 'next/navigation'
 import { useQuery } from "@tanstack/react-query";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { supabase } from "@/integrations/supabase/client";
@@ -68,8 +68,8 @@ function getXenditSectionStyle(status: string) {
 }
 
 export default function TransaksiDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const id = useParams<{ id: string }>()?.id ?? "";
+  const router = useRouter();
 
   const { data: trx, isLoading, isError, refetch } = useQuery({
     queryKey: ["membership-transaction-detail", id],
@@ -111,7 +111,7 @@ export default function TransaksiDetailPage() {
           <h3 className="text-lg font-semibold mb-2">Gagal memuat data</h3>
           <p className="text-muted-foreground mb-4">Transaksi tidak ditemukan atau terjadi kesalahan.</p>
           <div className="flex gap-2">
-            <Button variant="outline" onClick={() => navigate("/membership/riwayat-transaksi")}><ArrowLeft className="h-4 w-4 mr-2" />Kembali</Button>
+            <Button variant="outline" onClick={() => router.push("/membership/riwayat-transaksi")}><ArrowLeft className="h-4 w-4 mr-2" />Kembali</Button>
             <Button onClick={() => refetch()}><RefreshCw className="h-4 w-4 mr-2" />Coba Lagi</Button>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function TransaksiDetailPage() {
         </Breadcrumb>
 
         {/* Back button */}
-        <Button variant="ghost" size="sm" onClick={() => navigate("/membership/riwayat-transaksi")} className="text-muted-foreground -ml-2">
+        <Button variant="ghost" size="sm" onClick={() => router.push("/membership/riwayat-transaksi")} className="text-muted-foreground -ml-2">
           <ArrowLeft className="h-4 w-4 mr-1" />Kembali
         </Button>
 
@@ -174,7 +174,7 @@ export default function TransaksiDetailPage() {
               </>
             )}
             {trx.primary_status === "BERHASIL" && (
-              <Button variant="outline" size="sm" onClick={() => navigate(`/faktur/view/${trx.id}`)}>
+              <Button variant="outline" size="sm" onClick={() => router.push(`/faktur/view/${trx.id}`)}>
                 <FileText className="h-4 w-4 mr-2" />Lihat Dokumen Invoice
               </Button>
             )}

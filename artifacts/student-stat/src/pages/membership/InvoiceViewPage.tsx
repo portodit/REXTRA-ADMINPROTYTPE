@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'next/navigation'
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import logoRextra from "@/assets/logo-rextra.png";
@@ -21,7 +21,7 @@ const formatTimeAmPm = (d: Date) => {
 const formatDateTimeId = (d: Date) => `${formatDateId(d)}, ${formatTimeAmPm(d)}`;
 
 export default function InvoiceViewPage() {
-  const { id } = useParams<{ id: string }>();
+  const id = useParams<{ id: string }>()?.id ?? "";
 
   const { data: trx, isLoading: trxLoading } = useQuery({
     queryKey: ["invoice-trx", id],
@@ -147,7 +147,7 @@ export default function InvoiceViewPage() {
           {/* Header */}
           <div className="flex items-start justify-between mb-6">
             <div>
-              <img src={logoRextra} alt="Logo" className="h-10 object-contain mb-1" />
+              <img src={logoRextra.src} alt="Logo" className="h-10 object-contain mb-1" />
               <p className="text-sm font-bold" style={{ color: '#111' }}>{companyName}</p>
               {companyAddress && (
                 <p className="text-xs" style={{ color: '#888' }}>{companyAddress}</p>
@@ -261,7 +261,7 @@ export default function InvoiceViewPage() {
                 {notes.map((note, idx) => (
                   <li key={idx} style={{ listStyleType: 'disc' }}>{note}</li>
                 ))}
-                {termsContent && termsContent.split('\n').filter(Boolean).map((line, idx) => (
+                {termsContent && termsContent.split('\n').filter(Boolean).map((line: string, idx: number) => (
                   <li key={`t-${idx}`} style={{ listStyleType: 'disc' }}>{line}</li>
                 ))}
               </ul>

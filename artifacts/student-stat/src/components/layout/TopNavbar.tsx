@@ -1,26 +1,26 @@
+'use client'
+
 import { useRef, useState, useEffect } from 'react'
 import { Bell, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import useAuthStore from '@/store/useAuthStore'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 
 interface TopNavbarProps {
   className?: string
-  onMenuClick?: () => void
 }
 
 export function TopNavbar({ className }: TopNavbarProps) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const { user, logout } = useAuthStore()
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const handleLogout = () => {
     logout()
-    navigate('/login')
+    router.push('/login')
   }
 
-  // Close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -38,12 +38,9 @@ export function TopNavbar({ className }: TopNavbarProps) {
         className,
       )}
     >
-      {/* Left: empty (breadcrumbs placeholder) */}
       <div />
 
-      {/* Right: Bell + separator + profile */}
       <div className="flex items-center gap-6">
-        {/* Notification Bell */}
         <button className="relative p-2 rounded-xl hover:bg-gray-50 transition-colors">
           <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
             <Bell size={20} />
@@ -51,10 +48,8 @@ export function TopNavbar({ className }: TopNavbarProps) {
           <span className="absolute top-2 right-3 w-2.5 h-2.5 bg-blue-600 border-2 border-white rounded-full" />
         </button>
 
-        {/* Separator */}
         <div className="h-8 w-px bg-gray-200 mx-1 hidden md:block" />
 
-        {/* User Profile */}
         <div className="relative" ref={ref}>
           <div
             onClick={() => setOpen((prev) => !prev)}
@@ -77,10 +72,8 @@ export function TopNavbar({ className }: TopNavbarProps) {
             </div>
           </div>
 
-          {/* Dropdown */}
           {open && (
             <div className="absolute right-0 mt-3 w-48 bg-white rounded-xl shadow-lg border border-gray-100 z-50 overflow-hidden">
-              {/* Mobile: show name/email */}
               <div className="sm:hidden px-4 py-3 border-b border-gray-100">
                 <p className="text-sm font-semibold text-gray-800">{user?.name ?? 'Admin User'}</p>
                 <p className="text-xs text-gray-500">{user?.email ?? ''}</p>

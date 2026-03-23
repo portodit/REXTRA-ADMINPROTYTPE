@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useRouter, useParams, useSearchParams } from 'next/navigation'
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -33,10 +33,10 @@ function getInitials(name: string) {
 }
 
 export default function UserMembershipDetailPage() {
-  const { userId } = useParams<{ userId: string }>();
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const activeTab = searchParams.get("tab") || "status";
+  const userId = useParams<{ userId: string }>()?.userId ?? "";
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const activeTab = searchParams?.get("tab") || "status";
 
   const { data: membership, isLoading, isError, refetch } = useUserMembership(userId);
   const cycles = useSubscriptionCycles(userId);
@@ -44,7 +44,7 @@ export default function UserMembershipDetailPage() {
   const entitlements = useUserEntitlements(userId, membership?.tier);
 
   const setTab = (tab: string) => {
-    setSearchParams({ tab });
+    ;
   };
 
   if (isLoading) {
@@ -80,7 +80,7 @@ export default function UserMembershipDetailPage() {
                 <RefreshCw className="h-4 w-4 mr-2" /> Coba Lagi
               </Button>
             )}
-            <Button variant="outline" onClick={() => navigate("/membership/riwayat-langganan")}>
+            <Button variant="outline" onClick={() => router.push("/membership/riwayat-langganan")}>
               <ArrowLeft className="h-4 w-4 mr-2" /> Kembali
             </Button>
           </div>
@@ -96,7 +96,7 @@ export default function UserMembershipDetailPage() {
       <div className="space-y-6">
         {/* Breadcrumb & Back */}
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/membership/riwayat-langganan")}>
+          <Button variant="ghost" size="icon" onClick={() => router.push("/membership/riwayat-langganan")}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>

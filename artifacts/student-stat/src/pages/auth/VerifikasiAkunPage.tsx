@@ -1,5 +1,6 @@
+import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import React, { useEffect, useRef, Suspense } from 'react'
-import { useSearchParams, useNavigate, Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import Typography from '@/components/Typography'
 import { Button } from '@/components/ui/button'
@@ -9,9 +10,9 @@ import { useResendVerificationEmail } from '@/hooks/auth/useResendVerification'
 function VerifikasiAkunContent() {
   const email = localStorage.getItem('verify_email')
   const { mutate: resendEmail, isPending } = useResendVerificationEmail()
-  const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
-  const token = searchParams.get('token')
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const token = searchParams?.get('token') ?? null
   const hasVerified = useRef(false)
 
   useEffect(() => {
@@ -22,15 +23,15 @@ function VerifikasiAkunContent() {
       try {
         await authApi.get('/api/v1/auth/verify', { params: { token } })
         toast.success('Akun berhasil diverifikasi, silakan login')
-        navigate('/login')
+        router.push('/login')
       } catch {
         toast.error('Token verifikasi tidak valid atau sudah kedaluwarsa')
-        navigate('/verifikasi-akun/gagal')
+        router.push('/verifikasi-akun/gagal')
       }
     }
 
     verifyAccount()
-  }, [token, navigate])
+  }, [token, router])
 
   const handleResend = () => {
     if (email) resendEmail({ email })
@@ -101,7 +102,7 @@ function VerifikasiAkunContent() {
               weight="regular"
               className="text-center text-[#494848] text-[14px] mt-2"
             >
-              <Link to="/login" className="underline text-[#003499]">
+              <Link href="/login" className="underline text-[#003499]">
                 Kembali ke Login
               </Link>
             </Typography>

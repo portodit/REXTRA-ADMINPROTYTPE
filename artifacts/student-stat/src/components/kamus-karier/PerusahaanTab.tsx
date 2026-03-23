@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -210,7 +210,7 @@ const sortOptions = [
 ];
 
 export const PerusahaanTab = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // Filter states
   const [searchQuery, setSearchQuery] = useState("");
@@ -371,7 +371,7 @@ export const PerusahaanTab = () => {
   };
 
   const handleViewDetail = (item: Perusahaan) => {
-    navigate(`/kamus-karier/master-data/perusahaan/${item.id}`);
+    router.push(`/kamus-karier/master-data/perusahaan/${item.id}`);
   };
 
   return (
@@ -660,7 +660,7 @@ export const PerusahaanTab = () => {
                                 variant="ghost"
                                 size="icon"
                                 className="h-8 w-8 hover:bg-primary/10 hover:text-primary"
-                                onClick={() => navigate(`/kamus-karier/master-data/perusahaan/${item.id}/edit`)}
+                                onClick={() => router.push(`/kamus-karier/master-data/perusahaan/${item.id}/edit`)}
                               >
                                 <Pencil className="h-4 w-4" />
                               </Button>
