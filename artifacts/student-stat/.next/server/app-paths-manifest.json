@@ -1,4 +1,3 @@
 {
-  "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/(dashboard)/persona-rextra/page": "app/(dashboard)/persona-rextra/page.js"
+  "/(auth)/login/page": "app/(auth)/login/page.js"
 }
