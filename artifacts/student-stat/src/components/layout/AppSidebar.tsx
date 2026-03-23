@@ -60,7 +60,7 @@ const menuData = [
         href: "#",
         children: [
           { label: "Master Data", href: "/kenali-diri/master-data" },
-          { label: "Hasil Tes", href: "/" },
+          { label: "Hasil Tes", href: "/kenali-diri/hasil-tes" },
           { label: "Umpan Balik", href: "/kenali-diri/umpan-balik" },
         ],
       },

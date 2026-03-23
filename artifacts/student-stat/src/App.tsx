@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster as HotToaster } from "react-hot-toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -8,11 +9,23 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
+// Auth Pages
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import ChangePasswordPage from "./pages/auth/ChangePasswordPage";
+import ChangePasswordSuccessPage from "./pages/auth/ChangePasswordSuccessPage";
+import VerifikasiAkunPage from "./pages/auth/VerifikasiAkunPage";
+import VerifikasiAkunTerkirimPage from "./pages/auth/VerifikasiAkunTerkirimPage";
+import VerifikasiAkunGagalPage from "./pages/auth/VerifikasiAkunGagalPage";
+import LinkExpiredPage from "./pages/auth/LinkExpiredPage";
+
 // Persona REXTRA
 import PersonaRextraPage from "./pages/persona-rextra/KonfigurasiJourneyPage";
 import JourneyUserDetailPage from "./pages/persona-rextra/JourneyUserDetailPage";
 
 // Kenali Diri
+import HasilTesPage from "./pages/kenali-diri/HasilTesPage";
 import UmpanBalik from "./pages/kenali-diri/UmpanBalikPage";
 
 // Kamus Karier
@@ -47,25 +60,38 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <HotToaster position="top-right" />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
 
-          {/* Kenali Diri */}
+          {/* ─── Auth ─── */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
+          <Route path="/change-password/success" element={<ChangePasswordSuccessPage />} />
+          <Route path="/verifikasi-akun" element={<VerifikasiAkunPage />} />
+          <Route path="/verifikasi-akun/terkirim" element={<VerifikasiAkunTerkirimPage />} />
+          <Route path="/verifikasi-akun/gagal" element={<VerifikasiAkunGagalPage />} />
+          <Route path="/link-expired" element={<LinkExpiredPage />} />
+
+          {/* ─── Kenali Diri ─── */}
+          <Route path="/kenali-diri/hasil-tes" element={<HasilTesPage />} />
           <Route path="/kenali-diri/umpan-balik" element={<UmpanBalik />} />
 
-          {/* Persona REXTRA */}
+          {/* ─── Persona REXTRA ─── */}
           <Route path="/persona-rextra" element={<PersonaRextraPage />} />
           <Route path="/persona-rextra/journey/:userId" element={<JourneyUserDetailPage />} />
 
-          {/* Kamus Karier */}
+          {/* ─── Kamus Karier ─── */}
           <Route path="/kamus-karier/master-data" element={<KamusKarierMasterData />} />
           <Route path="/kamus-karier/master-data/profesi/:id" element={<ProfesiDetail />} />
           <Route path="/kamus-karier/master-data/profesi/:id/edit" element={<ProfesiEdit />} />
           <Route path="/kamus-karier/master-data/perusahaan/:id" element={<PerusahaanDetail />} />
           <Route path="/kamus-karier/master-data/perusahaan/:id/edit" element={<PerusahaanEdit />} />
 
-          {/* Membership */}
+          {/* ─── Membership ─── */}
           <Route path="/membership/fitur-hak-akses" element={<MembershipFiturHakAkses />} />
           <Route path="/membership/status" element={<MembershipStatusPage />} />
           <Route path="/membership/status/:id" element={<MembershipDetailPage />} />
@@ -78,12 +104,11 @@ const App = () => (
           <Route path="/membership/promo-diskon/:id" element={<PromoDiskonDetailPage />} />
           <Route path="/faktur/view/:id" element={<InvoiceViewPage />} />
 
-          {/* Sistem Token */}
+          {/* ─── Sistem Token ─── */}
           <Route path="/sistem-token/ikhtisar" element={<SistemTokenIkhtisar />} />
           <Route path="/sistem-token/pengadaan" element={<SistemTokenPengadaan />} />
           <Route path="/sistem-token/ledger" element={<SistemTokenLedger />} />
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
