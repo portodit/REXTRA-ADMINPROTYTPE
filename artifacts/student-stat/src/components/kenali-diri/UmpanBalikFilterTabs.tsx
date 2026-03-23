@@ -1,17 +1,20 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import Typography from '@/components/Typography'
-import { useLocation, useNavigate } from 'react-router-dom'
 
 const tabs = [
-  { label: 'Mahasiswa', key: 'mahasiswa', path: '/kenali-diri/umpan-balik' },
-  { label: 'Expert', key: 'expert', path: '/kenali-diri/umpan-balik/expert' },
-]
+  { label: 'Mahasiswa', key: 'mahasiswa' },
+  { label: 'Expert', key: 'expert' },
+] as const
 
-export default function UmpanBalikFilterTabs() {
-  const location = useLocation()
-  const navigate = useNavigate()
+type TabKey = (typeof tabs)[number]['key']
 
+interface UmpanBalikFilterTabsProps {
+  activeTab: TabKey
+  onTabChange: (tab: TabKey) => void
+}
+
+export default function UmpanBalikFilterTabs({ activeTab, onTabChange }: UmpanBalikFilterTabsProps) {
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-1">
@@ -35,21 +38,23 @@ export default function UmpanBalikFilterTabs() {
           "
         >
           {tabs.map((tab) => {
-            const isActive = location.pathname.includes(tab.key)
+            const isActive = activeTab === tab.key
             return (
               <Button
                 key={tab.key}
-                onClick={() => navigate(tab.path)}
+                onClick={() => onTabChange(tab.key)}
                 className={`
                   whitespace-nowrap rounded-lg shadow-none transition-all
                   ${
                     isActive
-                      ? 'bg-[#CCDDFF] border-[#669AFF] border text-white hover:bg-[#CCDDFF] hover:border hover:border-[#669AFF]'
-                      : 'bg-transparent text-[#669AFF] hover:bg-[#CCDDFF] hover:border hover:border-[#669AFF]'
+                      ? 'bg-[#CCDDFF] border-[#669AFF] border text-[#003499] hover:bg-[#CCDDFF] hover:border hover:border-[#669AFF]'
+                      : 'bg-transparent text-[#494848] hover:bg-[#CCDDFF]/50 shadow-none'
                   }
                 `}
               >
-                <Typography variant="l2">{tab.label}</Typography>
+                <Typography variant="l2" weight={isActive ? 'semibold' : 'regular'}>
+                  {tab.label}
+                </Typography>
               </Button>
             )
           })}
@@ -58,3 +63,5 @@ export default function UmpanBalikFilterTabs() {
     </div>
   )
 }
+
+export type { TabKey as UmpanBalikTabKey }

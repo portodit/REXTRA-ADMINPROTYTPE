@@ -74,23 +74,25 @@ export default function MahasiswaHasilTestDataTable({ tableData }: TestDataTable
     })
   }
 
+  const toggleAll = () => {
+    if (selected.size === paginatedData.length) {
+      setSelected(new Set())
+    } else {
+      setSelected(new Set(paginatedData.map((d) => d.test_id)))
+    }
+  }
+
   return (
     <div className="w-full bg-white rounded-2xl p-6 border border-gray-200">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row justify-between items-center mb-6 gap-4">
+      <div className="flex flex-col mb-6 gap-4">
         <div>
           <Typography variant="h6" weight="bold" className="text-gray-900">
-            Riwayat Tes
+            List Data
           </Typography>
           <Typography variant="l1" className="text-gray-500 mt-1">
-            Menampilkan {Math.min(perPage, totalData)} dari {totalData} data
+            Menampilkan {Math.min(perPage, totalData)} dari {totalData} data hasil tes
           </Typography>
-        </div>
-        <div className="flex gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 border border-red-400 bg-red-50 rounded-lg text-red-600 hover:bg-red-100 text-sm font-medium">
-            <Trash2 className="w-4 h-4" />
-            Hapus Data
-          </button>
         </div>
       </div>
 
@@ -98,87 +100,93 @@ export default function MahasiswaHasilTestDataTable({ tableData }: TestDataTable
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow className="border-gray-200">
-              <TableHead className="w-10"></TableHead>
-              <TableHead>
-                <Typography variant="l1" weight="medium" className="text-gray-700">ID Tes</Typography>
+            <TableRow className="border-gray-200 rounded-xl">
+              <TableHead className="text-center w-10">
+                <Checkbox
+                  checked={selected.size === paginatedData.length && paginatedData.length > 0}
+                  onCheckedChange={toggleAll}
+                />
               </TableHead>
               <TableHead>
-                <Typography variant="l1" weight="medium" className="text-gray-700">Nama Pengguna</Typography>
+                <Typography variant="l1" weight="medium" className="text-gray-700 text-center">
+                  ID Test
+                </Typography>
               </TableHead>
               <TableHead>
-                <Typography variant="l1" weight="medium" className="text-gray-700">Kategori</Typography>
-              </TableHead>
-              <TableHead className="text-center">
-                <Typography variant="l1" weight="medium" className="text-gray-700">Status</Typography>
-              </TableHead>
-              <TableHead className="text-center">
-                <Typography variant="l1" weight="medium" className="text-gray-700">Hasil</Typography>
+                <Typography variant="l1" weight="medium" className="text-gray-700 text-center">
+                  Nama
+                </Typography>
               </TableHead>
               <TableHead>
-                <Typography variant="l1" weight="medium" className="text-gray-700">Mulai</Typography>
+                <Typography variant="l1" weight="medium" className="text-gray-700 text-center">
+                  Kategori
+                </Typography>
               </TableHead>
               <TableHead>
-                <Typography variant="l1" weight="medium" className="text-gray-700">Selesai</Typography>
+                <Typography variant="l1" weight="medium" className="text-gray-700 text-center">
+                  Status
+                </Typography>
               </TableHead>
-              <TableHead className="text-center">
-                <Typography variant="l1" weight="medium" className="text-gray-700">Aksi</Typography>
+              <TableHead>
+                <Typography variant="l1" weight="medium" className="text-gray-700 text-center">
+                  Hasil
+                </Typography>
+              </TableHead>
+              <TableHead>
+                <Typography variant="l1" weight="medium" className="text-gray-700 text-center">
+                  Aksi
+                </Typography>
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {paginatedData.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={9} className="text-center py-10">
+                <TableCell colSpan={7} className="text-center py-10">
                   <Typography variant="l1" className="text-gray-400">Tidak ada data</Typography>
                 </TableCell>
               </TableRow>
             ) : (
-              paginatedData.map((item) => (
-                <TableRow key={item.test_id} className="border-gray-100 hover:bg-gray-50">
-                  <TableCell>
+              paginatedData.map((row) => (
+                <TableRow key={row.test_id} className="border-gray-100 hover:bg-gray-50">
+                  <TableCell className="text-center">
                     <Checkbox
-                      checked={selected.has(item.test_id)}
-                      onCheckedChange={() => toggleSelect(item.test_id)}
+                      checked={selected.has(row.test_id)}
+                      onCheckedChange={() => toggleSelect(row.test_id)}
                     />
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <Typography variant="l1" weight="medium" className="text-blue-600">
-                      {item.test_id}
+                      #{row.test_id}
                     </Typography>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <Typography variant="l1" className="text-gray-800">
-                      {item.user_name}
+                      {row.user_name}
                     </Typography>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <Typography variant="l1" className="text-gray-600">
-                      {item.category_name}
+                      {row.category_name}
                     </Typography>
                   </TableCell>
                   <TableCell className="text-center">
-                    <StatusBadge status={item.status} />
+                    <StatusBadge status={row.status} />
                   </TableCell>
                   <TableCell className="text-center">
-                    <Typography variant="l1" weight="semibold" className="text-gray-800">
-                      {item.result_code || '-'}
+                    <Typography variant="l1" weight="medium" className="text-gray-700">
+                      {row.result_code || '-'}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="l2" className="text-gray-500">
-                      {item.started_at}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="l2" className="text-gray-500">
-                      {item.completed_at || '-'}
-                    </Typography>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <button className="p-1.5 rounded hover:bg-gray-100 text-gray-500 hover:text-blue-600 transition">
-                      <Pencil className="w-4 h-4" />
-                    </button>
+                    <div className="flex justify-center gap-3">
+                      <button className="text-red-400 hover:text-red-600 transition-colors">
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                      <button className="text-blue-400 hover:text-blue-600 transition-colors">
+                        <Pencil className="w-5 h-5" />
+                      </button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))
