@@ -1,6 +1,6 @@
 import React from 'react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
-import FilterTabs, { TabType } from '@/components/kenali-diri/FilterTabs'
+import FilterTabs, { TabType, FilterValues } from '@/components/kenali-diri/FilterTabs'
 import MahasiswaHasilTestDataTable from '@/components/kenali-diri/MahasiswaHasilTestTable'
 import { KenaliDiriHistoryItem } from '@/types/kenali-diri'
 
@@ -46,21 +46,30 @@ const mapStatus = (status: KenaliDiriHistoryItem['status']): TabType => {
 interface PageFilters {
   tab: TabType
   search: string
+  hasil: string
+  kategori: string
+  urutan: string
 }
 
 export default function HasilTesPage() {
+  const [data, setData] = React.useState<KenaliDiriHistoryItem[]>(DUMMY_DATA)
   const [filters, setFilters] = React.useState<PageFilters>({
     tab: 'Semua Data',
     search: '',
+    hasil: 'Semua Hasil',
+    kategori: 'Semua Kategori',
+    urutan: 'Nama A-Z',
   })
 
   const filteredData = React.useMemo(() => {
-    let result = [...DUMMY_DATA]
+    let result = [...data]
 
+    // Tab filter
     if (filters.tab !== 'Semua Data') {
       result = result.filter((item) => mapStatus(item.status) === filters.tab)
     }
 
+    // Search filter
     if (filters.search.trim()) {
       const q = filters.search.toLowerCase()
       result = result.filter(
@@ -70,8 +79,33 @@ export default function HasilTesPage() {
       )
     }
 
+    // RIASEC hasil filter
+    if (filters.hasil !== 'Semua Hasil') {
+      result = result.filter((item) => item.result_code === filters.hasil)
+    }
+
+    // Kategori filter
+    if (filters.kategori !== 'Semua Kategori') {
+      result = result.filter((item) => item.category_name === filters.kategori)
+    }
+
+    // Urutan
+    if (filters.urutan === 'Nama A-Z') {
+      result.sort((a, b) => a.user_name.localeCompare(b.user_name))
+    } else if (filters.urutan === 'Nama Z-A') {
+      result.sort((a, b) => b.user_name.localeCompare(a.user_name))
+    } else if (filters.urutan === 'Terbaru') {
+      result.sort((a, b) => new Date(b.started_at).getTime() - new Date(a.started_at).getTime())
+    } else if (filters.urutan === 'Terlama') {
+      result.sort((a, b) => new Date(a.started_at).getTime() - new Date(b.started_at).getTime())
+    }
+
     return result
-  }, [filters])
+  }, [filters, data])
+
+  const handleDelete = (testId: string) => {
+    setData((prev) => prev.filter((item) => item.test_id !== testId))
+  }
 
   return (
     <DashboardLayout>
@@ -82,9 +116,14 @@ export default function HasilTesPage() {
             search={filters.search}
             onTabChange={(tab) => setFilters((prev) => ({ ...prev, tab }))}
             onSearchChange={(search) => setFilters((prev) => ({ ...prev, search }))}
-            onFilterClick={() => {}}
+            onFilterChange={(f: FilterValues) =>
+              setFilters((prev) => ({ ...prev, ...f }))
+            }
           />
-          <MahasiswaHasilTestDataTable tableData={filteredData} />
+          <MahasiswaHasilTestDataTable
+            tableData={filteredData}
+            onDelete={handleDelete}
+          />
         </div>
       </div>
     </DashboardLayout>

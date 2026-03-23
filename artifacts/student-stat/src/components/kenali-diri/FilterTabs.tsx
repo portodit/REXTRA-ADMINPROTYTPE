@@ -1,29 +1,133 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import Typography from '@/components/Typography'
 import { SearchBar } from './SearchBar'
-import { SlidersHorizontal, X } from 'lucide-react'
+import { SlidersHorizontal, X, ChevronDown, Check, Search } from 'lucide-react'
 
 const tabs = ['Semua Data', 'Selesai', 'Berjalan', 'Dihentikan'] as const
 type TabType = (typeof tabs)[number]
+
+export interface FilterValues {
+  hasil: string
+  kategori: string
+  urutan: string
+}
 
 interface FilterTabsProps {
   activeTab: TabType
   search: string
   onTabChange: (tab: TabType) => void
   onSearchChange: (value: string) => void
+  onFilterChange?: (filters: FilterValues) => void
   onFilterClick?: () => void
 }
 
 const KATEGORI_OPTIONS = ['Semua Kategori', 'Tes Profil Karier', 'Tes Minat Bakat', 'Tes Kepribadian']
-const HASIL_OPTIONS = ['Semua Hasil', 'RIA', 'SEC', 'AIR', 'CRE', 'IAS', 'ESC', 'RCS', 'ARI']
+const HASIL_OPTIONS = ['Semua Hasil', 'RIA', 'SEC', 'AIR', 'CRE', 'IAS', 'ESC', 'RCS', 'ARI', 'RSC', 'IAE', 'ECA']
 const URUTAN_OPTIONS = ['Nama A-Z', 'Nama Z-A', 'Terbaru', 'Terlama']
 
+/* ── Searchable Combobox ──────────────────────────────────────── */
+interface ComboboxProps {
+  options: string[]
+  value: string
+  onChange: (val: string) => void
+  placeholder?: string
+}
+
+function SearchableCombobox({ options, value, onChange, placeholder = 'Pilih...' }: ComboboxProps) {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const ref = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const filtered = options.filter((o) =>
+    o.toLowerCase().includes(query.toLowerCase()),
+  )
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+        setQuery('')
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleOpen = () => {
+    setOpen(true)
+    setQuery('')
+    setTimeout(() => inputRef.current?.focus(), 50)
+  }
+
+  const handleSelect = (opt: string) => {
+    onChange(opt)
+    setOpen(false)
+    setQuery('')
+  }
+
+  return (
+    <div ref={ref} className="relative w-full">
+      <button
+        type="button"
+        onClick={handleOpen}
+        className="w-full flex items-center justify-between border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors"
+      >
+        <span className={value === options[0] ? 'text-gray-400' : 'text-gray-800'}>
+          {value || placeholder}
+        </span>
+        <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <div className="absolute z-50 mt-1 w-full min-w-[180px] bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+          {/* Search input */}
+          <div className="flex items-center gap-2 px-3 py-2 border-b border-gray-100">
+            <Search className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+            <input
+              ref={inputRef}
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Cari kode..."
+              className="w-full text-sm outline-none text-gray-700 placeholder-gray-400"
+            />
+          </div>
+
+          {/* Options list */}
+          <div className="max-h-52 overflow-y-auto py-1">
+            {filtered.length === 0 ? (
+              <div className="px-4 py-3 text-sm text-gray-400 text-center">Tidak ditemukan</div>
+            ) : (
+              filtered.map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => handleSelect(opt)}
+                  className="w-full flex items-center justify-between px-4 py-2 text-sm text-left hover:bg-blue-50 transition-colors"
+                >
+                  <span className={opt === value ? 'text-blue-700 font-medium' : 'text-gray-700'}>
+                    {opt}
+                  </span>
+                  {opt === value && <Check className="w-3.5 h-3.5 text-blue-600" />}
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* ── FilterTabs ───────────────────────────────────────────────── */
 export default function FilterTabs({
   activeTab,
   search,
   onTabChange,
   onSearchChange,
+  onFilterChange,
 }: FilterTabsProps) {
   const [showFilter, setShowFilter] = useState(false)
   const [filterKategori, setFilterKategori] = useState(KATEGORI_OPTIONS[0])
@@ -35,10 +139,16 @@ export default function FilterTabs({
     filterHasil !== HASIL_OPTIONS[0] ||
     filterUrutan !== URUTAN_OPTIONS[0]
 
+  const applyFilter = () => {
+    onFilterChange?.({ hasil: filterHasil, kategori: filterKategori, urutan: filterUrutan })
+    setShowFilter(false)
+  }
+
   const resetFilter = () => {
     setFilterKategori(KATEGORI_OPTIONS[0])
     setFilterHasil(HASIL_OPTIONS[0])
     setFilterUrutan(URUTAN_OPTIONS[0])
+    onFilterChange?.({ hasil: HASIL_OPTIONS[0], kategori: KATEGORI_OPTIONS[0], urutan: URUTAN_OPTIONS[0] })
   }
 
   return (
@@ -127,6 +237,7 @@ export default function FilterTabs({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Kategori Tes */}
             <div className="flex flex-col gap-1">
               <label className="text-xs font-medium text-gray-600">Kategori Tes</label>
               <select
@@ -140,19 +251,18 @@ export default function FilterTabs({
               </select>
             </div>
 
+            {/* Hasil Tes (RIASEC) — Searchable Combobox */}
             <div className="flex flex-col gap-1">
-              <label className="text-xs font-medium text-gray-600">Hasil Tes</label>
-              <select
+              <label className="text-xs font-medium text-gray-600">Hasil Tes (Kode RIASEC)</label>
+              <SearchableCombobox
+                options={HASIL_OPTIONS}
                 value={filterHasil}
-                onChange={(e) => setFilterHasil(e.target.value)}
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300"
-              >
-                {HASIL_OPTIONS.map((o) => (
-                  <option key={o} value={o}>{o}</option>
-                ))}
-              </select>
+                onChange={setFilterHasil}
+                placeholder="Cari kode RIASEC..."
+              />
             </div>
 
+            {/* Urutkan */}
             <div className="flex flex-col gap-1">
               <label className="text-xs font-medium text-gray-600">Urutkan</label>
               <select
@@ -168,7 +278,10 @@ export default function FilterTabs({
           </div>
 
           <div className="flex gap-2 mt-4">
-            <button className="px-4 py-2 rounded-lg bg-[#003499] text-white text-sm font-medium hover:bg-blue-800 transition-colors">
+            <button
+              onClick={applyFilter}
+              className="px-4 py-2 rounded-lg bg-[#003499] text-white text-sm font-medium hover:bg-blue-800 transition-colors"
+            >
               Terapkan Filter
             </button>
             {hasActiveFilter && (
