@@ -35,21 +35,19 @@ export const useLoginMutation = () => {
       setAccessToken(access_token)
       setRefreshToken(refresh_token)
 
-      const userRes = await authApi.get<UserResponse>('/api/v1/auth/me')
+      const userRes = await authApi.get<UserResponse>('/api/v1/auth/me', {
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
       if (userRes.data) {
         login({ ...userRes.data.data, token: access_token })
       }
 
       return res.data
     },
-    onSuccess: (res) => {
+    onSuccess: () => {
       toast.success('Berhasil masuk!')
       setTimeout(() => {
-        if (res.data.role === 'ADMIN') {
-          navigate('/')
-        } else {
-          navigate('/')
-        }
+        navigate('/persona-rextra')
       }, 1000)
     },
     onError: (error) => {

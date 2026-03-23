@@ -12,7 +12,7 @@ import { LoginSchema } from '@/validation/login'
 
 export default function LoginPage() {
   const methods = useForm<z.infer<typeof LoginSchema>>({
-    mode: 'onBlur',
+    mode: 'onChange',
     resolver: zodResolver(LoginSchema),
   })
 
