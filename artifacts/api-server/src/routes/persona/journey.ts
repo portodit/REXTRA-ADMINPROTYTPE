@@ -16,15 +16,15 @@ router.get("/users/stats", async (_req, res) => {
     const profiles = await db
       .select({
         journeyStatus: userPersonaProfile.journeyStatus,
-        initialPhaseCode: personaPhaseMaster.code,
+        currentPhaseCode: personaPhaseMaster.code,
       })
       .from(userPersonaProfile)
-      .leftJoin(personaPhaseMaster, eq(userPersonaProfile.initialPhaseId, personaPhaseMaster.id));
+      .leftJoin(personaPhaseMaster, eq(userPersonaProfile.currentPhaseId, personaPhaseMaster.id));
 
     const total = profiles.length;
-    const pathfinder = profiles.filter(p => p.initialPhaseCode === "PATHFINDER").length;
-    const builder = profiles.filter(p => p.initialPhaseCode === "BUILDER").length;
-    const achiever = profiles.filter(p => p.initialPhaseCode === "ACHIEVER").length;
+    const pathfinder = profiles.filter(p => p.currentPhaseCode === "PATHFINDER" && p.journeyStatus === "ACTIVE").length;
+    const builder = profiles.filter(p => p.currentPhaseCode === "BUILDER" && p.journeyStatus === "ACTIVE").length;
+    const achiever = profiles.filter(p => p.currentPhaseCode === "ACHIEVER" && p.journeyStatus === "ACTIVE").length;
     const completed = profiles.filter(p => p.journeyStatus === "COMPLETED").length;
 
     res.json({
@@ -62,6 +62,14 @@ router.get("/users", async (req, res) => {
       .$with("initial_phase")
       .as(db.select().from(personaPhaseMaster));
 
+    const whereClause = and(
+      persona_initial ? sql`ip.code = ${persona_initial}` : undefined,
+      persona_active ? sql`cp.code = ${persona_active}` : undefined,
+      status ? eq(userPersonaProfile.journeyStatus, status as "ACTIVE" | "COMPLETED") : undefined,
+      date_from ? gte(userPersonaProfile.profiledAt, new Date(date_from)) : undefined,
+      date_to ? lte(userPersonaProfile.profiledAt, new Date(date_to)) : undefined,
+    );
+
     const rows = await db
       .select({
         userId: userPersonaProfile.userId,
@@ -69,29 +77,16 @@ router.get("/users", async (req, res) => {
         journeyStatus: userPersonaProfile.journeyStatus,
         profiledAt: userPersonaProfile.profiledAt,
         lastUpdatedAt: userPersonaProfile.lastUpdatedAt,
+        profilingAnswers: userPersonaProfile.profilingAnswers,
         initialPhaseCode: sql<string>`ip.code`.as("initial_phase_code"),
         initialPhaseName: sql<string>`ip.name`.as("initial_phase_name"),
         currentPhaseCode: sql<string>`cp.code`.as("current_phase_code"),
         currentPhaseName: sql<string>`cp.name`.as("current_phase_name"),
       })
       .from(userPersonaProfile)
-      .leftJoin(
-        sql`persona_phase_master ip`,
-        sql`${userPersonaProfile.initialPhaseId} = ip.id`
-      )
-      .leftJoin(
-        sql`persona_phase_master cp`,
-        sql`${userPersonaProfile.currentPhaseId} = cp.id`
-      )
-      .where(
-        and(
-          persona_initial ? sql`ip.code = ${persona_initial}` : undefined,
-          persona_active ? sql`cp.code = ${persona_active}` : undefined,
-          status ? eq(userPersonaProfile.journeyStatus, status as "ACTIVE" | "COMPLETED") : undefined,
-          date_from ? gte(userPersonaProfile.profiledAt, new Date(date_from)) : undefined,
-          date_to ? lte(userPersonaProfile.profiledAt, new Date(date_to)) : undefined,
-        )
-      )
+      .leftJoin(sql`persona_phase_master ip`, sql`${userPersonaProfile.initialPhaseId} = ip.id`)
+      .leftJoin(sql`persona_phase_master cp`, sql`${userPersonaProfile.currentPhaseId} = cp.id`)
+      .where(whereClause)
       .limit(limitNum)
       .offset(offset);
 
@@ -118,17 +113,22 @@ router.get("/users", async (req, res) => {
 
     const countResult = await db
       .select({ count: sql<number>`count(*)::int` })
-      .from(userPersonaProfile);
+      .from(userPersonaProfile)
+      .leftJoin(sql`persona_phase_master ip`, sql`${userPersonaProfile.initialPhaseId} = ip.id`)
+      .leftJoin(sql`persona_phase_master cp`, sql`${userPersonaProfile.currentPhaseId} = cp.id`)
+      .where(whereClause);
 
     const total = countResult[0]?.count ?? 0;
 
     const data = rows.map(r => {
       const progress = progressMap.get(r.profileId) ?? { done: 0, total: 0 };
       const pct = progress.total > 0 ? (progress.done / progress.total) * 100 : 0;
+      const answers = r.profilingAnswers as Record<string, string> | null;
+      const name = answers?.userName ?? `User ${r.userId.slice(0, 8)}`;
       return {
         user_id: r.userId,
-        name: `User ${r.userId.slice(0, 8)}`,
-        email: `${r.userId.slice(0, 8)}@example.com`,
+        name,
+        email: `${name.toLowerCase().replace(/\s+/g, ".")}@example.com`,
         initial_persona: r.initialPhaseCode ?? "",
         active_persona: r.currentPhaseCode ?? "",
         journey_status: r.journeyStatus,
@@ -227,11 +227,12 @@ router.get("/users/:userId/journey", async (req, res) => {
     const pct = requiredTotal > 0 ? (requiredCompleted / requiredTotal) * 100 : 0;
 
     const profilingAnswers = profile.profilingAnswers as Record<string, unknown> | null;
+    const userName = (profilingAnswers?.userName as string) ?? `User ${profile.userId.slice(0, 8)}`;
 
     res.json({
       user_id: profile.userId,
-      name: `User ${profile.userId.slice(0, 8)}`,
-      email: `${profile.userId.slice(0, 8)}@example.com`,
+      name: userName,
+      email: `${userName.toLowerCase().replace(/\s+/g, ".")}@example.com`,
       initial_persona: profile.initialPhaseCode,
       active_persona: profile.currentPhaseCode,
       journey_status: profile.journeyStatus,
