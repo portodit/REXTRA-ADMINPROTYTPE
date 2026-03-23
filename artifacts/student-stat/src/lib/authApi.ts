@@ -18,7 +18,15 @@ authApi.interceptors.request.use((config) => {
 authApi.interceptors.response.use(
   (res) => res,
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
+    const url = error.config?.url ?? ''
+    // Only auto-redirect for protected routes, NOT for auth endpoints
+    // (login/forgot-password returning 401 must show toast, not reload page)
+    const isAuthEndpoint = url.includes('/auth/login') ||
+      url.includes('/auth/register') ||
+      url.includes('/auth/forgot-password') ||
+      url.includes('/auth/reset-password') ||
+      url.includes('/auth/verify-email')
+    if (error.response?.status === 401 && !isAuthEndpoint) {
       removeTokens()
       window.location.href = '/login'
     }

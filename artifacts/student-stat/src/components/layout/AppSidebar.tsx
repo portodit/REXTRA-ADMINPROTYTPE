@@ -320,8 +320,9 @@ export function AppSidebar() {
           'hidden md:flex flex-col',
           'shadow-[3px_9px_7px_7px_rgba(77,77,86,0.04)]',
           'bg-white border-r border-[#B5B7B8] transition-all duration-300 ease-in-out',
-          isOpen ? 'w-[318px]' : 'w-[88px]',
+          isOpen ? 'w-[318px]' : 'w-[88px] cursor-pointer',
         )}
+        onClick={!isOpen ? toggleSidebar : undefined}
       >
         <SidebarContent isOpen={isOpen} onClose={toggleSidebar} isMobile={false} />
       </aside>

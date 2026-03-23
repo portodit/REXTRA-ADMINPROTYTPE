@@ -1,53 +1,101 @@
-import { Bell, Menu } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRef, useState, useEffect } from 'react'
+import { Bell, LogOut } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import useAuthStore from '@/store/useAuthStore'
+import { useNavigate } from 'react-router-dom'
 
 interface TopNavbarProps {
-  className?: string;
-  onMenuClick?: () => void;
+  className?: string
+  onMenuClick?: () => void
 }
 
-export function TopNavbar({ className, onMenuClick }: TopNavbarProps) {
+export function TopNavbar({ className }: TopNavbarProps) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const { user, logout } = useAuthStore()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <header
-      className={`h-20 bg-card border-b border-sidebar-border flex items-center justify-between px-4 md:px-8 w-full ${className}`}
+      className={cn(
+        'h-20 bg-white border-b border-[#B5B7B8] flex items-center justify-between px-8 w-full',
+        className,
+      )}
     >
-      {/* Left: Menu button (mobile) */}
-      <div className="flex items-center gap-3">
-        <button
-          onClick={onMenuClick}
-          className="lg:hidden p-2 rounded-xl hover:bg-muted transition-colors text-muted-foreground"
-        >
-          <Menu size={22} />
-        </button>
-        {/* Breadcrumbs placeholder */}
-        <div />
-      </div>
+      {/* Left: empty (breadcrumbs placeholder) */}
+      <div />
 
-      {/* Right: Notifications + Profile */}
+      {/* Right: Bell + separator + profile */}
       <div className="flex items-center gap-6">
         {/* Notification Bell */}
-        <button className="relative p-2 rounded-xl hover:bg-muted/50 transition-colors">
-          <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+        <button className="relative p-2 rounded-xl hover:bg-gray-50 transition-colors">
+          <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
             <Bell size={20} />
           </div>
-          <span className="absolute top-2 right-3 w-2.5 h-2.5 bg-primary border-2 border-card rounded-full" />
+          <span className="absolute top-2 right-3 w-2.5 h-2.5 bg-blue-600 border-2 border-white rounded-full" />
         </button>
 
         {/* Separator */}
-        <div className="h-8 w-px bg-border mx-1 hidden md:block" />
+        <div className="h-8 w-px bg-gray-200 mx-1 hidden md:block" />
 
         {/* User Profile */}
-        <div className="flex items-center gap-3 cursor-pointer">
-          <Avatar className="h-10 w-10 border border-border">
-            <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" />
-            <AvatarFallback className="bg-primary/10 text-primary font-medium">AD</AvatarFallback>
-          </Avatar>
-          <div className="hidden sm:flex flex-col">
-            <span className="text-sm font-semibold text-foreground">Admin User</span>
-            <span className="text-xs text-muted-foreground">admin@rextra.id</span>
+        <div className="relative" ref={ref}>
+          <div
+            onClick={() => setOpen((prev) => !prev)}
+            className="flex items-center gap-3 cursor-pointer"
+          >
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gray-100">
+              <img
+                src="/images/dashboard/Gajah.jpg"
+                alt="User Avatar"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="hidden sm:flex flex-col">
+              <span className="text-sm font-bold text-gray-800">
+                {user?.name ?? 'Admin User'}
+              </span>
+              <span className="text-xs text-gray-500">
+                {user?.email ?? ''}
+              </span>
+            </div>
           </div>
+
+          {/* Dropdown */}
+          {open && (
+            <div className="absolute right-0 mt-3 w-48 bg-white rounded-xl shadow-lg border border-gray-100 z-50 overflow-hidden">
+              {/* Mobile: show name/email */}
+              <div className="sm:hidden px-4 py-3 border-b border-gray-100">
+                <p className="text-sm font-semibold text-gray-800">{user?.name ?? 'Admin User'}</p>
+                <p className="text-xs text-gray-500">{user?.email ?? ''}</p>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 transition-colors"
+              >
+                <LogOut size={16} />
+                Keluar
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>
-  );
+  )
 }
