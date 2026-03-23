@@ -63,7 +63,7 @@ const App = () => (
       <HotToaster position="top-right" />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
 
           {/* ─── Auth ─── */}
           <Route path="/login" element={<LoginPage />} />

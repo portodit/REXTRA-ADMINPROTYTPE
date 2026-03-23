@@ -1,183 +1,169 @@
-import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { cn } from "@/lib/utils";
-import logoRextra from "@/assets/logo-rextra.png";
+import { useState, useEffect } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
+import { cn } from '@/lib/utils'
+import logoRextra from '@/assets/logo-rextra.png'
 import {
-  ChevronLeft,
   ChevronDown,
+  ChevronLeft,
   X,
   User,
-  Fingerprint,
+  BarChart2,
   GraduationCap,
   Users,
-  Brain,
-  FileText,
+  Heart,
   Building2,
+  FileText,
   Trophy,
   DollarSign,
-  BarChart3,
   BookOpen,
   Crown,
   Coins,
-  Settings,
-  Heart,
   Menu,
-} from "lucide-react";
+} from 'lucide-react'
 
-// ─── Menu Data ──────────────────────────────────────────────────────
 const menuData = [
   {
-    category: "Fitur Mahasiswa",
+    category: 'Mahasiswa',
     items: [
-      { label: "Akun Mahasiswa", icon: User, href: "/akun-mahasiswa" },
-      { label: "Persona REXTRA", icon: Fingerprint, href: "/persona-rextra" },
-      { label: "Pendidikan", icon: GraduationCap, href: "/pendidikan" },
+      { label: 'Akun Mahasiswa', icon: User, href: '/akun-mahasiswa' },
+      { label: 'Persona REXTRA', icon: BarChart2, href: '/persona-rextra' },
+      { label: 'Pendidikan', icon: GraduationCap, href: '/pendidikan' },
       {
-        label: "Membership",
+        label: 'Membership',
         icon: Crown,
-        href: "#",
+        href: '#',
         children: [
-          { label: "Fitur & Hak Akses", href: "/membership/fitur-hak-akses" },
-          { label: "Status Membership", href: "/membership/status" },
-          { label: "Riwayat Langganan", href: "/membership/riwayat-langganan" },
-          { label: "Promo & Diskon", href: "/membership/promo-diskon" },
-          { label: "Pengaturan", href: "/membership/pengaturan" },
+          { label: 'Fitur & Hak Akses', href: '/membership/fitur-hak-akses' },
+          { label: 'Status Membership', href: '/membership/status' },
+          { label: 'Riwayat Langganan', href: '/membership/riwayat-langganan' },
+          { label: 'Promo & Diskon', href: '/membership/promo-diskon' },
+          { label: 'Pengaturan', href: '/membership/pengaturan' },
         ],
       },
       {
-        label: "Sistem Token",
+        label: 'Sistem Token',
         icon: Coins,
-        href: "#",
+        href: '#',
         children: [
-          { label: "Ikhtisar Token", href: "/sistem-token/ikhtisar" },
-          { label: "Pengadaan Token", href: "/sistem-token/pengadaan" },
-          { label: "Ledger Token", href: "/sistem-token/ledger" },
+          { label: 'Ikhtisar Token', href: '/sistem-token/ikhtisar' },
+          { label: 'Pengadaan Token', href: '/sistem-token/pengadaan' },
+          { label: 'Ledger Token', href: '/sistem-token/ledger' },
         ],
       },
       {
-        label: "Kenali Diri",
+        label: 'Kenali Diri',
         icon: Heart,
-        href: "#",
+        href: '#',
         children: [
-          { label: "Master Data", href: "/kenali-diri/master-data" },
-          { label: "Hasil Tes", href: "/kenali-diri/hasil-tes" },
-          { label: "Umpan Balik", href: "/kenali-diri/umpan-balik" },
+          { label: 'Master Data', href: '/kenali-diri/master-data' },
+          { label: 'Hasil Tes', href: '/kenali-diri/hasil-tes' },
+          { label: 'Umpan Balik', href: '/kenali-diri/umpan-balik' },
         ],
       },
       {
-        label: "Kamus Karier",
+        label: 'Kamus Karier',
         icon: BookOpen,
-        href: "#",
+        href: '#',
         children: [
-          { label: "Master Data", href: "/kamus-karier/master-data" },
-          { label: "Kecocokan Profesi", href: "/kamus-karier/kecocokan-profesi" },
-          { label: "Statistik", href: "/kamus-karier/statistik" },
+          { label: 'Master Data', href: '/kamus-karier/master-data' },
+          { label: 'Kecocokan Profesi', href: '/kamus-karier/kecocokan-profesi' },
+          { label: 'Statistik', href: '/kamus-karier/statistik' },
         ],
       },
     ],
   },
   {
-    category: "Fitur Perusahaan",
+    category: 'Perusahaan',
     items: [
-      { label: "Profil Perusahaan", icon: Building2, href: "/profil-perusahaan" },
-      { label: "Lowongan Kerja", icon: FileText, href: "/lowongan-kerja" },
+      { label: 'Profil Perusahaan', icon: Building2, href: '/profil-perusahaan' },
+      { label: 'Lowongan Kerja', icon: FileText, href: '/lowongan-kerja' },
     ],
   },
   {
-    category: "Performa Usaha",
+    category: 'Performa',
     items: [
-      { label: "Capaian Pengguna", icon: Trophy, href: "/capaian-pengguna" },
-      { label: "Capaian Keuangan", icon: DollarSign, href: "/capaian-keuangan" },
-      { label: "Visualisasi Performa", icon: BarChart3, href: "/visualisasi-performa" },
+      { label: 'Capaian Pengguna', icon: Trophy, href: '/capaian-pengguna' },
+      { label: 'Capaian Keuangan', icon: DollarSign, href: '/capaian-keuangan' },
+      { label: 'Visualisasi Performa', icon: BarChart2, href: '/visualisasi-performa' },
     ],
   },
-];
+]
 
-// ─── Sidebar Content ────────────────────────────────────────────────
 function SidebarContent({
   isOpen,
   onClose,
   isMobile = false,
 }: {
-  isOpen: boolean;
-  onClose: () => void;
-  isMobile?: boolean;
+  isOpen: boolean
+  onClose: () => void
+  isMobile?: boolean
 }) {
-  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
-  const location = useLocation();
-  const pathname = location.pathname;
+  const [expandedMenus, setExpandedMenus] = useState<string[]>([])
+  const location = useLocation()
+  const pathname = location.pathname
 
   const toggleMenu = (label: string) => {
-    setExpandedMenus((prev) =>
-      prev.includes(label)
-        ? prev.filter((item) => item !== label)
-        : [...prev, label]
-    );
-  };
+    setExpandedMenus(prev =>
+      prev.includes(label) ? prev.filter(item => item !== label) : [...prev, label],
+    )
+  }
 
-  // Auto-expand active parent
   useEffect(() => {
-    menuData.forEach((section) => {
-      section.items.forEach((item) => {
+    menuData.forEach(section => {
+      section.items.forEach(item => {
         if (item.children) {
           const isChildActive = item.children.some(
-            (child) => pathname === child.href || pathname.startsWith(child.href + "/")
-          );
+            child => pathname === child.href || pathname.startsWith(child.href + '/'),
+          )
           if (isChildActive) {
-            setExpandedMenus((prev) =>
-              prev.includes(item.label) ? prev : [...prev, item.label]
-            );
+            setExpandedMenus(prev => (prev.includes(item.label) ? prev : [...prev, item.label]))
           }
         }
-      });
-    });
-  }, [pathname]);
+      })
+    })
+  }, [pathname])
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header */}
+      {/* HEADER */}
       <div
         className={cn(
-          "h-20 flex items-center shrink-0 border-b border-sidebar-border",
-          isOpen && !isMobile ? "justify-between px-6" : isMobile ? "justify-between px-6" : "justify-center px-2"
+          'h-20 flex items-center mb-2 border-b border-[#B5B7B8] shrink-0',
+          isOpen && !isMobile
+            ? 'justify-between px-6'
+            : isMobile
+              ? 'justify-between px-6'
+              : 'justify-center px-0',
         )}
       >
         <div className="flex items-center gap-3 overflow-hidden whitespace-nowrap min-w-0">
           {isOpen || isMobile ? (
-            <img src={logoRextra} alt="Rextra Logo" className="h-8 object-contain" />
+            <img src={logoRextra} alt="Rextra Full Logo" className="h-8 object-contain transition-opacity duration-300" />
           ) : (
-            <img src={logoRextra} alt="Rextra Icon" className="h-8 w-8 object-contain" />
+            <img src={logoRextra} alt="Rextra Icon" className="w-9 h-9 object-contain transition-opacity duration-300" />
           )}
         </div>
         {(isOpen || isMobile) && (
-          <button
-            onClick={onClose}
-            className="text-muted-foreground hover:text-foreground ml-2 transition-colors"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 ml-2">
             {isMobile ? <X size={24} /> : <ChevronLeft size={24} />}
           </button>
         )}
       </div>
 
-      {/* Menu List */}
-      <div className="flex-1 overflow-y-auto scrollbar-hide px-4 py-4">
+      {/* MENU LIST */}
+      <div className="flex-1 overflow-y-auto scrollbar-hide px-4 pb-10">
         {menuData.map((section, idx) => (
           <div key={idx} className="mb-6">
-            {(isOpen || isMobile) && (
-              <p className="px-3 mb-2 text-xs font-medium text-muted-foreground/70 uppercase tracking-wider">
-                {section.category}
-              </p>
-            )}
-            <div className="space-y-0.5">
-              {section.items.map((item) => {
-                const hasChildren = item.children && item.children.length > 0;
-                const isMenuExpanded = expandedMenus.includes(item.label);
-                const isSelfActive = pathname === item.href;
+            <div className="gap-1">
+              {section.items.map(item => {
+                const hasChildren = item.children && item.children.length > 0
+                const isMenuExpanded = expandedMenus.includes(item.label)
+                const isSelfActive = pathname === item.href
                 const isChildActive = item.children?.some(
-                  (c) => pathname === c.href || pathname.startsWith(c.href + "/")
-                );
-                const isParentActive = isSelfActive || isChildActive;
-                const Icon = item.icon;
+                  c => pathname === c.href || pathname.startsWith(c.href + '/'),
+                )
+                const isParentActive = isSelfActive || isChildActive
+                const Icon = item.icon
 
                 return (
                   <div key={item.label}>
@@ -185,25 +171,24 @@ function SidebarContent({
                       <button
                         onClick={() => toggleMenu(item.label)}
                         className={cn(
-                          "flex items-center w-full p-3 rounded-2xl transition-all duration-200 group relative",
-                          isOpen || isMobile ? "justify-between" : "justify-center flex-col gap-1",
+                          'flex items-center w-full p-3 rounded-2xl transition-all duration-200 group relative',
+                          isOpen || isMobile ? 'justify-between' : 'justify-center flex-col gap-1',
                           isParentActive && (isOpen || isMobile)
-                            ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
-                            : "text-sidebar-foreground hover:bg-muted/50"
+                            ? 'bg-blue-50 text-blue-900 font-semibold'
+                            : 'text-gray-600 hover:bg-gray-50',
+                          isParentActive && !isOpen && !isMobile ? 'bg-blue-50/50 text-blue-900' : '',
                         )}
                       >
-                        <div className={cn("flex items-center gap-4", !isOpen && !isMobile && "flex-col gap-0")}>
+                        <div className={cn('flex items-center gap-4', !isOpen && !isMobile && 'flex-col gap-0')}>
                           <Icon
-                            size={22}
-                            className={cn(
-                              isParentActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
-                            )}
+                            size={24}
+                            className={cn(isParentActive ? 'text-blue-800' : 'text-gray-500 group-hover:text-gray-700')}
                             strokeWidth={1.5}
                           />
                           <span
                             className={cn(
-                              "whitespace-nowrap transition-all duration-200 text-[15px]",
-                              isOpen || isMobile ? "opacity-100" : "opacity-0 w-0 h-0 hidden"
+                              'whitespace-nowrap transition-all duration-200 font-medium font-poppins text-[16px]',
+                              isOpen || isMobile ? 'opacity-100' : 'opacity-0 w-0 h-0 hidden',
                             )}
                           >
                             {item.label}
@@ -212,36 +197,33 @@ function SidebarContent({
                         {(isOpen || isMobile) && (
                           <ChevronDown
                             size={18}
-                            className={cn(
-                              "transition-transform duration-200 text-muted-foreground",
-                              isMenuExpanded ? "rotate-180" : ""
-                            )}
+                            className={cn('transition-transform duration-200 text-gray-400', isMenuExpanded ? 'rotate-180' : '')}
                           />
                         )}
                       </button>
                     ) : (
                       <NavLink
                         to={item.href}
-                        className={cn(
-                          "flex items-center w-full p-3 rounded-2xl transition-all duration-200 group relative",
-                          isOpen || isMobile ? "justify-start" : "justify-center flex-col gap-1",
-                          isSelfActive
-                            ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
-                            : "text-sidebar-foreground hover:bg-muted/50"
-                        )}
+                        className={({ isActive }) =>
+                          cn(
+                            'flex items-center w-full p-3 rounded-2xl transition-all duration-200 group relative',
+                            isOpen || isMobile ? 'justify-start' : 'justify-center flex-col gap-1',
+                            isActive
+                              ? 'bg-blue-50 text-blue-900 font-semibold'
+                              : 'text-gray-600 hover:bg-gray-50',
+                          )
+                        }
                       >
-                        <div className={cn("flex items-center gap-4", !isOpen && !isMobile && "flex-col gap-0")}>
+                        <div className={cn('flex items-center gap-4', !isOpen && !isMobile && 'flex-col gap-0')}>
                           <Icon
-                            size={22}
-                            className={cn(
-                              isSelfActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
-                            )}
+                            size={24}
+                            className={cn(isSelfActive ? 'text-blue-800' : 'text-gray-500 group-hover:text-gray-700')}
                             strokeWidth={1.5}
                           />
                           <span
                             className={cn(
-                              "whitespace-nowrap transition-all duration-200 text-[15px]",
-                              isOpen || isMobile ? "opacity-100" : "opacity-0 w-0 h-0 hidden"
+                              'whitespace-nowrap transition-all duration-200 font-medium font-poppins text-[16px]',
+                              isOpen || isMobile ? 'opacity-100' : 'opacity-0 w-0 h-0 hidden',
                             )}
                           >
                             {item.label}
@@ -250,54 +232,49 @@ function SidebarContent({
                       </NavLink>
                     )}
 
-                    {/* Sub Menu with vertical line + dots */}
+                    {/* Sub Menu */}
                     {hasChildren && (isOpen || isMobile) && (
                       <div
                         className={cn(
-                          "grid transition-all duration-300 ease-in-out overflow-hidden",
-                          isMenuExpanded
-                            ? "grid-rows-[1fr] opacity-100 mt-1"
-                            : "grid-rows-[0fr] opacity-0 mt-0"
+                          'grid transition-all duration-300 ease-in-out overflow-hidden',
+                          isMenuExpanded ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0 mt-0',
                         )}
                       >
                         <div className="min-h-0 relative">
-                          {/* Vertical line */}
-                          <div className="absolute left-[23px] top-0 bottom-2 w-px bg-border z-0" />
+                          <div className="absolute left-[35.5px] top-0 bottom-4 w-px bg-gray-200 z-0" />
                           {item.children?.map((subItem, subIdx) => {
                             const isSubActive =
                               pathname === subItem.href ||
-                              (subItem.href !== "/" && pathname.startsWith(subItem.href + "/"));
+                              (subItem.href !== '/' && pathname.startsWith(subItem.href + '/'))
                             return (
                               <NavLink
                                 key={subIdx}
                                 to={subItem.href}
-                                className="relative flex items-center py-2.5 pl-14 text-sm hover:text-primary group/sub w-full"
+                                className="relative flex items-center py-2 pl-16 text-sm hover:text-blue-600 group/sub w-full"
                               >
-                                {/* Dot indicator */}
                                 <div
                                   className={cn(
-                                    "absolute left-[19px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 transition-all z-10",
+                                    'absolute left-9 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full border-2 transition-all z-10',
                                     isSubActive
-                                      ? "border-primary bg-primary"
-                                      : "border-muted-foreground/30 bg-background group-hover/sub:border-primary/50"
+                                      ? 'border-blue-600 bg-blue-600'
+                                      : 'border-gray-300 bg-white group-hover/sub:border-blue-400',
                                   )}
                                 />
                                 <span
                                   className={cn(
-                                    "transition-colors",
-                                    isSubActive ? "font-medium text-primary" : "text-muted-foreground"
+                                    isSubActive ? 'font-medium text-blue-900' : 'text-gray-500',
                                   )}
                                 >
                                   {subItem.label}
                                 </span>
                               </NavLink>
-                            );
+                            )
                           })}
                         </div>
                       </div>
                     )}
                   </div>
-                );
+                )
               })}
             </div>
           </div>
@@ -306,73 +283,82 @@ function SidebarContent({
 
       {/* Footer */}
       {(isOpen || isMobile) && (
-        <div className="p-4 border-t border-sidebar-border">
-          <p className="text-xs text-muted-foreground/60 text-center">© 2025 REXTRA Admin</p>
+        <div className="p-4 border-t border-[#B5B7B8]">
+          <p className="text-xs text-gray-400 text-center">© 2025 REXTRA Admin</p>
         </div>
       )}
     </div>
-  );
+  )
 }
 
-// ─── Main Sidebar Component ─────────────────────────────────────────
-interface AppSidebarProps {
-  className?: string;
-  onClose?: () => void;
-  isCollapsed?: boolean;
-  onCollapsedChange?: (collapsed: boolean) => void;
-}
+export function AppSidebar() {
+  const [isOpen, setIsOpen] = useState(true)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
-export function AppSidebar({ className, onClose, isCollapsed: controlledCollapsed, onCollapsedChange }: AppSidebarProps) {
-  const [internalCollapsed, setInternalCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
+  const toggleSidebar = () => setIsOpen(v => !v)
+  const openMobile = () => setMobileOpen(true)
+  const closeMobile = () => setMobileOpen(false)
 
-  const isCollapsed = controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed;
-  const setIsCollapsed = onCollapsedChange || setInternalCollapsed;
-
-  // Close mobile on route change
   useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
+    setMobileOpen(false)
+  }, [location.pathname])
 
-  // If used as mobile sidebar (onClose provided), render directly
-  if (onClose) {
-    return (
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
+  return (
+    <>
+      {/* DESKTOP SIDEBAR */}
       <aside
         className={cn(
-          "h-screen bg-card shadow-sidebar flex flex-col w-[300px]",
-          className
+          'hidden md:flex flex-col',
+          'shadow-[3px_9px_7px_7px_rgba(77,77,86,0.04)]',
+          'bg-white border-r border-[#B5B7B8] transition-all duration-300 ease-in-out',
+          isOpen ? 'w-[318px]' : 'w-[88px]',
         )}
       >
-        <SidebarContent isOpen={true} onClose={onClose} isMobile={true} />
+        <SidebarContent isOpen={isOpen} onClose={toggleSidebar} isMobile={false} />
       </aside>
-    );
-  }
 
-  // Desktop sidebar
-  return (
-    <aside
-      className={cn(
-        "h-screen bg-card border-r border-sidebar-border shadow-sidebar flex flex-col transition-all duration-300 ease-in-out",
-        isCollapsed ? "w-[80px]" : "w-[300px]",
-        className
-      )}
-    >
-      <SidebarContent
-        isOpen={!isCollapsed}
-        onClose={() => setIsCollapsed(!isCollapsed)}
-        isMobile={false}
-      />
+      {/* MOBILE: Hamburger */}
+      <button
+        onClick={openMobile}
+        className={cn(
+          'md:hidden fixed top-4 left-4 z-40',
+          'bg-white border border-[#B5B7B8] rounded-xl p-2',
+          'shadow-md text-gray-600 hover:text-gray-900 transition-colors',
+        )}
+        aria-label="Buka Menu"
+      >
+        <Menu size={22} />
+      </button>
 
-      {/* Click area to expand when collapsed */}
-      {isCollapsed && (
-        <button
-          onClick={() => setIsCollapsed(false)}
-          className="absolute inset-0 z-10 cursor-pointer bg-transparent"
-          style={{ pointerEvents: "auto" }}
-          aria-label="Expand sidebar"
+      {/* MOBILE: Overlay */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+          onClick={closeMobile}
         />
       )}
-    </aside>
-  );
+
+      {/* MOBILE: Drawer */}
+      <aside
+        className={cn(
+          'md:hidden fixed top-0 left-0 h-full z-50',
+          'bg-white shadow-2xl w-[300px]',
+          'transition-transform duration-300 ease-in-out',
+          mobileOpen ? 'translate-x-0' : '-translate-x-full',
+        )}
+      >
+        <SidebarContent isOpen={true} onClose={closeMobile} isMobile={true} />
+      </aside>
+    </>
+  )
 }
