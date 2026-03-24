@@ -1862,6 +1862,9 @@
   .min-w-\[12rem\] {
     min-width: 12rem;
   }
+  .min-w-\[22px\] {
+    min-width: 22px;
+  }
   .min-w-\[40px\] {
     min-width: 40px;
   }
@@ -2516,6 +2519,9 @@
     --tw-border-style: solid;
     border-style: solid;
   }
+  .border-\[\#1D4ED8\] {
+    border-color: #1D4ED8;
+  }
   .border-\[\#005DFF\] {
     border-color: #005DFF;
   }
@@ -3019,6 +3025,9 @@
   }
   .\!bg-green-100 {
     background-color: var(--color-green-100) !important;
+  }
+  .bg-\[\#1D4ED8\] {
+    background-color: #1D4ED8;
   }
   .bg-\[\#3B82F6\]\/15 {
     background-color: color-mix(in oklab, #3B82F6 15%, transparent);
@@ -3664,6 +3673,12 @@
   }
   .bg-white {
     background-color: var(--color-white);
+  }
+  .bg-white\/20 {
+    background-color: color-mix(in srgb, #fff 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+    }
   }
   .bg-white\/60 {
     background-color: color-mix(in srgb, #fff 60%, transparent);
@@ -4488,6 +4503,9 @@
   }
   .text-\[\#1CB0B4\] {
     color: #1CB0B4;
+  }
+  .text-\[\#1D4ED8\] {
+    color: #1D4ED8;
   }
   .text-\[\#3C41DF\] {
     color: #3C41DF;
@@ -5897,6 +5915,13 @@
       }
     }
   }
+  .hover\:bg-\[\#1e40af\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #1e40af;
+      }
+    }
+  }
   .hover\:bg-\[\#0046CC\]\/75 {
     &:hover {
       @media (hover: hover) {
@@ -6498,6 +6523,13 @@
       }
     }
   }
+  .hover\:text-gray-700 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-gray-700);
+      }
+    }
+  }
   .hover\:text-gray-900 {
     &:hover {
       @media (hover: hover) {
@@ -6799,6 +6831,11 @@
       z-index: 10;
     }
   }
+  .focus\:border-transparent {
+    &:focus {
+      border-color: transparent;
+    }
+  }
   .focus\:bg-accent {
     &:focus {
       background-color: hsl(var(--accent));
@@ -6844,6 +6881,11 @@
   .focus\:ring-blue-300 {
     &:focus {
       --tw-ring-color: var(--color-blue-300);
+    }
+  }
+  .focus\:ring-blue-500 {
+    &:focus {
+      --tw-ring-color: var(--color-blue-500);
     }
   }
   .focus\:ring-gray-300 {
