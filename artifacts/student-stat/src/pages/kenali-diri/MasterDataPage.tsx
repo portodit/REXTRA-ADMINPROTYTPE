@@ -1,75 +1,13 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import { Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getAllEntries, RiasecLetter, LETTER_NAMES } from '@/data/riasec-dummy'
 
-const LETTERS = ['R', 'I', 'A', 'S', 'E', 'C'] as const
-type RiasecLetter = typeof LETTERS[number]
-
-const LETTER_NAMES: Record<RiasecLetter, string> = {
-  R: 'Realistic',
-  I: 'Investigative',
-  A: 'Artistic',
-  S: 'Social',
-  E: 'Enterprising',
-  C: 'Conventional',
-}
-
-type RiasecEntry = {
-  id: string
-  letters: RiasecLetter[]
-  name: string
-  type: '1-huruf' | '2-huruf' | '3-huruf'
-}
-
-function generateData(): RiasecEntry[] {
-  const entries: RiasecEntry[] = []
-  let idCounter = 1
-
-  const fmt = (n: number) => `#${String(n).padStart(3, '0')}`
-
-  for (const l of LETTERS) {
-    entries.push({
-      id: fmt(idCounter++),
-      letters: [l],
-      name: LETTER_NAMES[l],
-      type: '1-huruf',
-    })
-  }
-
-  for (const l1 of LETTERS) {
-    for (const l2 of LETTERS) {
-      if (l1 === l2) continue
-      entries.push({
-        id: fmt(idCounter++),
-        letters: [l1, l2],
-        name: `${LETTER_NAMES[l1]} - ${LETTER_NAMES[l2]}`,
-        type: '2-huruf',
-      })
-    }
-  }
-
-  for (const l1 of LETTERS) {
-    for (const l2 of LETTERS) {
-      if (l1 === l2) continue
-      for (const l3 of LETTERS) {
-        if (l3 === l1 || l3 === l2) continue
-        entries.push({
-          id: fmt(idCounter++),
-          letters: [l1, l2, l3],
-          name: `${LETTER_NAMES[l1]} - ${LETTER_NAMES[l2]} - ${LETTER_NAMES[l3]}`,
-          type: '3-huruf',
-        })
-      }
-    }
-  }
-
-  return entries
-}
-
-const ALL_DATA = generateData()
+const ALL_DATA = getAllEntries()
 
 type TabKey = 'profil-kode-riasec' | 'kategori-tes-lain'
 type FilterKey = 'semua' | '1-huruf' | '2-huruf' | '3-huruf'
@@ -95,7 +33,7 @@ function RiasecBadge({ letter, size = 48 }: { letter: RiasecLetter; size?: numbe
   )
 }
 
-function RiasecCard({ entry }: { entry: RiasecEntry }) {
+function RiasecCard({ entry }: { entry: ReturnType<typeof getAllEntries>[number] }) {
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-4 flex flex-col gap-3 hover:shadow-md transition-shadow duration-200">
       <div className="flex items-start justify-between">
@@ -108,9 +46,12 @@ function RiasecCard({ entry }: { entry: RiasecEntry }) {
       </div>
       <div className="flex items-end justify-between gap-2">
         <p className="text-sm font-medium text-gray-700 leading-snug">{entry.name}</p>
-        <button className="shrink-0 bg-[#1D4ED8] hover:bg-[#1e40af] text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap">
+        <Link
+          href={`/kenali-diri/master-data/${entry.code}`}
+          className="shrink-0 bg-[#1D4ED8] hover:bg-[#1e40af] text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+        >
           Lihat detail
-        </button>
+        </Link>
       </div>
     </div>
   )
@@ -149,7 +90,6 @@ export default function MasterDataPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Master Data Profil Kode RIASEC</h1>
@@ -178,7 +118,6 @@ export default function MasterDataPage() {
         </div>
       </div>
 
-      {/* Tabs */}
       <div className="border-b border-gray-200">
         <div className="flex gap-0">
           {([
@@ -203,7 +142,6 @@ export default function MasterDataPage() {
 
       {activeTab === 'profil-kode-riasec' ? (
         <>
-          {/* Filter chips */}
           <div className="flex flex-wrap gap-2">
             {(Object.keys(FILTER_LABELS) as FilterKey[]).map(key => (
               <button
@@ -229,7 +167,6 @@ export default function MasterDataPage() {
             ))}
           </div>
 
-          {/* Grid */}
           {filtered.length === 0 ? (
             <div className="text-center py-16 text-gray-400">
               <p className="text-lg font-medium">Tidak ada data ditemukan</p>

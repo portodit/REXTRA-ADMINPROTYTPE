@@ -1047,6 +1047,9 @@
   .\!m-0 {
     margin: calc(var(--spacing) * 0) !important;
   }
+  .-m-4 {
+    margin: calc(var(--spacing) * -4);
+  }
   .m-2 {
     margin: calc(var(--spacing) * 2);
   }
@@ -1433,6 +1436,12 @@
   .h-\[49px\] {
     height: 49px;
   }
+  .h-\[64px\] {
+    height: 64px;
+  }
+  .h-\[65px\] {
+    height: 65px;
+  }
   .h-\[72px\] {
     height: 72px;
   }
@@ -1525,6 +1534,9 @@
   }
   .min-h-\[160px\] {
     min-height: 160px;
+  }
+  .min-h-\[180px\] {
+    min-height: 180px;
   }
   .min-h-dvh {
     min-height: 100dvh;
@@ -1813,6 +1825,9 @@
   }
   .max-w-\[800px\] {
     max-width: 800px;
+  }
+  .max-w-\[1188px\] {
+    max-width: 1188px;
   }
   .max-w-\[1600px\] {
     max-width: 1600px;
@@ -2528,6 +2543,9 @@
   .border-\[\#6B6F70\] {
     border-color: #6B6F70;
   }
+  .border-\[\#6b6f70\] {
+    border-color: #6b6f70;
+  }
   .border-\[\#9CA3AF\] {
     border-color: #9CA3AF;
   }
@@ -2588,11 +2606,20 @@
   .border-\[\#FF7409\] {
     border-color: #FF7409;
   }
+  .border-\[\#b5b7b8\] {
+    border-color: #b5b7b8;
+  }
   .border-\[\#cacaca\] {
     border-color: #cacaca;
   }
   .border-\[\#cacaca\]\/60 {
     border-color: color-mix(in oklab, #cacaca 60%, transparent);
+  }
+  .border-\[\#d3d4d4\] {
+    border-color: #d3d4d4;
+  }
+  .border-\[\#e2e4e9\] {
+    border-color: #e2e4e9;
   }
   .border-\[\#f1f1f1\] {
     border-color: #f1f1f1;
@@ -3044,11 +3071,17 @@
   .bg-\[\#0046CC\] {
     background-color: #0046CC;
   }
+  .bg-\[\#0046cc\] {
+    background-color: #0046cc;
+  }
   .bg-\[\#669AFF\] {
     background-color: #669AFF;
   }
   .bg-\[\#669AFF\]\/10 {
     background-color: color-mix(in oklab, #669AFF 10%, transparent);
+  }
+  .bg-\[\#669aff\] {
+    background-color: #669aff;
   }
   .bg-\[\#2662D9\] {
     background-color: #2662D9;
@@ -3133,6 +3166,27 @@
   }
   .bg-\[\#FFF1E3\]\/15 {
     background-color: color-mix(in oklab, #FFF1E3 15%, transparent);
+  }
+  .bg-\[\#ccddff\] {
+    background-color: #ccddff;
+  }
+  .bg-\[\#d0eddb\] {
+    background-color: #d0eddb;
+  }
+  .bg-\[\#d3d4d4\] {
+    background-color: #d3d4d4;
+  }
+  .bg-\[\#e0f2fe\] {
+    background-color: #e0f2fe;
+  }
+  .bg-\[\#f1f5f9\] {
+    background-color: #f1f5f9;
+  }
+  .bg-\[\#f8f9fb\] {
+    background-color: #f8f9fb;
+  }
+  .bg-\[\#fff1e3\] {
+    background-color: #fff1e3;
   }
   .bg-\[--color-bg\] {
     background-color: --color-bg;
@@ -4525,6 +4579,9 @@
   .text-\[\#16A34A\] {
     color: #16A34A;
   }
+  .text-\[\#16a34a\] {
+    color: #16a34a;
+  }
   .text-\[\#22D3EE\] {
     color: #22D3EE;
   }
@@ -4533,6 +4590,9 @@
   }
   .text-\[\#0046CC\] {
     color: #0046CC;
+  }
+  .text-\[\#0046cc\] {
+    color: #0046cc;
   }
   .text-\[\#60A5FA\] {
     color: #60A5FA;
@@ -4546,8 +4606,14 @@
   .text-\[\#676F7E\] {
     color: #676F7E;
   }
+  .text-\[\#676f7e\] {
+    color: #676f7e;
+  }
   .text-\[\#2563EB\] {
     color: #2563EB;
+  }
+  .text-\[\#2563eb\] {
+    color: #2563eb;
   }
   .text-\[\#3379FF\] {
     color: #3379FF;
@@ -4558,11 +4624,17 @@
   .text-\[\#14181F\] {
     color: #14181F;
   }
+  .text-\[\#14181f\] {
+    color: #14181f;
+  }
   .text-\[\#212729\] {
     color: #212729;
   }
   .text-\[\#333333\] {
     color: #333333;
+  }
+  .text-\[\#374151\] {
+    color: #374151;
   }
   .text-\[\#475569\] {
     color: #475569;
@@ -4596,6 +4668,9 @@
   }
   .text-\[\#FF7409\] {
     color: #FF7409;
+  }
+  .text-\[\#ff7409\] {
+    color: #ff7409;
   }
   .text-accent-foreground {
     color: hsl(var(--accent-foreground));
@@ -5922,6 +5997,13 @@
       }
     }
   }
+  .hover\:bg-\[\#003ab0\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #003ab0;
+      }
+    }
+  }
   .hover\:bg-\[\#0046CC\]\/75 {
     &:hover {
       @media (hover: hover) {
@@ -5968,6 +6050,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: #D0D3D9;
+      }
+    }
+  }
+  .hover\:bg-\[\#bbbcbc\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #bbbcbc;
       }
     }
   }
@@ -6464,6 +6553,13 @@
     &:hover {
       @media (hover: hover) {
         color: #0046CC;
+      }
+    }
+  }
+  .hover\:text-\[\#0046cc\] {
+    &:hover {
+      @media (hover: hover) {
+        color: #0046cc;
       }
     }
   }
@@ -8706,6 +8802,11 @@
   .md\:absolute {
     @media (width >= 48rem) {
       position: absolute;
+    }
+  }
+  .md\:-m-6 {
+    @media (width >= 48rem) {
+      margin: calc(var(--spacing) * -6);
     }
   }
   .md\:mx-0 {

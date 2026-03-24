@@ -1,4 +1,6 @@
 {
   "/(dashboard)/kenali-diri/hasil-tes/page": "app/(dashboard)/kenali-diri/hasil-tes/page.js",
-  "/(dashboard)/kenali-diri/umpan-balik/page": "app/(dashboard)/kenali-diri/umpan-balik/page.js"
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(dashboard)/kenali-diri/master-data/page": "app/(dashboard)/kenali-diri/master-data/page.js",
+  "/(dashboard)/kenali-diri/master-data/[code]/page": "app/(dashboard)/kenali-diri/master-data/[code]/page.js"
 }

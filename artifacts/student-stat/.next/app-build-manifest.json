@@ -36,10 +36,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/kenali-diri/master-data/page.js"
     ],
-    "/(dashboard)/kenali-diri/umpan-balik/page": [
+    "/(dashboard)/kenali-diri/master-data/[code]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/kenali-diri/umpan-balik/page.js"
+      "static/chunks/app/(dashboard)/kenali-diri/master-data/[code]/page.js"
     ]
   }
 }
