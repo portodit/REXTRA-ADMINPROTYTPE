@@ -2640,6 +2640,12 @@
   .border-\[\#cacaca\]\/60 {
     border-color: color-mix(in oklab, #cacaca 60%, transparent);
   }
+  .border-\[\#ccddff\] {
+    border-color: #ccddff;
+  }
+  .border-\[\#d1d5db\] {
+    border-color: #d1d5db;
+  }
   .border-\[\#d3d4d4\] {
     border-color: #d3d4d4;
   }
@@ -3240,11 +3246,20 @@
   .bg-\[\#e3ffee\] {
     background-color: #e3ffee;
   }
+  .bg-\[\#e8f0ff\] {
+    background-color: #e8f0ff;
+  }
   .bg-\[\#e9eaec\] {
     background-color: #e9eaec;
   }
+  .bg-\[\#f0f4ff\] {
+    background-color: #f0f4ff;
+  }
   .bg-\[\#f1f5f9\] {
     background-color: #f1f5f9;
+  }
+  .bg-\[\#f3f4f6\] {
+    background-color: #f3f4f6;
   }
   .bg-\[\#f8f9fb\] {
     background-color: #f8f9fb;
@@ -4219,6 +4234,9 @@
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
+  .px-\[9px\] {
+    padding-inline: 9px;
+  }
   .px-\[15px\] {
     padding-inline: 15px;
   }
@@ -4661,6 +4679,9 @@
   .text-\[\#6B7280\] {
     color: #6B7280;
   }
+  .text-\[\#6b7280\] {
+    color: #6b7280;
+  }
   .text-\[\#16A34A\] {
     color: #16A34A;
   }
@@ -4756,6 +4777,9 @@
   }
   .text-\[\#FF7409\] {
     color: #FF7409;
+  }
+  .text-\[\#ccddff\] {
+    color: #ccddff;
   }
   .text-\[\#d3d4d4\] {
     color: #d3d4d4;
@@ -5406,6 +5430,10 @@
     --tw-duration: 100ms;
     transition-duration: 100ms;
   }
+  .duration-150 {
+    --tw-duration: 150ms;
+    transition-duration: 150ms;
+  }
   .duration-200 {
     --tw-duration: 200ms;
     transition-duration: 200ms;
@@ -5454,6 +5482,9 @@
   }
   .duration-100 {
     animation-duration: 100ms;
+  }
+  .duration-150 {
+    animation-duration: 150ms;
   }
   .duration-200 {
     animation-duration: 200ms;
@@ -6002,6 +6033,13 @@
       }
     }
   }
+  .hover\:border-\[\#669aff\] {
+    &:hover {
+      @media (hover: hover) {
+        border-color: #669aff;
+      }
+    }
+  }
   .hover\:border-border {
     &:hover {
       @media (hover: hover) {
@@ -6193,6 +6231,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: color-mix(in oklab, #ccddff 50%, transparent);
+      }
+    }
+  }
+  .hover\:bg-\[\#f8f9fb\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #f8f9fb;
       }
     }
   }

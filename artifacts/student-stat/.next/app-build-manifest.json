@@ -20,6 +20,26 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/kenali-diri/hasil-tes/page.js"
+    ],
+    "/(dashboard)/kenali-diri/umpan-balik/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/kenali-diri/umpan-balik/page.js"
+    ],
+    "/(dashboard)/membership/fitur-hak-akses/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/membership/fitur-hak-akses/page.js"
+    ],
+    "/(dashboard)/membership/status/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/membership/status/page.js"
+    ],
+    "/(dashboard)/persona-rextra/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/persona-rextra/page.js"
     ]
   }
 }
