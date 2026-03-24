@@ -598,18 +598,18 @@ export function HakAksesTab() {
             {/* ══════════ SECTION 1: Kategori Aksi ══════════ */}
             <Collapsible open={!kategoriCollapsed} onOpenChange={o => setKategoriCollapsed(!o)}>
               <div className="border rounded-lg">
-                <CollapsibleTrigger asChild>
-                  <button className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
-                    <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+                  <CollapsibleTrigger asChild>
+                    <button className="flex items-center gap-2 flex-1 text-left">
                       {kategoriCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                       <h3 className="font-semibold text-sm sm:text-base">Kategori Aksi</h3>
                       <span className="text-xs sm:text-sm text-muted-foreground">({kategoriData.length} kategori)</span>
-                    </div>
-                    <Button size="sm" onClick={e => { e.stopPropagation(); openAddKategori(); }}>
-                      <Plus className="h-3 w-3 mr-1" />Tambah Kategori
-                    </Button>
-                  </button>
-                </CollapsibleTrigger>
+                    </button>
+                  </CollapsibleTrigger>
+                  <Button size="sm" onClick={openAddKategori}>
+                    <Plus className="h-3 w-3 mr-1" />Tambah Kategori
+                  </Button>
+                </div>
                 <CollapsibleContent>
                   <div className="border-t p-4">
                     <p className="text-xs sm:text-sm text-muted-foreground mb-4">

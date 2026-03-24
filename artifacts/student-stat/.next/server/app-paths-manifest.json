@@ -1,4 +1,7 @@
 {
+  "/(auth)/login/page": "app/(auth)/login/page.js",
   "/(dashboard)/persona-rextra/page": "app/(dashboard)/persona-rextra/page.js",
-  "/(auth)/login/page": "app/(auth)/login/page.js"
+  "/(dashboard)/membership/fitur-hak-akses/page": "app/(dashboard)/membership/fitur-hak-akses/page.js",
+  "/(dashboard)/membership/status/page": "app/(dashboard)/membership/status/page.js",
+  "/(dashboard)/membership/promo-diskon/page": "app/(dashboard)/membership/promo-diskon/page.js"
 }
