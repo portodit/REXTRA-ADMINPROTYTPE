@@ -57,8 +57,10 @@ export interface StudentFeedbackScores {
 }
 
 export interface FeedbackObstacle {
-  id: number
+  id?: number
+  key?: string
   label: string
+  other_text?: string | null
 }
 
 export interface StudentFeedbackItem {
@@ -69,23 +71,35 @@ export interface StudentFeedbackItem {
   message_to_team: string | null
   submitted_at: string
   test_category: string
+  test_category_label?: string
 }
 
 export interface ExpertInfo {
-  user_id: string
+  user_id?: string
   name: string
-  email: string
+  email?: string
+  profession?: string
+  profession_id?: number
+}
+
+export interface FeedbackScores {
+  accuracy: number
+  logic: number
+  usefulness: number
 }
 
 export interface ExpertFeedbackItem {
   id: number
   expert: ExpertInfo
-  scores: StudentFeedbackScores
+  top5_status?: string
+  top5_status_label?: string
+  scores: StudentFeedbackScores & Partial<FeedbackScores>
   obstacles: FeedbackObstacle[]
-  message_to_team: string | null
+  has_suggestion?: boolean
+  message_to_team?: string | null
   submitted_at: string
   test_category: string
-  top5_status?: string
+  test_category_label?: string
 }
 
 export interface GetStudentFeedbackParams {
@@ -95,13 +109,51 @@ export interface GetStudentFeedbackParams {
   test_category?: string
 }
 
+export interface GetExpertFeedbackParams {
+  page?: number
+  page_size?: number
+  search?: string
+  test_category?: string
+}
+
+export interface StudentFeedbackData {
+  items: StudentFeedbackItem[]
+  total?: number
+  page?: number
+  page_size?: number
+  pagination?: {
+    page: number
+    page_size: number
+    total_items: number
+    total_pages: number
+    has_next: boolean
+    has_prev: boolean
+  }
+}
+
+export interface ExpertFeedbackData {
+  items: ExpertFeedbackItem[]
+  total?: number
+  page?: number
+  page_size?: number
+  pagination?: {
+    page: number
+    page_size: number
+    total_items: number
+    total_pages: number
+    has_next: boolean
+    has_prev: boolean
+  }
+}
+
 export interface StudentFeedbackResponse {
   success: boolean
   message: string
-  data: {
-    items: StudentFeedbackItem[]
-    total: number
-    page: number
-    page_size: number
-  }
+  data: StudentFeedbackData
+}
+
+export interface ExpertFeedbackResponse {
+  success: boolean
+  message: string
+  data: ExpertFeedbackData
 }

@@ -126,10 +126,64 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/(dashboard)/admin/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/admin">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/admin/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/(dashboard)/akun-mahasiswa/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/akun-mahasiswa">> = Specific
   const handler = {} as typeof import("../../src/app/(dashboard)/akun-mahasiswa/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/expert/akun/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/expert/akun">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/expert/akun/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/expert/kenali-diri/hasil-tes/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/expert/kenali-diri/hasil-tes">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/expert/kenali-diri/hasil-tes/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/expert/kenali-diri/master-data/asesmen/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/expert/kenali-diri/master-data/asesmen">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/expert/kenali-diri/master-data/asesmen/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/expert/kenali-diri/master-data/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/expert/kenali-diri/master-data">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/expert/kenali-diri/master-data/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/expert/kenali-diri/umpan-balik/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/expert/kenali-diri/umpan-balik">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/expert/kenali-diri/umpan-balik/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -202,6 +256,60 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/kenali-diri/umpan-balik">> = Specific
   const handler = {} as typeof import("../../src/app/(dashboard)/kenali-diri/umpan-balik/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/mahasiswa/akun/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/mahasiswa/akun">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/mahasiswa/akun/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/mahasiswa/kenali-diri/hasil-tes/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/mahasiswa/kenali-diri/hasil-tes">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/mahasiswa/kenali-diri/hasil-tes/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/mahasiswa/kenali-diri/master-data/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/mahasiswa/kenali-diri/master-data">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/mahasiswa/kenali-diri/master-data/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/mahasiswa/kenali-diri/umpan-balik/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/mahasiswa/kenali-diri/umpan-balik">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/mahasiswa/kenali-diri/umpan-balik/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/mahasiswa/pendidikan/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/mahasiswa/pendidikan">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/mahasiswa/pendidikan/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/mahasiswa/persona/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/mahasiswa/persona">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/mahasiswa/persona/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -310,6 +418,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/persona-rextra">> = Specific
   const handler = {} as typeof import("../../src/app/(dashboard)/persona-rextra/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(dashboard)/rextra-club/members/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/rextra-club/members">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/rextra-club/members/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

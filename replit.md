@@ -69,6 +69,20 @@ REXTRA ADMIN Dashboard — migrated from React + Vite to **Next.js 15 (App Route
 - **API proxy**: Next.js rewrites `/api/:path*` → `http://localhost:8080/api/:path*`
 - **Images**: Served from `public/images/auth/`. `NextImage` component prepends `/images` to string paths.
 - **Features**: Membership management, Persona REXTRA, Kamus Karier (career dictionary), Sistem Token, Kenali Diri (feedback + hasil tes), Akun Mahasiswa, Hak Akses, Invoice
+- **Migrated routes** (from old Vercel project):
+  - `(dashboard)/admin/` — admin home (WelcomeCard + StatsCard)
+  - `(dashboard)/expert/akun/` — placeholder
+  - `(dashboard)/expert/kenali-diri/hasil-tes/` — full filter/table, React Query
+  - `(dashboard)/expert/kenali-diri/umpan-balik/` — server component, cookie-auth, DataTabs
+  - `(dashboard)/expert/kenali-diri/master-data/` — RIASEC code browser
+  - `(dashboard)/expert/kenali-diri/master-data/asesmen/` — assessment editor
+  - `(dashboard)/mahasiswa/akun|pendidikan|persona/` — placeholders
+  - `(dashboard)/mahasiswa/kenali-diri/hasil-tes|umpan-balik|master-data/` — mirrors expert routes
+  - `(dashboard)/rextra-club/members/` — placeholder
+- **New types**: `src/types/api.ts`, `src/types/entity/riasec.ts`, `src/types/entity/user.ts`, `src/types/me.ts`; updated `src/types/kenali-diri.ts` (superset of old + new shapes)
+- **New components**: `src/components/next-image.tsx` (Next.js Image wrapper with skeleton), `src/components/Typography.tsx`
+- **Import mapping**: client hooks use `@/lib/authApi`; server hooks read cookie `rextra_access_token`; BASE_URL = `process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'`
+- **Protected routes** (Replit-exclusive, never modified): `/membership/*`, `/sistem-token/*`, `/persona-rextra/*`
 - `pnpm --filter @workspace/student-stat run dev` — run the dev server
 
 ### `artifacts/api-server` (`@workspace/api-server`)
