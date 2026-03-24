@@ -33,9 +33,12 @@ export function PersonaCard({
   return (
     <Card className="border-border/50 overflow-hidden shadow-none gap-0 py-0">
       {/* Header */}
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         onClick={onToggle}
-        className="w-full flex items-center justify-between p-5 bg-muted/30 hover:bg-muted/50 transition-colors text-left"
+        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } }}
+        className="w-full flex items-center justify-between p-5 bg-muted/30 hover:bg-muted/50 transition-colors text-left cursor-pointer select-none"
       >
         <div className="space-y-1.5">
           <div className="flex items-center gap-2.5">
@@ -56,7 +59,7 @@ export function PersonaCard({
           </Button>
           {expanded ? <ChevronUp className="h-5 w-5 text-muted-foreground" /> : <ChevronDown className="h-5 w-5 text-muted-foreground" />}
         </div>
-      </button>
+      </div>
 
       {/* Body */}
       <div className={cn("transition-all duration-300 overflow-hidden", expanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0")}>
