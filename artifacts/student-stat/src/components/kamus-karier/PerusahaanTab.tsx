@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 import {
   AlertDialog,
   AlertDialogAction,

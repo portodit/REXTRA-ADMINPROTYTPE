@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 import {
   Search, RefreshCw, AlertCircle, Calendar, X, Filter, Eye,
   ArrowRight, Clock, CheckCircle2, Ban, ShoppingCart, RotateCcw, TrendingUp, TrendingDown,

@@ -23,7 +23,7 @@ import { TablePagination } from './TablePagination'
 import Typography from '@/components/Typography'
 import { KenaliDiriHistoryItem } from '@/types/kenali-diri'
 import { TestDetailModal } from './TestDetailModal'
-import { StatusBadge } from '@/components/shared/badges/StatusBadge'
+import { StatusBadge } from '@/components/design-system/badges/StatusBadge'
 
 interface TestDataTableProps {
   tableData: KenaliDiriHistoryItem[]

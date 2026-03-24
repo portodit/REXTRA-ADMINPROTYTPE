@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Plus, Search, Eye } from "lucide-react";
 import { useDiscounts, getDisplayStatus, type Discount, type DiscountFilters } from "@/hooks/useDiscounts";
 import { CreateEditDiscountDrawer } from "@/components/membership/promo-diskon/CreateEditDiscountDrawer";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 

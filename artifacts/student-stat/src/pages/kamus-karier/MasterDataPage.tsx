@@ -59,8 +59,8 @@ import {
 } from "@/components/ui/tooltip";
 import { Progress } from "@/components/ui/progress";
 import { Search, Eye, Trash2, Download, AlertTriangle, Code, Palette, PenTool, Megaphone, Settings, BarChart3, FileText, Plus, ChevronsUpDown, Check, Bug, CheckCircle2, XCircle, Info, Pencil } from "lucide-react";
-import { RextraTableHeader } from "@/components/shared/RextraTableHeader";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTableHeader } from "@/components/design-system/RextraTableHeader";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 import { KategoriTab } from "@/components/kamus-karier/KategoriTab";
 import { PerusahaanTab } from "@/components/kamus-karier/PerusahaanTab";
 import { toast } from "sonner";

@@ -89,7 +89,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 
 // Types
 interface BundlePackage {

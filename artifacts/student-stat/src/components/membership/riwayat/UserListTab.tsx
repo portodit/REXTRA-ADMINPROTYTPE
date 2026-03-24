@@ -10,7 +10,7 @@ import { UserCard } from "./UserCard";
 import { UserTableView } from "./UserTableView";
 import { generateMockUsers } from "./mockData";
 import { MemberUser } from "./types";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 
 // Map mock user IDs to database membership UUIDs
 const mockToDbId: Record<string, string> = {

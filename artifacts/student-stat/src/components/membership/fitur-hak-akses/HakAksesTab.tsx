@@ -31,7 +31,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 import { useFiturData, useKategoriAksiData, useHakAksesData } from "@/hooks/useFiturHakAksesData";
 import type { Fitur, HakAkses } from "@/hooks/useFiturHakAksesData";
 import { supabase } from "@/integrations/supabase/client";

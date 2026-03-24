@@ -9,8 +9,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { RextraTableHeader } from "@/components/shared/RextraTableHeader";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTableHeader } from "@/components/design-system/RextraTableHeader";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 import {
   Search, RefreshCw, AlertCircle, Calendar, X, Filter, Eye,
   ArrowRight, Clock, CheckCircle2, Ban, ShoppingCart, RotateCcw, TrendingUp, TrendingDown,

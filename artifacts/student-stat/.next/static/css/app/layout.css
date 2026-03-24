@@ -1330,6 +1330,14 @@
     width: calc(var(--spacing) * 10);
     height: calc(var(--spacing) * 10);
   }
+  .size-\[32px\] {
+    width: 32px;
+    height: 32px;
+  }
+  .size-\[56px\] {
+    width: 56px;
+    height: 56px;
+  }
   .h-0 {
     height: calc(var(--spacing) * 0);
   }
@@ -1419,6 +1427,15 @@
   }
   .h-96 {
     height: calc(var(--spacing) * 96);
+  }
+  .h-\[20px\] {
+    height: 20px;
+  }
+  .h-\[26px\] {
+    height: 26px;
+  }
+  .h-\[36px\] {
+    height: 36px;
   }
   .h-\[40px\] {
     height: 40px;
@@ -2214,6 +2231,9 @@
   .gap-\[5px\] {
     gap: 5px;
   }
+  .gap-\[10px\] {
+    gap: 10px;
+  }
   .space-y-0 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -2384,6 +2404,9 @@
   .overflow-auto {
     overflow: auto;
   }
+  .overflow-clip {
+    overflow: clip;
+  }
   .overflow-hidden {
     overflow: hidden;
   }
@@ -2408,11 +2431,20 @@
   .rounded-\[4px\] {
     border-radius: 4px;
   }
+  .rounded-\[5px\] {
+    border-radius: 5px;
+  }
   .rounded-\[6px\] {
     border-radius: 6px;
   }
+  .rounded-\[8px\] {
+    border-radius: 8px;
+  }
   .rounded-\[10px\] {
     border-radius: 10px;
+  }
+  .rounded-\[12px\] {
+    border-radius: 12px;
   }
   .rounded-\[20px\] {
     border-radius: 20px;
@@ -2550,6 +2582,9 @@
   .border-\[\#1D4ED8\] {
     border-color: #1D4ED8;
   }
+  .border-\[\#1cb0b4\] {
+    border-color: #1cb0b4;
+  }
   .border-\[\#005DFF\] {
     border-color: #005DFF;
   }
@@ -2571,8 +2606,14 @@
   .border-\[\#22D3EE\] {
     border-color: #22D3EE;
   }
+  .border-\[\#22d3ee\] {
+    border-color: #22d3ee;
+  }
   .border-\[\#34D399\] {
     border-color: #34D399;
+  }
+  .border-\[\#34d399\] {
+    border-color: #34d399;
   }
   .border-\[\#0046CC\] {
     border-color: #0046CC;
@@ -2582,6 +2623,9 @@
   }
   .border-\[\#60A5FA\] {
     border-color: #60A5FA;
+  }
+  .border-\[\#60a5fa\] {
+    border-color: #60a5fa;
   }
   .border-\[\#94a3b8\] {
     border-color: #94a3b8;
@@ -2600,6 +2644,9 @@
   }
   .border-\[\#2563EB\] {
     border-color: #2563EB;
+  }
+  .border-\[\#212729\] {
+    border-color: #212729;
   }
   .border-\[\#979797\] {
     border-color: #979797;
@@ -2637,6 +2684,9 @@
   .border-\[\#b5b7b8\] {
     border-color: #b5b7b8;
   }
+  .border-\[\#c084fc\] {
+    border-color: #c084fc;
+  }
   .border-\[\#cacaca\]\/60 {
     border-color: color-mix(in oklab, #cacaca 60%, transparent);
   }
@@ -2660,6 +2710,12 @@
   }
   .border-\[\#f1f1f1\] {
     border-color: #f1f1f1;
+  }
+  .border-\[\#fb923c\] {
+    border-color: #fb923c;
+  }
+  .border-\[\#fbbf24\] {
+    border-color: #fbbf24;
   }
   .border-\[\#ff7409\] {
     border-color: #ff7409;
@@ -3231,6 +3287,9 @@
   .bg-\[\#d3d4d4\]\/15 {
     background-color: color-mix(in oklab, #d3d4d4 15%, transparent);
   }
+  .bg-\[\#d3f8f9\] {
+    background-color: #d3f8f9;
+  }
   .bg-\[\#dbe9ff\] {
     background-color: #dbe9ff;
   }
@@ -3261,6 +3320,9 @@
   .bg-\[\#f3f4f6\] {
     background-color: #f3f4f6;
   }
+  .bg-\[\#f8d4d4\] {
+    background-color: #f8d4d4;
+  }
   .bg-\[\#f8f9fb\] {
     background-color: #f8f9fb;
   }
@@ -3276,8 +3338,23 @@
   .bg-\[--color-bg\] {
     background-color: --color-bg;
   }
+  .bg-\[rgba\(6\,182\,212\,0\.15\)\] {
+    background-color: rgba(6,182,212,0.15);
+  }
+  .bg-\[rgba\(16\,185\,129\,0\.15\)\] {
+    background-color: rgba(16,185,129,0.15);
+  }
+  .bg-\[rgba\(59\,130\,246\,0\.15\)\] {
+    background-color: rgba(59,130,246,0.15);
+  }
+  .bg-\[rgba\(168\,85\,247\,0\.15\)\] {
+    background-color: rgba(168,85,247,0.15);
+  }
   .bg-\[rgba\(204\,221\,255\,0\.25\)\] {
     background-color: rgba(204,221,255,0.25);
+  }
+  .bg-\[rgba\(211\,212\,212\,0\.5\)\] {
+    background-color: rgba(211,212,212,0.5);
   }
   .bg-\[rgba\(211\,212\,212\,0\.15\)\] {
     background-color: rgba(211,212,212,0.15);
@@ -3285,8 +3362,14 @@
   .bg-\[rgba\(211\,212\,212\,0\.25\)\] {
     background-color: rgba(211,212,212,0.25);
   }
+  .bg-\[rgba\(245\,158\,11\,0\.15\)\] {
+    background-color: rgba(245,158,11,0.15);
+  }
   .bg-\[rgba\(248\,212\,212\,0\.25\)\] {
     background-color: rgba(248,212,212,0.25);
+  }
+  .bg-\[rgba\(249\,115\,22\,0\.15\)\] {
+    background-color: rgba(249,115,22,0.15);
   }
   .bg-\[rgba\(255\,241\,227\,0\.5\)\] {
     background-color: rgba(255,241,227,0.5);
@@ -4234,8 +4317,17 @@
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
+  .px-\[2px\] {
+    padding-inline: 2px;
+  }
+  .px-\[8px\] {
+    padding-inline: 8px;
+  }
   .px-\[9px\] {
     padding-inline: 9px;
+  }
+  .px-\[10px\] {
+    padding-inline: 10px;
   }
   .px-\[15px\] {
     padding-inline: 15px;
@@ -4293,6 +4385,15 @@
   }
   .py-\[3px\] {
     padding-block: 3px;
+  }
+  .py-\[4px\] {
+    padding-block: 4px;
+  }
+  .py-\[6px\] {
+    padding-block: 6px;
+  }
+  .py-\[8px\] {
+    padding-block: 8px;
   }
   .pt-0 {
     padding-top: calc(var(--spacing) * 0);
@@ -4534,6 +4635,9 @@
   .text-\[18px\] {
     font-size: 18px;
   }
+  .text-\[20px\] {
+    font-size: 20px;
+  }
   .text-\[24px\] {
     font-size: 24px;
   }
@@ -4664,6 +4768,9 @@
   .text-\[\#1D4ED8\] {
     color: #1D4ED8;
   }
+  .text-\[\#1cb0b4\] {
+    color: #1cb0b4;
+  }
   .text-\[\#3C41DF\] {
     color: #3C41DF;
   }
@@ -4678,6 +4785,9 @@
   }
   .text-\[\#6B7280\] {
     color: #6B7280;
+  }
+  .text-\[\#6b6f70\] {
+    color: #6b6f70;
   }
   .text-\[\#6b7280\] {
     color: #6b7280;
@@ -4715,6 +4825,9 @@
   .text-\[\#676f7e\] {
     color: #676f7e;
   }
+  .text-\[\#0891b2\] {
+    color: #0891b2;
+  }
   .text-\[\#2563EB\] {
     color: #2563EB;
   }
@@ -4727,11 +4840,17 @@
   .text-\[\#003499\] {
     color: #003499;
   }
+  .text-\[\#9333ea\] {
+    color: #9333ea;
+  }
   .text-\[\#14181F\] {
     color: #14181F;
   }
   .text-\[\#14181f\] {
     color: #14181f;
+  }
+  .text-\[\#059669\] {
+    color: #059669;
   }
   .text-\[\#212729\] {
     color: #212729;
@@ -4784,8 +4903,14 @@
   .text-\[\#d3d4d4\] {
     color: #d3d4d4;
   }
+  .text-\[\#d97706\] {
+    color: #d97706;
+  }
   .text-\[\#dc2626\] {
     color: #dc2626;
+  }
+  .text-\[\#ea580c\] {
+    color: #ea580c;
   }
   .text-\[\#ff7409\] {
     color: #ff7409;

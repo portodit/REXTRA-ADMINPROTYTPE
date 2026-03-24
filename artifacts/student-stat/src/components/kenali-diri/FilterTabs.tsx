@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import Typography from '@/components/Typography'
 import { SearchBar } from './SearchBar'
 import { X, ChevronDown, Check, Search } from 'lucide-react'
-import { TabBar } from '@/components/shared/table/TabBar'
-import { FilterButton, TerapkanFilterButton, ResetFilterButton } from '@/components/shared/buttons/ActionButtons'
+import { TabBar } from '@/components/design-system/table/TabBar'
+import { FilterButton, TerapkanFilterButton, ResetFilterButton } from '@/components/design-system/buttons/ActionButtons'
 
 const tabs = ['Semua Data', 'Selesai', 'Berjalan', 'Dihentikan'] as const
 type TabType = (typeof tabs)[number]

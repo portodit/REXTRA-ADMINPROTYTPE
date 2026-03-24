@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
 import { X, Heart, Star, Globe, DollarSign, Check, Circle } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { StatusBadge } from '@/components/shared/badges/StatusBadge'
+import { StatusBadge } from '@/components/design-system/badges/StatusBadge'
 
 /* ── Types ──────────────────────────────────────────────── */
 export interface TestDetailData {

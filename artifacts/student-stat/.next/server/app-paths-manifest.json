@@ -1,7 +1,3 @@
 {
-  "/(dashboard)/kenali-diri/umpan-balik/page": "app/(dashboard)/kenali-diri/umpan-balik/page.js",
-  "/(dashboard)/kenali-diri/hasil-tes/page": "app/(dashboard)/kenali-diri/hasil-tes/page.js",
-  "/(dashboard)/membership/fitur-hak-akses/page": "app/(dashboard)/membership/fitur-hak-akses/page.js",
-  "/(dashboard)/membership/status/page": "app/(dashboard)/membership/status/page.js",
-  "/(dashboard)/persona-rextra/page": "app/(dashboard)/persona-rextra/page.js"
+  "/(dashboard)/kenali-diri/hasil-tes/page": "app/(dashboard)/kenali-diri/hasil-tes/page.js"
 }

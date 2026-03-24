@@ -14,7 +14,7 @@ import {
 import { 
   Search, Plus, Lock, Edit2, Copy, Power, PowerOff,
 } from "lucide-react";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/use-toast";
 import { AddEditMappingDrawer, MappingData } from "./AddEditMappingDrawer";

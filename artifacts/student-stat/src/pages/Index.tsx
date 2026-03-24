@@ -15,9 +15,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { ExportDataDialog } from "@/components/shared/ExportDataDialog";
-import { BulkDeleteDialog } from "@/components/shared/BulkDeleteDialog";
-import { SingleDeleteDialog } from "@/components/shared/SingleDeleteDialog";
+import { ExportDataDialog } from "@/components/design-system/ExportDataDialog";
+import { BulkDeleteDialog } from "@/components/design-system/BulkDeleteDialog";
+import { SingleDeleteDialog } from "@/components/design-system/SingleDeleteDialog";
 import { TestDetailModal } from "@/components/kenali-diri/TestDetailModal";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { 

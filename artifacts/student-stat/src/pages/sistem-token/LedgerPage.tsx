@@ -51,8 +51,8 @@ import {
   ExternalLink,
   Info,
 } from "lucide-react";
-import { RextraTableHeader } from "@/components/shared/RextraTableHeader";
-import { RextraTablePagination } from "@/components/shared/RextraTablePagination";
+import { RextraTableHeader } from "@/components/design-system/RextraTableHeader";
+import { RextraTablePagination } from "@/components/design-system/RextraTablePagination";
 
 // Types
 type MovementType = "in" | "out";
