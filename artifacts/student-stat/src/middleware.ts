@@ -13,7 +13,7 @@ const AUTH_ONLY_PATHS = ['/login', '/forgot-password', '/change-password']
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const token = request.cookies.get('@rextra/access_token')?.value
+  const token = request.cookies.get('rextra_access_token')?.value
 
   const isPublic = PUBLIC_PATHS.some(
     (p) => pathname === p || pathname.startsWith(p + '/'),

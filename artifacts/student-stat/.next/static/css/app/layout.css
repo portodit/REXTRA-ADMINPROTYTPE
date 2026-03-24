@@ -1641,6 +1641,9 @@
   .w-\[249px\] {
     width: 249px;
   }
+  .w-\[280px\] {
+    width: 280px;
+  }
   .w-\[290px\] {
     width: 290px;
   }
@@ -1649,9 +1652,6 @@
   }
   .w-\[318px\] {
     width: 318px;
-  }
-  .w-\[320px\] {
-    width: 320px;
   }
   .w-\[420px\] {
     width: 420px;
@@ -4077,6 +4077,9 @@
   }
   .text-\[18px\] {
     font-size: 18px;
+  }
+  .text-\[22px\] {
+    font-size: 22px;
   }
   .text-\[24px\] {
     font-size: 24px;

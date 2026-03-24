@@ -113,49 +113,42 @@ export default function LoginPage() {
       </div>
 
       {/* ─── Right panel: blue with mascot ─── */}
-      <div className="w-full lg:w-1/2 bg-transparent lg:bg-[#005DFF] text-white p-6 flex flex-col items-center text-center relative overflow-hidden lg:order-2">
+      <div className="w-full lg:w-1/2 bg-[#005DFF] text-white p-6 flex-col items-center text-center relative overflow-hidden lg:order-2 hidden lg:flex">
         <img
           src="/images/auth/butterfly.png"
           alt="Butterfly"
-          className="absolute top-[75px] right-3 w-[65px] max-w-full pointer-events-none select-none lg:flex hidden z-[3]"
+          className="absolute top-[75px] right-3 w-[65px] pointer-events-none select-none z-[3]"
         />
         <img
           src="/images/auth/wave-rextra-top.svg"
-          alt="Wave Top"
-          className="absolute top-0 left-0 w-full pointer-events-none select-none hidden lg:block"
+          alt=""
+          className="absolute top-0 left-0 w-full pointer-events-none select-none"
         />
         <img
           src="/images/auth/wave-rextra.svg"
-          alt="Wave"
-          className="absolute bottom-0 left-0 w-full pointer-events-none select-none hidden lg:block"
+          alt=""
+          className="absolute bottom-0 left-0 w-full pointer-events-none select-none"
         />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full pt-16 pb-8 hidden lg:flex">
+        <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
           <img
             src="/images/auth/mascot-rextra.png"
             alt="Mascot REXTRA"
-            className="w-[320px] max-w-full object-contain"
+            className="w-[280px] max-w-full object-contain"
           />
           <Typography
             variant="h5"
             weight="bold"
-            className="text-white mt-6 text-center"
+            className="text-white text-center text-[22px] leading-snug mt-2"
           >
             Selamat Datang di REXTRA Admin
           </Typography>
           <Typography
             variant="bt"
-            className="text-white/80 mt-2 text-center max-w-xs"
+            className="text-white/80 text-center max-w-xs text-sm"
           >
             Kelola dan pantau semua fitur platform dengan mudah.
           </Typography>
         </div>
-
-        {/* Mobile decorative images */}
-        <img
-          src="/images/auth/bintang1.png"
-          alt="bintang1"
-          className="absolute inset-0 z-0 md:hidden block"
-        />
       </div>
     </div>
   )

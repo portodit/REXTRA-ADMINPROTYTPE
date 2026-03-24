@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
-const ACCESS_TOKEN_KEY = '@rextra/access_token'
-const REFRESH_TOKEN_KEY = '@rextra/refresh_token'
+const ACCESS_TOKEN_KEY = 'rextra_access_token'
+const REFRESH_TOKEN_KEY = 'rextra_refresh_token'
 
 export const getAccessToken = (): string | undefined =>
   Cookies.get(ACCESS_TOKEN_KEY)
