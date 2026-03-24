@@ -30,6 +30,31 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(auth)/login/page.js"
+    ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
+    "/(dashboard)/persona-rextra/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/persona-rextra/page.js"
+    ],
+    "/(dashboard)/kenali-diri/master-data/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/kenali-diri/master-data/page.js"
+    ],
+    "/(dashboard)/kenali-diri/master-data/[code]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/kenali-diri/master-data/[code]/page.js"
+    ],
+    "/(dashboard)/kenali-diri/master-data/[code]/edit/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/kenali-diri/master-data/[code]/edit/page.js"
     ]
   }
 }

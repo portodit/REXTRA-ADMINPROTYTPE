@@ -1,49 +1,41 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, ChevronDown, ChevronUp } from 'lucide-react'
 import { getRiasecProfile, ProfileItem, RiasecLetter, LETTER_NAMES } from '@/data/riasec-dummy'
 
-/* ── Icon helpers ─────────────────────────────────────── */
+/* ── Check icons ──────────────────────────────────────── */
 function CheckIcon({ variant = 'default' }: { variant?: 'default' | 'warning' | 'idea' | 'people' | 'building' }) {
-  if (variant === 'warning') {
-    return (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
-        <path d="M10 2.5L17.5 16.25H2.5L10 2.5Z" stroke="#ff7409" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M10 8v4" stroke="#ff7409" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="10" cy="13.75" r="0.75" fill="#ff7409"/>
-      </svg>
-    )
-  }
-  if (variant === 'idea') {
-    return (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
-        <circle cx="10" cy="7.5" r="4" stroke="#2563eb" strokeWidth="1.5"/>
-        <path d="M8 12.5L10 17.5L12 12.5" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
-  }
-  if (variant === 'people') {
-    return (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
-        <circle cx="7" cy="6" r="3" stroke="#0284c7" strokeWidth="1.5"/>
-        <circle cx="13.5" cy="6.5" r="2.5" stroke="#0284c7" strokeWidth="1.5"/>
-        <path d="M1.5 16.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M13.5 12c2.5 0 5 1.5 5 4.5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    )
-  }
-  if (variant === 'building') {
-    return (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
-        <path d="M2.5 17.5V9L10 3l7.5 6v8.5H2.5Z" stroke="#475569" strokeWidth="1.5" strokeLinejoin="round"/>
-        <rect x="7" y="11" width="2.5" height="6.5" rx="0.5" stroke="#475569" strokeWidth="1.5"/>
-        <rect x="10.5" y="11" width="2.5" height="4" rx="0.5" stroke="#475569" strokeWidth="1.5"/>
-      </svg>
-    )
-  }
-  // default: green circle check
+  if (variant === 'warning') return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
+      <path d="M10 2.5L17.5 16.25H2.5L10 2.5Z" stroke="#ff7409" strokeWidth="1.5" strokeLinejoin="round"/>
+      <path d="M10 8v4" stroke="#ff7409" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="10" cy="13.75" r="0.75" fill="#ff7409"/>
+    </svg>
+  )
+  if (variant === 'idea') return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
+      <circle cx="10" cy="7.5" r="4" stroke="#2563eb" strokeWidth="1.5"/>
+      <path d="M8 12.5L10 17.5L12 12.5" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+  if (variant === 'people') return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
+      <circle cx="7" cy="6" r="3" stroke="#0284c7" strokeWidth="1.5"/>
+      <circle cx="13.5" cy="6.5" r="2.5" stroke="#0284c7" strokeWidth="1.5"/>
+      <path d="M1.5 16.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M13.5 12c2.5 0 5 1.5 5 4.5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  )
+  if (variant === 'building') return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
+      <path d="M2.5 17.5V9L10 3l7.5 6v8.5H2.5Z" stroke="#475569" strokeWidth="1.5" strokeLinejoin="round"/>
+      <rect x="7" y="11" width="2.5" height="6.5" rx="0.5" stroke="#475569" strokeWidth="1.5"/>
+      <rect x="10.5" y="11" width="2.5" height="4" rx="0.5" stroke="#475569" strokeWidth="1.5"/>
+    </svg>
+  )
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 mt-0.5" aria-hidden>
       <circle cx="10" cy="10" r="9" stroke="#16a34a" strokeWidth="1.5"/>
@@ -52,7 +44,7 @@ function CheckIcon({ variant = 'default' }: { variant?: 'default' | 'warning' | 
   )
 }
 
-/* ── Section card item ────────────────────────────────── */
+/* ── Section item ─────────────────────────────────────── */
 function SectionItem({ item, iconVariant }: { item: ProfileItem; iconVariant?: 'default' | 'warning' | 'idea' | 'people' | 'building' }) {
   return (
     <div className="flex items-start gap-3">
@@ -65,7 +57,7 @@ function SectionItem({ item, iconVariant }: { item: ProfileItem; iconVariant?: '
   )
 }
 
-/* ── Section card block ───────────────────────────────── */
+/* ── Collapsible section card ─────────────────────────── */
 function SectionCard({
   title,
   subtitle,
@@ -75,6 +67,7 @@ function SectionCard({
   cardBg,
   borderColor,
   iconVariant,
+  defaultOpen = false,
 }: {
   title: string
   subtitle?: string
@@ -84,80 +77,59 @@ function SectionCard({
   cardBg: string
   borderColor: string
   iconVariant?: 'default' | 'warning' | 'idea' | 'people' | 'building'
+  defaultOpen?: boolean
 }) {
+  const [open, setOpen] = useState(defaultOpen)
+
   return (
-    <div className={`flex flex-col gap-3 rounded-xl border p-6 ${cardBg} ${borderColor} h-full`}>
-      <div className="flex items-center gap-2">
+    <div className={`rounded-xl border ${cardBg} ${borderColor} overflow-hidden`}>
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:brightness-95 transition-all"
+      >
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconBg}`}>
           {iconEl}
         </div>
-        <h3 className="text-lg font-semibold text-[#212729]">{title}</h3>
-      </div>
-      {subtitle && <p className="text-sm text-[#676f7e]">{subtitle}</p>}
-      <div className="flex flex-col gap-4 mt-1">
-        {items.map((item, i) => (
-          <SectionItem key={i} item={item} iconVariant={iconVariant} />
-        ))}
-      </div>
+        <span className="text-base font-semibold text-[#212729] flex-1">{title}</span>
+        {open
+          ? <ChevronUp className="w-4 h-4 text-[#676f7e] shrink-0" />
+          : <ChevronDown className="w-4 h-4 text-[#676f7e] shrink-0" />}
+      </button>
+
+      {open && (
+        <div className="px-5 pb-6 flex flex-col gap-4 border-t border-black/5 pt-4">
+          {subtitle && <p className="text-sm text-[#676f7e]">{subtitle}</p>}
+          {items.map((item, i) => (
+            <SectionItem key={i} item={item} iconVariant={iconVariant} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
 
-/* ── RIASEC letter icon ───────────────────────────────── */
+/* ── RIASEC letter badge ──────────────────────────────── */
 function LetterBadge({ letter, size = 48 }: { letter: RiasecLetter; size?: number }) {
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
-      <Image
-        src={`/images/riasec/${letter}.svg`}
-        alt={LETTER_NAMES[letter]}
-        fill
-        className="object-contain"
-        unoptimized
-      />
+      <Image src={`/images/riasec/${letter}.svg`} alt={LETTER_NAMES[letter]} fill className="object-contain" unoptimized />
     </div>
   )
 }
 
-/* ── Section icon SVGs ────────────────────────────────── */
-const KekuatanIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <circle cx="10" cy="10" r="9" stroke="#16a34a" strokeWidth="1.5"/>
-    <path d="M6.5 10l2.5 2.5 5-5" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-const TantanganIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <path d="M10 2.5L17.5 16.25H2.5L10 2.5Z" stroke="#ff7409" strokeWidth="1.5" strokeLinejoin="round"/>
-    <path d="M10 8v4" stroke="#ff7409" strokeWidth="1.5" strokeLinecap="round"/>
-    <circle cx="10" cy="13.75" r="0.75" fill="#ff7409"/>
-  </svg>
-)
-const StrategiIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <circle cx="10" cy="7.5" r="4" stroke="#2563eb" strokeWidth="1.5"/>
-    <path d="M8 12.5L10 17.5L12 12.5" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-const GayaIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <circle cx="7" cy="6" r="3" stroke="#0284c7" strokeWidth="1.5"/>
-    <circle cx="13.5" cy="6.5" r="2.5" stroke="#0284c7" strokeWidth="1.5"/>
-    <path d="M1.5 16.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M13.5 12c2.5 0 5 1.5 5 4.5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/>
-  </svg>
-)
-const LingkunganIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <path d="M2.5 17.5V9L10 3l7.5 6v8.5H2.5Z" stroke="#475569" strokeWidth="1.5" strokeLinejoin="round"/>
-    <rect x="7" y="11" width="2.5" height="6.5" rx="0.5" stroke="#475569" strokeWidth="1.5"/>
-    <rect x="10.5" y="11" width="2.5" height="4" rx="0.5" stroke="#475569" strokeWidth="1.5"/>
-  </svg>
-)
+/* ── Section icons ────────────────────────────────────── */
+const KekuatanIcon = () => <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden><circle cx="10" cy="10" r="9" stroke="#16a34a" strokeWidth="1.5"/><path d="M6.5 10l2.5 2.5 5-5" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+const TantanganIcon = () => <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden><path d="M10 2.5L17.5 16.25H2.5L10 2.5Z" stroke="#ff7409" strokeWidth="1.5" strokeLinejoin="round"/><path d="M10 8v4" stroke="#ff7409" strokeWidth="1.5" strokeLinecap="round"/><circle cx="10" cy="13.75" r="0.75" fill="#ff7409"/></svg>
+const StrategiIcon = () => <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden><circle cx="10" cy="7.5" r="4" stroke="#2563eb" strokeWidth="1.5"/><path d="M8 12.5L10 17.5L12 12.5" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+const GayaIcon = () => <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden><circle cx="7" cy="6" r="3" stroke="#0284c7" strokeWidth="1.5"/><circle cx="13.5" cy="6.5" r="2.5" stroke="#0284c7" strokeWidth="1.5"/><path d="M1.5 16.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/><path d="M13.5 12c2.5 0 5 1.5 5 4.5" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round"/></svg>
+const LingkunganIcon = () => <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden><path d="M2.5 17.5V9L10 3l7.5 6v8.5H2.5Z" stroke="#475569" strokeWidth="1.5" strokeLinejoin="round"/><rect x="7" y="11" width="2.5" height="6.5" rx="0.5" stroke="#475569" strokeWidth="1.5"/><rect x="10.5" y="11" width="2.5" height="4" rx="0.5" stroke="#475569" strokeWidth="1.5"/></svg>
 
-/* ── Main component ───────────────────────────────────── */
+/* ── Main ─────────────────────────────────────────────── */
 export default function MasterDataPreviewPage({ code }: { code: string }) {
   const router = useRouter()
   const profile = getRiasecProfile(code)
+  const [tentangOpen, setTentangOpen] = useState(true)
 
   if (!profile) {
     return (
@@ -172,7 +144,7 @@ export default function MasterDataPreviewPage({ code }: { code: string }) {
 
   return (
     <div className="-m-4 md:-m-6 flex flex-col bg-[#f8f9fb] min-h-screen">
-      {/* ── Nav bar ─────────────────────────────── */}
+      {/* Nav bar */}
       <div className="bg-white border-b border-[#b5b7b8] px-6 h-[64px] flex items-center justify-between shadow-sm sticky top-0 z-20">
         <button
           onClick={() => router.push('/kenali-diri/master-data')}
@@ -189,7 +161,7 @@ export default function MasterDataPreviewPage({ code }: { code: string }) {
         </button>
       </div>
 
-      {/* ── Info strip ──────────────────────────── */}
+      {/* Info strip */}
       <div className="bg-white border-b border-[#e2e4e9] px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 bg-[#e3ffee] border border-[#16a34a] rounded-md px-2.5 py-1">
@@ -211,24 +183,35 @@ export default function MasterDataPreviewPage({ code }: { code: string }) {
         </div>
       </div>
 
-      {/* ── Content ─────────────────────────────── */}
-      <div className="max-w-[1190px] w-full mx-auto px-6 py-8 flex flex-col gap-6">
+      {/* Content */}
+      <div className="max-w-[1190px] w-full mx-auto px-6 py-8 flex flex-col gap-5">
 
-        {/* Tentang Kode */}
-        <div className="bg-gradient-to-r from-[rgba(38,98,217,0.05)] via-[rgba(38,98,217,0.1)] to-[rgba(38,98,217,0.05)] rounded-xl p-6 flex flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+        {/* Tentang Kode — collapsible, default open */}
+        <div className="bg-gradient-to-r from-[rgba(38,98,217,0.05)] via-[rgba(38,98,217,0.1)] to-[rgba(38,98,217,0.05)] rounded-xl overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setTentangOpen(o => !o)}
+            className="w-full flex items-center gap-2 px-6 py-4 text-left hover:brightness-95 transition-all"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0" aria-hidden>
               <circle cx="10" cy="10" r="9" stroke="#2562d9" strokeWidth="1.5"/>
               <path d="M10 9v6" stroke="#2562d9" strokeWidth="1.5" strokeLinecap="round"/>
               <circle cx="10" cy="6.5" r="0.75" fill="#2562d9"/>
             </svg>
-            <h2 className="text-lg font-semibold text-[#14181f]">Tentang Kode</h2>
-          </div>
-          <p className="text-sm text-[#676f7e] leading-relaxed max-w-4xl">{profile.description}</p>
+            <h2 className="text-lg font-semibold text-[#14181f] flex-1">Tentang Kode</h2>
+            {tentangOpen
+              ? <ChevronUp className="w-4 h-4 text-[#676f7e] shrink-0" />
+              : <ChevronDown className="w-4 h-4 text-[#676f7e] shrink-0" />}
+          </button>
+          {tentangOpen && (
+            <div className="px-6 pb-6">
+              <p className="text-sm text-[#676f7e] leading-relaxed">{profile.description}</p>
+            </div>
+          )}
         </div>
 
-        {/* Row 1: Tantangan (left) + Kekuatan (right) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Row 1: Tantangan + Kekuatan */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <SectionCard
             title="Tantangan Profil"
             subtitle="Beberapa tantangan yang perlu kamu perhatikan dalam proses pengembangan diri:"
@@ -251,8 +234,8 @@ export default function MasterDataPreviewPage({ code }: { code: string }) {
           />
         </div>
 
-        {/* Row 2: Strategi (left) + Gaya Interaksi (right) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Row 2: Strategi + Gaya */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <SectionCard
             title="Strategi Pengembangan Diri"
             subtitle="Untuk menghadapi tantangan dan mengembangkan potensimu:"
@@ -275,8 +258,8 @@ export default function MasterDataPreviewPage({ code }: { code: string }) {
           />
         </div>
 
-        {/* Row 3: Lingkungan Kerja Ideal */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Row 3: Lingkungan */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <SectionCard
             title="Lingkungan Kerja Ideal"
             subtitle="Kondisi kerja yang paling mendukung produktivitasmu:"

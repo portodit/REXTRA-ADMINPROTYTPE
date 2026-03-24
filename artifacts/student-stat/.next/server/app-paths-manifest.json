@@ -1,4 +1,7 @@
 {
-  "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/(dashboard)/kenali-diri/hasil-tes/page": "app/(dashboard)/kenali-diri/hasil-tes/page.js"
+  "/(dashboard)/kenali-diri/hasil-tes/page": "app/(dashboard)/kenali-diri/hasil-tes/page.js",
+  "/(dashboard)/persona-rextra/page": "app/(dashboard)/persona-rextra/page.js",
+  "/(dashboard)/kenali-diri/master-data/page": "app/(dashboard)/kenali-diri/master-data/page.js",
+  "/(dashboard)/kenali-diri/master-data/[code]/page": "app/(dashboard)/kenali-diri/master-data/[code]/page.js",
+  "/(dashboard)/kenali-diri/master-data/[code]/edit/page": "app/(dashboard)/kenali-diri/master-data/[code]/edit/page.js"
 }
