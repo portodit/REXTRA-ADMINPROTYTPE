@@ -169,7 +169,7 @@ export default function MasterDataDetailPage({ code }: { code: string }) {
           Kembali
         </button>
         <button
-          type="button"
+          onClick={() => router.push(`/kenali-diri/master-data/${profile.code}`)}
           className="bg-[#0046cc] text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#003ab0] transition-colors shadow-sm"
         >
           Preview

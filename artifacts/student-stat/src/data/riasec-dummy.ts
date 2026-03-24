@@ -56,90 +56,90 @@ const REALISTIC_PROFILE: RiasecProfile = {
   ],
   tantanganProfil: [
     {
-      title: 'Komunikasi non-teknis',
+      title: 'Kurang sabar dengan diskusi abstrak',
       description:
-        'Menjelaskan konsep teknis kepada audiens non-teknis bisa menjadi tantangan. Kamu mungkin merasa frustrasi ketika orang lain tidak memahami apa yang terasa jelas bagimu.',
+        'Pembahasan yang terlalu konseptual tanpa rencana aksi yang jelas bisa membuatmu frustrasi. Kamu mungkin sering bertanya dalam hati, "Jadi kita mau mengerjakan apa sebenarnya?"',
     },
     {
-      title: 'Adaptasi terhadap ambiguitas',
+      title: 'Kesulitan menjelaskan kepada orang awam',
       description:
-        'Kamu lebih nyaman dengan instruksi yang jelas dan terstruktur. Situasi yang ambigu atau tidak pasti bisa membuat kamu merasa tidak nyaman dan kurang produktif.',
+        'Menjelaskan hal teknis kepada orang yang tidak memiliki latar belakang sama adalah tantangan tersendiri. Kamu memahami prosesnya dengan sangat baik, tetapi menerjemahkannya ke bahasa sederhana membutuhkan keterampilan khusus.',
     },
     {
-      title: 'Pekerjaan administratif',
+      title: 'Tidak nyaman dengan perubahan mendadak',
       description:
-        'Tugas-tugas seperti dokumentasi, pelaporan, dan pekerjaan administratif mungkin terasa membosankan dan membuang waktu dibandingkan pekerjaan langsung.',
+        'Kamu cenderung lebih menyukai metode yang sudah terbukti berhasil. Kalau tiba-tiba ada perubahan arah tanpa penjelasan yang masuk akal, kamu memerlukan waktu untuk menyesuaikan diri.',
     },
     {
-      title: 'Keterbatasan dalam berpikir abstrak',
+      title: 'Pekerjaan administratif terasa membebani',
       description:
-        'Konsep-konsep yang sangat teoritis atau filosofis mungkin kurang menarik perhatianmu dibandingkan aplikasi praktisnya.',
+        'Tugas-tugas seperti dokumentasi dan pelaporan mungkin terasa membosankan. Kamu lebih senang langsung mengerjakan daripada menuliskan apa yang sudah dikerjakan.',
     },
   ],
   strategiPengembangan: [
     {
-      title: 'Tingkatkan kemampuan presentasi',
+      title: 'Latih kemampuan menjelaskan',
       description:
-        'Latih dirimu untuk menjelaskan ide-ide teknis dalam bahasa sederhana. Gunakan analogi dan visualisasi untuk membantu orang lain memahami konsep yang kamu kuasai.',
+        'Berlatihlah menjelaskan hal teknis menggunakan analogi atau contoh sehari-hari. Coba rekam diri kamu menjelaskan sesuatu, lalu tinjau kembali apakah penjelasanmu bisa dipahami orang di luar bidangmu.',
     },
     {
-      title: 'Kembangkan toleransi terhadap ketidakpastian',
+      title: 'Bangun kebiasaan dokumentasi',
       description:
-        'Berlatih mengambil keputusan dengan informasi yang tidak lengkap. Mulai dengan proyek kecil yang membutuhkan fleksibilitas dan adaptasi.',
+        'Biasakan untuk mendokumentasikan proses kerjamu. Ini tidak hanya membantu orang lain memahami pekerjaanmu, tetapi juga menciptakan referensi berharga untuk dirimu sendiri di masa depan.',
     },
     {
-      title: 'Pelajari dasar-dasar manajemen proyek',
+      title: 'Cari kolaborasi lintas bidang',
       description:
-        'Memahami bagaimana merencanakan, mendokumentasikan, dan melaporkan kemajuan akan membuatmu lebih berharga dalam tim yang lebih besar.',
+        'Bekerjalah secara aktif dengan orang dari fungsi atau latar belakang berbeda. Hal ini akan membuka perspektif baru dan meningkatkan kemampuan adaptasimu.',
     },
     {
-      title: 'Eksplor kolaborasi lintas fungsi',
+      title: 'Tingkatkan toleransi ambiguitas',
       description:
-        'Bekerja sama dengan rekan dari bidang yang berbeda akan memperluas perspektifmu dan membantu mengembangkan keterampilan interpersonal yang lebih beragam.',
+        'Latih diri mengambil keputusan dengan informasi yang belum lengkap. Mulai dari proyek kecil yang membutuhkan fleksibilitas, hingga kamu terbiasa dengan ketidakpastian.',
     },
   ],
   gayaInteraksi: [
     {
-      title: 'Kerja mandiri dengan tujuan jelas',
+      title: 'Komunikasi langsung dan faktual',
       description:
-        'Kamu paling produktif ketika diberikan tujuan yang jelas dan kebebasan untuk mencapainya dengan caramu sendiri. Micromanagement menurunkan motivasimu.',
+        'Kamu menghargai komunikasi yang efisien dan tidak bertele-tele. Kamu menyampaikan informasi secara langsung dan mengharapkan hal yang sama dari orang lain.',
     },
     {
-      title: 'Komunikasi langsung dan to-the-point',
+      title: 'Lebih suka mandiri tapi kolaboratif',
       description:
-        'Kamu menghargai komunikasi yang efisien dan tidak bertele-tele. Pertemuan yang panjang tanpa agenda yang jelas terasa menyia-nyiakan waktu bagimu.',
+        'Kamu paling produktif saat bekerja mandiri dengan tujuan yang jelas, namun tetap terbuka untuk berkolaborasi ketika dibutuhkan dalam tim kecil yang fungsional.',
     },
     {
-      title: 'Preferensi tim kecil dan fungsional',
+      title: 'Nyaman dengan struktur yang jelas',
       description:
-        'Kamu lebih efektif dalam tim kecil dengan peran yang terdefinisi dengan baik dibandingkan dalam kelompok besar yang kurang terstruktur.',
+        'Kamu bekerja lebih baik ketika peran dan tanggung jawab terdefinisi dengan baik. Kejelasan alur kerja membuat kamu lebih fokus dan produktif dalam mencapai target.',
     },
     {
       title: 'Penyelesaian konflik berbasis fakta',
       description:
-        'Ketika menghadapi konflik, kamu cenderung mencari solusi berdasarkan data dan fakta daripada pertimbangan emosional.',
+        'Ketika menghadapi konflik, kamu cenderung mencari solusi berdasarkan data dan fakta yang ada, bukan pertimbangan emosional semata.',
     },
   ],
   lingkunganKerjaIdeal: [
     {
-      title: 'Lingkungan berbasis hasil',
+      title: 'Spesifikasi yang jelas',
       description:
-        'Kamu berkembang dalam budaya yang menghargai output nyata dan pencapaian konkret, bukan seberapa sibuk seseorang terlihat.',
+        'Kamu berkembang ketika diberikan tujuan yang spesifik dan terukur. Lingkungan kerja yang menetapkan ekspektasi dengan jelas membuat performamu optimal.',
     },
     {
-      title: 'Akses ke alat dan teknologi terkini',
+      title: 'Akses ke alat yang layak',
       description:
-        'Bekerja dengan peralatan, software, atau teknologi yang up-to-date membuatmu lebih bersemangat dan produktif.',
+        'Bukan pemimpin yang harus punya segalanya, melainkan setidaknya punya alat kerja yang memadai. Kamu menghargai akses ke tools dan teknologi yang mendukung pekerjaanmu.',
     },
     {
-      title: 'Ruang untuk pemecahan masalah',
+      title: 'Ruang untuk bereksperimen',
       description:
-        'Kamu membutuhkan tantangan teknis yang nyata untuk diselesaikan. Pekerjaan rutin tanpa variasi bisa membuatmu bosan dalam jangka panjang.',
+        'Lingkungan yang memberikan ruang untuk mencoba pendekatan baru tanpa takut gagal sangat mendukung kreativitas dan inovasimu dalam memecahkan masalah.',
     },
     {
-      title: 'Fleksibilitas dalam metode kerja',
+      title: 'Evaluasi berbasis kinerja',
       description:
-        'Selama hasilnya tercapai, kamu menghargai kebebasan untuk memilih pendekatan terbaikmu sendiri dalam menyelesaikan tugas.',
+        'Kamu menghargai sistem penilaian yang objektif berdasarkan hasil kerja nyata, bukan sekadar kesan atau hubungan interpersonal semata.',
     },
   ],
 }
@@ -154,7 +154,7 @@ function makeSimpleProfile(
   const make = (titles: string[]): ProfileItem[] =>
     titles.map(title => ({
       title,
-      description: `Karakteristik ${name} dalam aspek ini menunjukkan keunggulan yang khas dan relevan dalam konteks dunia kerja modern.`,
+      description: `Karakteristik ${name} dalam aspek ini menunjukkan keunggulan yang khas dan relevan dalam konteks dunia kerja modern yang terus berkembang.`,
     }))
 
   return {
@@ -163,26 +163,26 @@ function makeSimpleProfile(
     name,
     id,
     description,
-    kekuatanProfil: make([`Keunggulan utama ${name}`, 'Kemampuan analitis', 'Orientasi hasil', 'Adaptabilitas']),
-    tantanganProfil: make(['Area pengembangan 1', 'Area pengembangan 2', 'Area pengembangan 3', 'Area pengembangan 4']),
-    strategiPengembangan: make(['Strategi 1', 'Strategi 2', 'Strategi 3', 'Strategi 4']),
-    gayaInteraksi: make(['Gaya komunikasi', 'Preferensi tim', 'Kolaborasi', 'Resolusi konflik']),
-    lingkunganKerjaIdeal: make(['Budaya kerja ideal', 'Struktur organisasi', 'Manajemen', 'Lingkungan fisik']),
+    kekuatanProfil: make([`Keunggulan utama ${name}`, 'Kemampuan analitis tinggi', 'Orientasi pada hasil', 'Adaptabilitas tinggi']),
+    tantanganProfil: make(['Perlu mengembangkan komunikasi', 'Manajemen waktu', 'Fleksibilitas', 'Kolaborasi lintas tim']),
+    strategiPengembangan: make(['Tingkatkan keterampilan interpersonal', 'Bangun jaringan profesional', 'Perluas wawasan lintas bidang', 'Kembangkan kepemimpinan']),
+    gayaInteraksi: make(['Komunikasi terbuka dan jujur', 'Preferensi tim yang solid', 'Kolaborasi sinergis', 'Resolusi konflik konstruktif']),
+    lingkunganKerjaIdeal: make(['Budaya kerja yang supportif', 'Struktur organisasi yang jelas', 'Manajemen yang inspiratif', 'Lingkungan yang kondusif']),
   }
 }
 
 const PROFILES_MAP: Record<string, RiasecProfile> = {
   R: REALISTIC_PROFILE,
   I: makeSimpleProfile('I', ['I'], 'Investigative', '#002',
-    'Profil Investigative menunjukkan individu yang analitis, intelektual, dan berorientasi pada pemecahan masalah kompleks. Kamu senang mengeksplorasi ide-ide abstrak dan mencari pemahaman mendalam tentang fenomena di sekitarmu.'),
+    'Profil Investigative menunjukkan individu yang analitis, intelektual, dan berorientasi pada pemecahan masalah kompleks. Kamu senang mengeksplorasi ide-ide abstrak dan mencari pemahaman mendalam tentang fenomena di sekitarmu. Kamu unggul dalam penelitian, analisis data, dan pekerjaan yang membutuhkan pemikiran kritis tinggi.'),
   A: makeSimpleProfile('A', ['A'], 'Artistic', '#003',
-    'Profil Artistic mencerminkan individu yang kreatif, imajinatif, dan ekspresif. Kamu cenderung berpikir di luar kebiasaan dan menemukan cara-cara inovatif untuk mengekspresikan ide dan perasaan.'),
+    'Profil Artistic mencerminkan individu yang kreatif, imajinatif, dan ekspresif. Kamu cenderung berpikir di luar kebiasaan dan menemukan cara-cara inovatif untuk mengekspresikan ide. Kamu menghargai kebebasan berekspresi dan menghindari pekerjaan yang terlalu terstruktur atau repetitif.'),
   S: makeSimpleProfile('S', ['S'], 'Social', '#004',
-    'Profil Social menggambarkan individu yang hangat, empatik, dan berorientasi pada membantu orang lain. Kamu menemukan kepuasan dalam berinteraksi, mendidik, dan mendukung pertumbuhan orang lain.'),
+    'Profil Social menggambarkan individu yang hangat, empatik, dan berorientasi pada membantu orang lain. Kamu menemukan kepuasan dalam berinteraksi, mendidik, dan mendukung pertumbuhan orang lain. Kamu unggul dalam pekerjaan yang melibatkan pelayanan, pengajaran, atau konseling.'),
   E: makeSimpleProfile('E', ['E'], 'Enterprising', '#005',
-    'Profil Enterprising menunjukkan individu yang ambisius, persuasif, dan berorientasi pada kepemimpinan. Kamu menikmati memimpin tim, mengambil keputusan strategis, dan mencapai tujuan bisnis.'),
+    'Profil Enterprising menunjukkan individu yang ambisius, persuasif, dan berorientasi pada kepemimpinan. Kamu menikmati memimpin tim, mengambil keputusan strategis, dan mencapai tujuan bisnis. Kamu memiliki kemampuan alami untuk mempengaruhi dan memotivasi orang lain.'),
   C: makeSimpleProfile('C', ['C'], 'Conventional', '#006',
-    'Profil Conventional mencerminkan individu yang terorganisir, detail-oriented, dan sistematis. Kamu unggul dalam pekerjaan yang membutuhkan ketelitian, konsistensi, dan mengikuti prosedur yang telah ditetapkan.'),
+    'Profil Conventional mencerminkan individu yang terorganisir, detail-oriented, dan sistematis. Kamu unggul dalam pekerjaan yang membutuhkan ketelitian, konsistensi, dan mengikuti prosedur yang telah ditetapkan. Kamu adalah orang yang dapat diandalkan dalam menjaga kerapian dan akurasi data.'),
 }
 
 export function getRiasecProfile(code: string): RiasecProfile | null {
@@ -194,11 +194,9 @@ export function getRiasecProfile(code: string): RiasecProfile | null {
   if (validLetters.length !== letters.length || validLetters.length < 2 || validLetters.length > 3) return null
 
   const name = validLetters.map(l => LETTER_NAMES[l]).join(' - ')
-  const idNum = 6 + validLetters.length * 10
-  const id = `#${String(idNum).padStart(3, '0')}`
 
-  return makeSimpleProfile(upper, validLetters, name, id,
-    `Profil ${name} merupakan kombinasi unik yang menggabungkan karakteristik dari ${validLetters.map(l => LETTER_NAMES[l]).join(', ')}. Individu dengan profil ini menampilkan kekuatan dari masing-masing tipe yang membentuk kombinasi tersebut.`)
+  return makeSimpleProfile(upper, validLetters, name, `#${String(7 + validLetters.length * 10).padStart(3, '0')}`,
+    `Profil ${name} merupakan kombinasi unik yang menggabungkan karakteristik dari ${validLetters.map(l => LETTER_NAMES[l]).join(', ')}. Individu dengan profil ini menampilkan kekuatan dari masing-masing tipe yang membentuk kombinasi tersebut, menciptakan pendekatan kerja yang beragam dan adaptif.`)
 }
 
 export function getAllEntries() {

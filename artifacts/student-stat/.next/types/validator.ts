@@ -252,6 +252,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../src/app/(dashboard)/kenali-diri/master-data/[code]/edit/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/kenali-diri/master-data/[code]/edit">> = Specific
+  const handler = {} as typeof import("../../src/app/(dashboard)/kenali-diri/master-data/[code]/edit/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/(dashboard)/kenali-diri/master-data/[code]/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/kenali-diri/master-data/[code]">> = Specific
@@ -663,6 +672,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends PagesPageConfig> = Specific
   const handler = {} as typeof import("../../src/pages/kenali-diri/MasterDataPage.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/pages/kenali-diri/MasterDataPreviewPage.tsx
+{
+  type __IsExpected<Specific extends PagesPageConfig> = Specific
+  const handler = {} as typeof import("../../src/pages/kenali-diri/MasterDataPreviewPage.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

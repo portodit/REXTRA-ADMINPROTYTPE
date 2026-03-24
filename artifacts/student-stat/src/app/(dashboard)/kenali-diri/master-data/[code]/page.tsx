@@ -1,6 +1,6 @@
-import MasterDataDetailPage from '@/pages/kenali-diri/MasterDataDetailPage'
+import MasterDataPreviewPage from '@/pages/kenali-diri/MasterDataPreviewPage'
 
 export default async function Page({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params
-  return <MasterDataDetailPage code={code} />
+  return <MasterDataPreviewPage code={code} />
 }
