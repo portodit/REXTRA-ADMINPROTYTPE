@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
 import { X, Heart, Star, Globe, DollarSign, Check, Circle } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { StatusBadge } from '@/components/shared/badges/StatusBadge'
 
 /* ── Types ──────────────────────────────────────────────── */
 export interface TestDetailData {
@@ -42,21 +43,6 @@ const recommendationData = [
   { rank: 1, title: 'UI/UX Designer',      matchPercent: 94, isSelected: true,  desc: 'Profesi ini mengakomodasi minat Artistic (Desain) dan Investigative (Riset User), serta sangat dibutuhkan di pasar saat ini.' },
   { rank: 2, title: 'Frontend Developer',  matchPercent: 88, isSelected: false, desc: 'Cocok dengan sisi Realistic (Coding) dan Investigative, namun aspek Love sedikit lebih rendah dibandingkan UI/UX.' },
 ]
-
-/* ── Status badge ────────────────────────────────────────── */
-function StatusBadge({ status }: { status: TestDetailData['status'] }) {
-  const map = {
-    'Selesai':        { bg: 'bg-[#e3ffee]', border: 'border-[#16a34a]', text: 'text-[#16a34a]' },
-    'Sedang Berjalan':{ bg: 'bg-[#fff1e3]', border: 'border-[#ff7409]', text: 'text-[#ff7409]' },
-    'Dihentikan':     { bg: 'bg-[rgba(248,212,212,0.25)]', border: 'border-[#dc2626]', text: 'text-[#dc2626]' },
-  }
-  const s = map[status]
-  return (
-    <span className={cn('inline-flex items-center px-3 py-[3px] rounded-[6px] border text-xs font-semibold', s.bg, s.border, s.text)}>
-      {status}
-    </span>
-  )
-}
 
 /* ── Info row ────────────────────────────────────────────── */
 function InfoRow({ icon, label, children, last }: { icon: React.ReactNode; label: string; children: React.ReactNode; last?: boolean }) {
@@ -317,7 +303,7 @@ export function TestDetailModal({ open, onOpenChange, testData }: TestDetailModa
                 {data.endTime}
               </InfoRow>
               <InfoRow icon={<IconTask />} label="Status Tes">
-                <StatusBadge status={data.status} />
+                <StatusBadge value={data.status} />
               </InfoRow>
               <InfoRow icon={<IconDoc />} label="Hasil Tes" last>
                 <span className="text-[#0046cc] font-semibold">{data.result}</span>

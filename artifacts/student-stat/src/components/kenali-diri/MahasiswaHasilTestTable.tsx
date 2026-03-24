@@ -21,43 +21,13 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Trash2, Pencil } from 'lucide-react'
 import { TablePagination } from './TablePagination'
 import Typography from '@/components/Typography'
-import { cn } from '@/lib/utils'
 import { KenaliDiriHistoryItem } from '@/types/kenali-diri'
 import { TestDetailModal } from './TestDetailModal'
+import { StatusBadge } from '@/components/shared/badges/StatusBadge'
 
 interface TestDataTableProps {
   tableData: KenaliDiriHistoryItem[]
   onDelete?: (testId: string) => void
-}
-
-const StatusBadge = ({ status }: { status: KenaliDiriHistoryItem['status'] }) => {
-  const configs = {
-    completed: {
-      label: 'Selesai',
-      className: 'bg-green-50 text-green-600 border-green-200',
-    },
-    in_progress: {
-      label: 'Berjalan',
-      className: 'bg-orange-50 text-orange-600 border-orange-200',
-    },
-    abandoned: {
-      label: 'Dihentikan',
-      className: 'bg-red-50 text-red-600 border-red-200',
-    },
-  }
-
-  const config = configs[status] || configs.in_progress
-
-  return (
-    <div
-      className={cn(
-        'inline-flex items-center px-6 py-1 rounded-lg border-[1.5px] text-sm font-medium justify-center min-w-[120px]',
-        config.className,
-      )}
-    >
-      {config.label}
-    </div>
-  )
 }
 
 const statusLabel: Record<KenaliDiriHistoryItem['status'], 'Selesai' | 'Sedang Berjalan' | 'Dihentikan'> = {
@@ -211,7 +181,7 @@ export default function MahasiswaHasilTestDataTable({ tableData, onDelete }: Tes
                       </Typography>
                     </TableCell>
                     <TableCell className="text-center">
-                      <StatusBadge status={row.status} />
+                      <StatusBadge value={row.status} />
                     </TableCell>
                     <TableCell className="text-center">
                       <Typography variant="l1" weight="medium" className="text-gray-700">

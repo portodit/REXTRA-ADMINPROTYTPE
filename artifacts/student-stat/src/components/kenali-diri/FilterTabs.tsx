@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
 import Typography from '@/components/Typography'
 import { SearchBar } from './SearchBar'
-import { SlidersHorizontal, X, ChevronDown, Check, Search } from 'lucide-react'
+import { X, ChevronDown, Check, Search } from 'lucide-react'
+import { TabBar } from '@/components/shared/table/TabBar'
+import { FilterButton, TerapkanFilterButton, ResetFilterButton } from '@/components/shared/buttons/ActionButtons'
 
 const tabs = ['Semua Data', 'Selesai', 'Berjalan', 'Dihentikan'] as const
 type TabType = (typeof tabs)[number]
@@ -164,36 +165,7 @@ export default function FilterTabs({
       </div>
 
       {/* Row 1: Status tabs (full width, scrollable on mobile) */}
-      <div
-        className="
-          flex gap-1 sm:gap-2 w-full overflow-x-auto
-          bg-[#D3D4D4]/15
-          outline outline-1 outline-[#B5B7B8]
-          rounded-lg p-1 scrollbar-none
-        "
-      >
-        {tabs.map((t) => {
-          const isActive = activeTab === t
-          return (
-            <Button
-              key={t}
-              onClick={() => onTabChange(t)}
-              className={`
-                shrink-0 sm:flex-1 whitespace-nowrap rounded-lg shadow-none transition-all
-                ${
-                  isActive
-                    ? 'bg-[#CCDDFF] border-[#669AFF] border text-[#003499] hover:bg-[#CCDDFF]'
-                    : 'bg-transparent text-[#494848] hover:bg-[#CCDDFF]/50 shadow-none'
-                }
-              `}
-            >
-              <Typography variant="l1" weight={isActive ? 'semibold' : 'regular'}>
-                {t}
-              </Typography>
-            </Button>
-          )
-        })}
-      </div>
+      <TabBar tabs={tabs} activeTab={activeTab} onTabChange={onTabChange} />
 
       {/* Row 2: Search + Filter toggle */}
       <div className="flex items-center gap-3">
@@ -202,23 +174,11 @@ export default function FilterTabs({
           onSearch={onSearchChange}
           className="flex-1 min-w-0"
         />
-        <button
+        <FilterButton
+          active={showFilter || hasActiveFilter}
+          hasActiveFilter={hasActiveFilter}
           onClick={() => setShowFilter((v) => !v)}
-          className={`
-            flex items-center gap-2 px-4 py-2 rounded-lg border text-sm whitespace-nowrap shrink-0 transition-colors
-            ${
-              showFilter || hasActiveFilter
-                ? 'border-blue-400 bg-blue-50 text-blue-700'
-                : 'border-gray-300 bg-white hover:bg-gray-50 text-gray-600'
-            }
-          `}
-        >
-          <SlidersHorizontal className="w-4 h-4" />
-          Filter
-          {hasActiveFilter && (
-            <span className="ml-1 w-2 h-2 rounded-full bg-blue-500 inline-block" />
-          )}
-        </button>
+        />
       </div>
 
       {/* Row 3: Filter panel (expandable) */}
@@ -278,19 +238,9 @@ export default function FilterTabs({
           </div>
 
           <div className="flex gap-2 mt-4">
-            <button
-              onClick={applyFilter}
-              className="px-4 py-2 rounded-lg bg-[#003499] text-white text-sm font-medium hover:bg-blue-800 transition-colors"
-            >
-              Terapkan Filter
-            </button>
+            <TerapkanFilterButton onClick={applyFilter} />
             {hasActiveFilter && (
-              <button
-                onClick={resetFilter}
-                className="px-4 py-2 rounded-lg border border-red-300 text-red-500 text-sm font-medium hover:bg-red-50 transition-colors"
-              >
-                Reset Filter
-              </button>
+              <ResetFilterButton onClick={resetFilter} />
             )}
           </div>
         </div>
