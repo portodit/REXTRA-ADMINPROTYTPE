@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getAllEntries, RiasecLetter, LETTER_NAMES } from '@/data/riasec-dummy'
@@ -19,33 +20,28 @@ const FILTER_LABELS: Record<FilterKey, string> = {
   '3-huruf': '3 Huruf',
 }
 
-/* ── CSS letter badge (no image loading) ─────────────── */
-const LETTER_COLORS: Record<RiasecLetter, { bg: string; border: string; text: string }> = {
-  R: { bg: 'bg-orange-100', border: 'border-orange-300', text: 'text-orange-700' },
-  I: { bg: 'bg-blue-100', border: 'border-blue-300', text: 'text-blue-700' },
-  A: { bg: 'bg-purple-100', border: 'border-purple-300', text: 'text-purple-700' },
-  S: { bg: 'bg-teal-100', border: 'border-teal-300', text: 'text-teal-700' },
-  E: { bg: 'bg-yellow-100', border: 'border-yellow-300', text: 'text-yellow-700' },
-  C: { bg: 'bg-slate-100', border: 'border-slate-300', text: 'text-slate-700' },
-}
-
-function LetterChip({ letter, size = 'md' }: { letter: RiasecLetter; size?: 'sm' | 'md' }) {
-  const c = LETTER_COLORS[letter]
-  const dim = size === 'sm' ? 'w-9 h-9 text-base' : 'w-11 h-11 text-lg'
+/* ── SVG letter badge ─────────────────────────────────── */
+function LetterBadge({ letter, size }: { letter: RiasecLetter; size: number }) {
   return (
-    <div className={cn('rounded-xl border-2 flex items-center justify-center font-bold shrink-0', dim, c.bg, c.border, c.text)}>
-      {letter}
+    <div className="relative shrink-0" style={{ width: size, height: size }}>
+      <Image
+        src={`/images/riasec/${letter}.svg`}
+        alt={LETTER_NAMES[letter]}
+        fill
+        className="object-contain"
+        unoptimized
+      />
     </div>
   )
 }
 
 function RiasecCard({ entry }: { entry: ReturnType<typeof getAllEntries>[number] }) {
-  const size = entry.letters.length === 3 ? 'sm' : 'md'
+  const badgeSize = entry.letters.length === 3 ? 38 : 46
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-4 flex flex-col gap-3 hover:shadow-md transition-shadow duration-200">
       <div className="flex items-start justify-between">
-        <div className="flex items-center gap-1.5">
-          {entry.letters.map((l, i) => <LetterChip key={i} letter={l} size={size} />)}
+        <div className="flex items-center gap-1">
+          {entry.letters.map((l, i) => <LetterBadge key={i} letter={l} size={badgeSize} />)}
         </div>
         <span className="text-xs text-gray-400 font-medium shrink-0 mt-1">ID {entry.id}</span>
       </div>

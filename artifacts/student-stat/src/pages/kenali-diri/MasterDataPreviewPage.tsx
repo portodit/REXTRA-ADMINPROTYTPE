@@ -210,67 +210,56 @@ export default function MasterDataPreviewPage({ code }: { code: string }) {
           )}
         </div>
 
-        {/* Row 1: Tantangan + Kekuatan */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <SectionCard
-            title="Tantangan Profil"
-            subtitle="Beberapa tantangan yang perlu kamu perhatikan dalam proses pengembangan diri:"
-            items={profile.tantanganProfil}
-            iconBg="bg-[#fff1e3]"
-            iconEl={<TantanganIcon />}
-            cardBg="bg-[rgba(255,241,227,0.5)]"
-            borderColor="border-[#ff7409]"
-            iconVariant="warning"
-          />
-          <SectionCard
-            title="Kekuatan Profil"
-            subtitle={`Profil ${profile.code} menunjukkan keunggulan kompetitifmu di dunia kerja digital:`}
-            items={profile.kekuatanProfil}
-            iconBg="bg-[#d0eddb]"
-            iconEl={<KekuatanIcon />}
-            cardBg="bg-gradient-to-br from-[#ecfdf5] to-[#f0fdf4]"
-            borderColor="border-[#a7f3d0]"
-            iconVariant="default"
-          />
-        </div>
-
-        {/* Row 2: Strategi + Gaya */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <SectionCard
-            title="Strategi Pengembangan Diri"
-            subtitle="Untuk menghadapi tantangan dan mengembangkan potensimu:"
-            items={profile.strategiPengembangan}
-            iconBg="bg-[#dbeafe]"
-            iconEl={<StrategiIcon />}
-            cardBg="bg-[rgba(204,221,255,0.25)]"
-            borderColor="border-[#0046cc]"
-            iconVariant="idea"
-          />
-          <SectionCard
-            title="Gaya Interaksi & Kolaborasi"
-            subtitle="Bagaimana kamu berinteraksi dan bekerja sama dengan orang lain:"
-            items={profile.gayaInteraksi}
-            iconBg="bg-[#e0f2fe]"
-            iconEl={<GayaIcon />}
-            cardBg="bg-[rgba(211,212,212,0.25)]"
-            borderColor="border-[#0046cc]"
-            iconVariant="people"
-          />
-        </div>
-
-        {/* Row 3: Lingkungan */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <SectionCard
-            title="Lingkungan Kerja Ideal"
-            subtitle="Kondisi kerja yang paling mendukung produktivitasmu:"
-            items={profile.lingkunganKerjaIdeal}
-            iconBg="bg-[#f1f5f9]"
-            iconEl={<LingkunganIcon />}
-            cardBg="bg-[rgba(211,212,212,0.15)]"
-            borderColor="border-[#94a3b8]"
-            iconVariant="building"
-          />
-        </div>
+        <SectionCard
+          title="Tantangan Profil"
+          subtitle="Beberapa tantangan yang perlu kamu perhatikan dalam proses pengembangan diri:"
+          items={profile.tantanganProfil}
+          iconBg="bg-[#fff1e3]"
+          iconEl={<TantanganIcon />}
+          cardBg="bg-[rgba(255,241,227,0.5)]"
+          borderColor="border-[#ff7409]"
+          iconVariant="warning"
+        />
+        <SectionCard
+          title="Kekuatan Profil"
+          subtitle={`Profil ${profile.code} menunjukkan keunggulan kompetitifmu di dunia kerja digital:`}
+          items={profile.kekuatanProfil}
+          iconBg="bg-[#d0eddb]"
+          iconEl={<KekuatanIcon />}
+          cardBg="bg-gradient-to-br from-[#ecfdf5] to-[#f0fdf4]"
+          borderColor="border-[#a7f3d0]"
+          iconVariant="default"
+        />
+        <SectionCard
+          title="Strategi Pengembangan Diri"
+          subtitle="Untuk menghadapi tantangan dan mengembangkan potensimu:"
+          items={profile.strategiPengembangan}
+          iconBg="bg-[#dbeafe]"
+          iconEl={<StrategiIcon />}
+          cardBg="bg-[rgba(204,221,255,0.25)]"
+          borderColor="border-[#0046cc]"
+          iconVariant="idea"
+        />
+        <SectionCard
+          title="Gaya Interaksi & Kolaborasi"
+          subtitle="Bagaimana kamu berinteraksi dan bekerja sama dengan orang lain:"
+          items={profile.gayaInteraksi}
+          iconBg="bg-[#e0f2fe]"
+          iconEl={<GayaIcon />}
+          cardBg="bg-[rgba(211,212,212,0.25)]"
+          borderColor="border-[#0046cc]"
+          iconVariant="people"
+        />
+        <SectionCard
+          title="Lingkungan Kerja Ideal"
+          subtitle="Kondisi kerja yang paling mendukung produktivitasmu:"
+          items={profile.lingkunganKerjaIdeal}
+          iconBg="bg-[#f1f5f9]"
+          iconEl={<LingkunganIcon />}
+          cardBg="bg-[rgba(211,212,212,0.15)]"
+          borderColor="border-[#94a3b8]"
+          iconVariant="building"
+        />
       </div>
     </div>
   )
