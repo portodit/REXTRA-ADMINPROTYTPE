@@ -1,9 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(dashboard)/persona-rextra/page": "app/(dashboard)/persona-rextra/page.js",
-  "/(dashboard)/membership/fitur-hak-akses/page": "app/(dashboard)/membership/fitur-hak-akses/page.js",
-  "/(dashboard)/membership/status/page": "app/(dashboard)/membership/status/page.js",
-  "/(dashboard)/membership/promo-diskon/page": "app/(dashboard)/membership/promo-diskon/page.js",
-  "/(dashboard)/membership/riwayat-langganan/page": "app/(dashboard)/membership/riwayat-langganan/page.js",
-  "/(dashboard)/kenali-diri/hasil-tes/page": "app/(dashboard)/kenali-diri/hasil-tes/page.js"
+  "/(dashboard)/kenali-diri/hasil-tes/page": "app/(dashboard)/kenali-diri/hasil-tes/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js"
 }
