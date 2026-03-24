@@ -53,14 +53,22 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 
 ### `artifacts/student-stat` (`@workspace/student-stat`)
 
-REXTRA ADMIN Dashboard — a React + Vite web application connected to Supabase.
+REXTRA ADMIN Dashboard — migrated from React + Vite to **Next.js 15 (App Router)**.
 
 - **Preview path**: `/` (mounted at root)
-- **Port**: 21370 (reads from `PORT` env var via Vite)
-- **Stack**: React 18, Vite 7, Tailwind CSS v4 (`@tailwindcss/vite`), shadcn/ui, React Router v6, Tanstack Query, Supabase JS
-- **Features**: Membership management, Persona REXTRA, Kamus Karier (career dictionary), Sistem Token, Kenali Diri feedback
-- **Supabase**: URL and anon key stored as shared env vars (`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`)
-- **Notes**: Uses Tailwind v4 format (no `tailwind.config.ts`, no `postcss.config.js`). Google Fonts loaded via `<link>` in `index.html`. Source was migrated from a Lovable/Tailwind v3 project.
+- **Port**: 21370 (reads from `PORT` env var via `next dev --port $PORT`)
+- **Stack**: Next.js 15, React 19, Tailwind CSS v4, Tanstack Query v5, react-hook-form + zod, axios, js-cookie v3
+- **Auth**: JWT stored in cookie `rextra_access_token` (no special chars to avoid URL-encoding). Middleware protects `/persona-rextra` and all dashboard routes. Login uses `window.location.href` for hard redirect after `admin@rextra.id / admin123`.
+- **Structure**:
+  - `src/app/` — Next.js App Router (`(auth)` and `(dashboard)` route groups)
+  - `src/pages/` — actual page components (imported by app route files)
+  - `src/components/` — reusable UI: `Button`, `NextImage`, `Typography`, `form/Input`, `Sidebar`, `TopNavbar`
+  - `src/hooks/` — React Query mutation hooks (auth, data fetching)
+  - `src/lib/` — utilities: `axiosInstance`, `authApi`, `cookiesUtil`, `auth` (isAuthenticated), `utils`
+  - `src/validation/` — zod schemas for all forms
+- **API proxy**: Next.js rewrites `/api/:path*` → `http://localhost:8080/api/:path*`
+- **Images**: Served from `public/images/auth/`. `NextImage` component prepends `/images` to string paths.
+- **Features**: Membership management, Persona REXTRA, Kamus Karier (career dictionary), Sistem Token, Kenali Diri (feedback + hasil tes), Akun Mahasiswa, Hak Akses, Invoice
 - `pnpm --filter @workspace/student-stat run dev` — run the dev server
 
 ### `artifacts/api-server` (`@workspace/api-server`)

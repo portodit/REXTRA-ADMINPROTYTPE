@@ -832,11 +832,23 @@
   .top-\[50\%\] {
     top: 50%;
   }
+  .top-\[55\%\] {
+    top: 55%;
+  }
   .top-\[60\%\] {
     top: 60%;
   }
   .top-\[75px\] {
     top: 75px;
+  }
+  .top-\[88px\] {
+    top: 88px;
+  }
+  .top-\[366px\] {
+    top: 366px;
+  }
+  .top-\[384px\] {
+    top: 384px;
   }
   .top-full {
     top: 100%;
@@ -952,6 +964,9 @@
   .left-\[15px\] {
     left: 15px;
   }
+  .left-\[34px\] {
+    left: 34px;
+  }
   .left-\[35\.5px\] {
     left: 35.5px;
   }
@@ -960,6 +975,9 @@
   }
   .left-\[72px\] {
     left: 72px;
+  }
+  .left-\[280px\] {
+    left: 280px;
   }
   .z-0 {
     z-index: 0;
@@ -982,8 +1000,14 @@
   .z-\[1\] {
     z-index: 1;
   }
+  .z-\[2\] {
+    z-index: 2;
+  }
   .z-\[3\] {
     z-index: 3;
+  }
+  .z-\[4\] {
+    z-index: 4;
   }
   .z-\[100\] {
     z-index: 100;
@@ -1641,8 +1665,8 @@
   .w-\[249px\] {
     width: 249px;
   }
-  .w-\[280px\] {
-    width: 280px;
+  .w-\[272px\] {
+    width: 272px;
   }
   .w-\[290px\] {
     width: 290px;
@@ -1656,8 +1680,26 @@
   .w-\[420px\] {
     width: 420px;
   }
+  .w-\[500px\] {
+    width: 500px;
+  }
+  .w-\[519px\] {
+    width: 519px;
+  }
+  .w-\[540px\] {
+    width: 540px;
+  }
+  .w-\[570px\] {
+    width: 570px;
+  }
   .w-\[579px\] {
     width: 579px;
+  }
+  .w-\[674px\] {
+    width: 674px;
+  }
+  .w-\[779px\] {
+    width: 779px;
   }
   .w-\[var\(--sidebar-width\)\] {
     width: var(--sidebar-width);
@@ -1917,6 +1959,12 @@
   }
   .rotate-180 {
     rotate: 180deg;
+  }
+  .rotate-\[30deg\] {
+    rotate: 30deg;
+  }
+  .rotate-\[40deg\] {
+    rotate: 40deg;
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -4078,9 +4126,6 @@
   .text-\[18px\] {
     font-size: 18px;
   }
-  .text-\[22px\] {
-    font-size: 22px;
-  }
   .text-\[24px\] {
     font-size: 24px;
   }
@@ -4216,6 +4261,9 @@
   }
   .text-\[\#2563EB\] {
     color: #2563EB;
+  }
+  .text-\[\#3379FF\] {
+    color: #3379FF;
   }
   .text-\[\#003499\] {
     color: #003499;
@@ -8556,6 +8604,11 @@
   .lg\:flex {
     @media (width >= 64rem) {
       display: flex;
+    }
+  }
+  .lg\:hidden {
+    @media (width >= 64rem) {
+      display: none;
     }
   }
   .lg\:table-cell {
