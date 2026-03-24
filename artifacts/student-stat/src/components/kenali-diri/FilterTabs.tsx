@@ -163,13 +163,13 @@ export default function FilterTabs({
         </Typography>
       </div>
 
-      {/* Row 1: Status tabs (full width) */}
+      {/* Row 1: Status tabs (full width, scrollable on mobile) */}
       <div
         className="
-          flex gap-2 w-full
+          flex gap-1 sm:gap-2 w-full overflow-x-auto
           bg-[#D3D4D4]/15
           outline outline-1 outline-[#B5B7B8]
-          rounded-lg p-1
+          rounded-lg p-1 scrollbar-none
         "
       >
         {tabs.map((t) => {
@@ -179,7 +179,7 @@ export default function FilterTabs({
               key={t}
               onClick={() => onTabChange(t)}
               className={`
-                flex-1 whitespace-nowrap rounded-lg shadow-none transition-all
+                shrink-0 sm:flex-1 whitespace-nowrap rounded-lg shadow-none transition-all
                 ${
                   isActive
                     ? 'bg-[#CCDDFF] border-[#669AFF] border text-[#003499] hover:bg-[#CCDDFF]'

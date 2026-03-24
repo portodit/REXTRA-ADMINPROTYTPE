@@ -110,7 +110,7 @@ export default function HasilTesPage() {
   return (
     <DashboardLayout>
       <div className="flex min-h-screen bg-gray-50">
-        <div className="w-full max-w-7xl mx-auto space-y-6 p-6">
+        <div className="w-full max-w-7xl mx-auto space-y-6 p-3 sm:p-6">
           <FilterTabs
             activeTab={filters.tab}
             search={filters.search}

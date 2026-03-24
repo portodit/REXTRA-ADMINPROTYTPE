@@ -61,12 +61,12 @@ function StatusBadge({ status }: { status: TestDetailData['status'] }) {
 /* ── Info row ────────────────────────────────────────────── */
 function InfoRow({ icon, label, children, last }: { icon: React.ReactNode; label: string; children: React.ReactNode; last?: boolean }) {
   return (
-    <div className={cn('flex items-center py-3 gap-4', !last && 'border-b border-[#e9eaec]')}>
-      <div className="flex items-center gap-2.5 w-[160px] shrink-0 text-[#676f7e]">
+    <div className={cn('flex items-center py-3 gap-3 sm:gap-4', !last && 'border-b border-[#e9eaec]')}>
+      <div className="flex items-center gap-2 w-[130px] sm:w-[160px] shrink-0 text-[#676f7e]">
         <span className="shrink-0">{icon}</span>
-        <span className="text-sm">{label}</span>
+        <span className="text-xs sm:text-sm leading-snug">{label}</span>
       </div>
-      <div className="flex-1 text-sm font-medium text-[#14181f]">{children}</div>
+      <div className="flex-1 text-xs sm:text-sm font-medium text-[#14181f] min-w-0">{children}</div>
     </div>
   )
 }
@@ -101,7 +101,8 @@ function RiasecTab() {
           <h4 className="text-sm font-semibold text-[#14181f] mb-1">Penilaian RIASEC</h4>
           <p className="text-sm text-[#676f7e]">Menampilkan skor dan peringkat tiap tipe kepribadian RIASEC.</p>
         </div>
-        <table className="w-full">
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[360px]">
           <thead>
             <tr className="bg-[#0046cc] text-white">
               <th className="px-5 py-3 text-left text-sm font-semibold">Tipe Kepribadian</th>
@@ -131,6 +132,7 @@ function RiasecTab() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* Classification Type */}
@@ -278,7 +280,7 @@ export function TestDetailModal({ open, onOpenChange, testData }: TestDetailModa
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="w-full sm:max-w-[560px] p-0 overflow-hidden flex flex-col bg-white"
+        className="w-full sm:max-w-[560px] p-0 overflow-hidden flex flex-col bg-white [&>button:last-child]:!hidden"
         style={{ outline: 'none' }}
       >
         {/* Header */}
